@@ -23,10 +23,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Always push the destination repo to 'default'
-  DEST_BRANCH: default
-  # Always fetch 'master' from sources
-  SRC_REF: master
+  DEST_BRANCH: default    # Always push to 'default' in destination
+  SRC_REF: master         # Always pull from 'master' in sources
 
 jobs:
   # === Manual "sync all" fan-out ===
@@ -35,8 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 1    # serialize pushes to avoid conflicts
       matrix:
         repo: [ "LeapXD/kick-start", "LeapXD/kicks", "LeapXD/kicks-editor", "LeapXD/kicks-plugins" ]
+
     steps:
       - name: Checkout destination repo@default
         uses: actions/checkout@v4
@@ -113,6 +113,7 @@ jobs:
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
+          git pull --rebase origin "$DEST_BRANCH" || true
           git push origin "$DEST_BRANCH"
 
   # === Single-repo path (manual or repository_dispatch) ===
@@ -207,4 +208,5 @@ jobs:
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
+          git pull --rebase origin "$DEST_BRANCH" || true
           git push origin "$DEST_BRANCH"
