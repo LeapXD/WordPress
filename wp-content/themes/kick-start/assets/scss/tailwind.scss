@@ -1,0 +1,26 @@
+@use "sass:map";
+@use "sass:math";
+@use "variables" as * with ($root: ":root", $scope: "main");
+// @use "mixins" as *;
+
+
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../../views";
+
+
+/* ---- Tailwind tokens (emit ONCE to :root via @theme) ---- */
+@theme {
+  /* screens from map */
+  @each $name, $value in $grid-breakpoints {
+    --breakpoint-#{$name}: #{$value};
+  }
+
+  /* colors as Tailwind tokens -> text-body, bg-body, etc. */
+	@each $name, $value in $palette {
+		--color-#{$name}: #{$value};
+		--text-#{$name}: #{$value};
+		--bg-#{$name}: #{$value};
+		// --#{$name}: #{$value};
+		@token colors.#{$name} none #{$value};
+	}
+}

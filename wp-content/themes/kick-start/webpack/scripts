@@ -1,0 +1,129 @@
+#! /bin/bash
+RED='\033[0;31m';
+GREEN='\033[0;32m';
+YELLOW='\033[1;33m';
+MAGENTA='\033[1;35m';
+CYAN='\033[0;36m';
+WHITE='\033[1;37m';
+GRAY='\033[1;30m';
+
+lint_styles() {
+    node ./node_modules/stylelint/bin/stylelint "./assets/**/*.scss"
+}
+
+lint_scripts() {
+    node ./node_modules/eslint/bin/eslint "./assets/**/*.js" 
+}
+
+lint_twig() {
+    node_modules/.bin/prettier ./views/ --check
+}
+
+lint_php() {
+    phpcs ./
+}
+
+script=$1
+mode=$2
+args=$3
+#for ((i=3;i<=$#;i++)); do args="${args} ${!i}"; done
+
+if [ $script == 'build' ]
+then
+    if [[ "$PWD" =~ 'kicks' ]]
+    then
+        xd-scripts update-version;
+        if [[ $? > 0 ]]
+        then
+            echo -e $RED'Styleheet version could not be updated';
+            echo -e $CYAN'Ensure xd-scripts is installed';
+            echo -e $GRAY;
+            exit;
+        fi
+    fi
+    if  [ $mode == 'development' ]
+    then
+        webpack --config ./webpack/webpack.config.js --progress --env build NODE_ENV=development;
+    fi
+    if  [ $mode == 'production' ]
+    then
+        # npm run lint;
+        # if [[ $? > 0 ]]
+        # then
+        #     exit 1;
+        # fi
+        webpack --env production NODE_ENV=production  --config ./webpack/webpack.config.js --progress
+        lando wp xd build-blocks-manifest
+    fi
+fi
+if [ $script == 'watch' ]
+then
+    if  [ $mode == 'front-end' ]
+    then
+        webpack serve --config ./webpack/webpack.config.js --env NODE_ENV=development "$args"
+    fi
+    if  [ $mode == 'editor' ]
+    then
+        webpack --config ./webpack/webpack.config.js --env editor
+    fi
+fi
+if [ $script == 'lint' ]
+then
+    if  [ $mode == 'styles' ]
+    then
+        lint_styles
+        if [[ $? > 0 ]]
+        then
+            echo -e $RED'Style linting failed.';
+            echo -e $GRAY;
+            exit 1;
+        fi
+    fi
+    if  [ $mode == 'scripts' ]
+    then
+        lint_scripts
+        if [[ $? > 0 ]]
+        then
+            echo -e $RED'Script linting failed.';
+            echo -e $GRAY;
+            exit 1;
+        fi
+    fi
+    if  [ $mode == 'twig' ]
+    then
+        lint_twig
+        if [[ $? > 0 ]]
+        then
+            echo -e $RED'Twig linting failed.';
+            echo -e $GRAY;
+            exit 1;
+        fi
+    fi
+    if  [ $mode == 'php' ]
+    then
+        lint_php
+        if [[ $? > 0 ]]
+        then
+            echo -e $RED'PHP linting failed.';
+            echo -e $GRAY;
+            exit 1;
+        fi
+    fi
+    if  [ $mode == 'all' ]
+    then
+        lint_styles
+        style_lint_result=$?
+        lint_scripts
+        script_lint_result=$?
+        lint_twig
+        twig_lint_result=$?
+        lint_php
+        php_lint_result=$?
+        if [[ $style_lint_result || $script_lint_result || $twig_lint_result || $php_lint_result ]]
+        then
+            echo -e $RED'Linting failed.';
+            echo -e $GRAY;
+            exit 1;
+        fi
+    fi
+fi

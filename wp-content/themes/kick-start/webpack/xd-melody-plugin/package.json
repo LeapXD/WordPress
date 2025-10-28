@@ -1,0 +1,18 @@
+{
+  "name": "xd-melody-plugin",
+  "version": "1.0.2",
+  "description": "Twig formatter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": "./index.js"
+  },
+  "author": "Leap XD",
+  "license": "ISC",
+  "dependencies": {
+    "@zackad/prettier-plugin-twig": "^0.16.0",
+    "prettier": "^3.6.2"
+  }
+}

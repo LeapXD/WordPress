@@ -1,0 +1,134 @@
+@use '../mixins' as *;
+
+/* ----- CSS FONT VARIABLES --------------------------------- */
+/* stylelint-disable custom-property-empty-line-before */
+/* stylelint-disable max-empty-lines */
+/* stylelint-disable string-quotes */
+@include root {
+
+  // Font family
+
+  --primary-font-family: "Open Sans", sans-serif;
+  --secondary-font-family: "Open Sans", sans-serif;
+  // --tertiary-font-family: var(--secondary-font-family);
+
+  --d1-font-family: var(--primary-font-family);
+  --d2-font-family: var(--primary-font-family);
+
+  --h2-font-family: var(--primary-font-family);
+  --h3-font-family: var(--primary-font-family);
+  --h4-font-family: var(--primary-font-family);
+  --h5-font-family: var(--primary-font-family);
+  --h6-font-family: var(--primary-font-family);
+
+  --body-font-family: var(--secondary-font-family);
+  --title-font-family: var(--primary-font-family);
+
+  --p1-font-family: var(--body-font-family);
+  --p2-font-family: var(--body-font-family);
+  --p3-font-family: var(--body-font-family);
+  --p4-font-family: var(--body-font-family);
+
+
+  // Font weight
+
+  --d1-font-weight: 300;
+  --d2-font-weight: 300;
+  --h2-font-weight: 400;
+  --h3-font-weight: 400;
+  --h4-font-weight: 400;
+  --h5-font-weight: 400;
+  --h6-font-weight: 400;
+
+  --p1-font-weight: 400;
+  --p2-font-weight: 400;
+  --p3-font-weight: 400;
+  --p4-font-weight: 400;
+
+  --title-font-weight: 700;
+  --title-sm-font-weight: 700;
+
+
+  // Line height
+
+  --d1-line-height: 1.1;
+  --d2-line-height: 1.1;
+  --h2-line-height: 1.2;
+  --h3-line-height: 1.2;
+
+  --h4-line-height: 1.5;
+  --h5-line-height: 1.5;
+  --h6-line-height: 1.5;
+
+  --body-line-height: 1.7;
+  --p1-line-height: 1.7;
+  --p2-line-height: 1.7;
+  --p3-line-height: 1.7;
+  --p4-line-height: 1.7;
+
+  --title-line-height: 1.5;
+  --title-sm-line-height: 1.5;
+
+
+  // Font size
+
+  --d1-font-size: #{pixeltorem(52)};
+  --d2-font-size: #{pixeltorem(46)};
+  --h2-font-size: #{pixeltorem(36)};
+  --h3-font-size: #{pixeltorem(32)};
+  --h4-font-size: #{pixeltorem(26)};
+  --h5-font-size: #{pixeltorem(22)};
+  --h6-font-size: #{pixeltorem(20)};
+
+  --p1-font-size: #{pixeltorem(18)};
+  --body-font-size: #{pixeltorem(16)};
+  --p3-font-size: #{pixeltorem(14)};
+  --p4-font-size: #{pixeltorem(14)};
+
+
+  --title-font-size: #{pixeltorem(12)};
+  --title-sm-font-size: #{pixeltorem(10)};
+
+
+  @include mq(m) {
+    --d1-font-size: #{pixeltorem(92)};
+    --d2-font-size: #{pixeltorem(72)};
+    --h2-font-size: #{pixeltorem(48)};
+    --h3-font-size: #{pixeltorem(42)};
+    --h4-font-size: #{pixeltorem(32)};
+    --h5-font-size: #{pixeltorem(24)};
+    --h6-font-size: #{pixeltorem(22)};
+
+    --p1-font-size: #{pixeltorem(22)};
+    --body-font-size: #{pixeltorem(18)};
+    --p3-font-size: #{pixeltorem(16)};
+    // --p4-font-size:#{pixeltorem(14)};
+
+    --title-font-size: #{pixeltorem(14)};
+    --title-sm-font-size: #{pixeltorem(12)};
+  }
+
+
+  // Text transform
+
+  --d1-text-transform: none;
+  --d2-text-transform: none;
+  --h2-text-transform: none;
+  --h3-text-transform: none;
+  --h4-text-transform: none;
+  --h5-text-transform: none;
+  --h6-text-transform: none;
+  --title-text-transform: uppercase;
+  --title-sm-text-transform: uppercase;
+
+
+  // Letter spacing
+
+  --title-letter-spacing: #{pixeltorem(1.5)};
+  --title-sm-letter-spacing: #{pixeltorem(1.5)};
+
+  @include mq(m) {
+    --title-letter-spacing: #{pixeltorem(2)};
+    --title-sm-letter-spacing: #{pixeltorem(2)};
+  }
+}

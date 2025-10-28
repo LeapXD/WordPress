@@ -1,0 +1,42 @@
+{
+    "key": "group_5e730ca2ba8a8",
+    "title": "Instagram feed",
+    "fields": [
+        {
+            "key": "field_5e730d8588628",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "Instagram feed title",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/instagram-feed"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}

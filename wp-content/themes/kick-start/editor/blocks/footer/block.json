@@ -1,0 +1,14 @@
+{
+  "name": "xd/footer",
+  "title": "Footer",
+  "attributes": {
+    "footerType": {
+      "default": "footer-top-full"
+    }
+  },
+  "supports": {
+    "custom": {
+      "merge": true
+    }
+  }
+}

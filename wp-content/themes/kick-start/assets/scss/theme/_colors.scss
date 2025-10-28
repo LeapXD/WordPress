@@ -1,0 +1,352 @@
+@use '../mixins' as *;
+/* ----- CSS COLOR VARIABLES --------------------------------- */
+/* stylelint-disable custom-property-empty-line-before */
+/* stylelint-disable max-empty-lines */
+/* stylelint-disable string-quotes */
+@include root {
+
+  // Theme Colors
+
+  --body: #292929;
+
+  --black: #000;
+  --white: #fff;
+
+  --primary: #235fa3;
+  --secondary: #468ad8;
+  --tertiary: #474747;
+
+  --light: transparent;
+  --medium: var(--grey-100);
+  --dark: var(--tertiary);
+
+  // New Greys
+
+  --grey-100: #f8f8f8;
+  --grey-200: #f2f2f2;
+  --grey-300: #dcdcdc;
+  --grey-400: #b6b6b6;
+  --grey-500: #999;
+  --grey-600: #888;
+  --grey-700: #565656;
+  --grey-800: #3c3c3c;
+  --grey-900: var(--body);
+
+  // Overlays
+  --overlay-3: rgba(0, 0, 0, 0.3);
+  --overlay-4: rgba(0, 0, 0, 0.4);
+  --overlay-5: rgba(0, 0, 0, 0.5);
+  --overlay-6: rgba(0, 0, 0, 0.6);
+  --overlay-7: rgba(0, 0, 0, 0.7);
+  --overlay-8: rgba(0, 0, 0, 0.8);
+
+  // Font default colors
+
+  --d1-color: var(--body);
+  --d2-color: var(--body);
+  --h2-color: var(--body);
+  --h3-color: var(--body);
+  --h4-color: var(--body);
+  --h5-color: var(--body);
+  --h6-color: var(--body);
+  --p-color: var(--body);
+
+  //links
+  --body-link-color: var(--primary);
+  --body-link-hover-color: var(--secondary);
+  --body-link-focus-color: var(--body);
+
+  // Title link colors will use body link colors in most cases if these are not set.
+  --title-link-color: var(--body);
+  --title-link-hover-color: var(--grey-700);
+
+  // Base icon link color is overridden in most cases. This is the default.
+  --icon-link-color: var(--body);
+  --icon-link-hover-color: var(--grey-700);
+
+  // Elements
+  --stroke: var(--grey-300);
+
+  --input-border: var(--grey-400);
+  --input-background: var(--white);
+  --input-focus: var(--stroke);
+  --input-accent: var(--primary);
+  --input-color: var(--body);
+  --label-color: var(--body);
+
+  --error-color: #c10000;
+  --error-bg-color: #f8d7da;
+
+  --warning-color: #805d1e;
+  --warning-bg-color: #fff3cd;
+
+  --filter-select-color: var(--body);
+  --filter-select-background: var(--white);
+  --filter-select-border-color: var(--stroke);
+  --pagination-body: var(--body);
+  --pagination-body-link: var(--secondary);
+  --flyout-background: var(--white);
+  --icon-color: var(--body);
+
+  // Overlays
+  --hero-overlay: var(--overlay-3);
+  --modal-overlay: var(--overlay-8);
+  --offcanvas-overlay: var(--overlay-4);
+
+  // Button default (primary, text, download) colors
+  @extend %btn;
+
+  // If different from body link
+  // --text-btn-color: var(--primary);
+  // --text-btn-hover-color: var(--secondary);
+  // --download-btn-color: var(--text-btn-color);
+  // --download-btn-hover-color: var(--text-btn-hover-color);
+
+  // Menu colors
+  --menu-button-color: var(--white);
+  --menu-button-background-color: transparent;
+  --header-background-color: transparent;
+  --menu-color: var(--body);
+  --menu-hover-color: var(--grey-600);
+  --menu-background-color: var(--flyout-background);
+
+  // navbar menu colors
+  --menu-navbar-color: var(--menu-button-color);
+  --menu-navbar-hover-color: var(--grey-200);
+  --menu-navbar-subnav-color: var(--menu-color);
+  --menu-navbar-subnav-hover-color: var(--menu-hover-color);
+
+  // Footer colors
+  --footer-color: var(--white);
+  --footer-hover-color: var(--grey-300);
+  --footer-background-color: var(--grey-800);
+  --footer-bottom-background-color: var(--grey-900);
+
+
+  // Slider control colors
+  --slider-dot-color: var(--body);
+  --slider-arrow-background-color: var(--white);
+  --slider-arrow-color: var(--secondary);
+
+  // Card button colors
+  --card-button-color: var(--white);
+  --card-button-background-color: rgba(255, 255, 255, 0.3);
+
+  // Card colors
+  // --card-background-color: var(--white);
+  // --card-border-color: var(--stroke);
+  --card-label-background-color: var(--tertiary);
+  --card-label-color: var(--white);
+
+
+  color: var(--body);
+}
+
+// Button styles
+%btn {
+  // Button default (primary, text, download) colors
+  --btn-background-color: var(--primary);
+  --btn-border-color: var(--primary);
+  --btn-color: var(--white);
+
+  --btn-background-hover-color: var(--secondary);
+  --btn-border-hover-color: var(--secondary);
+  --btn-hover-color: var(--white);
+
+  --btn-focus-inner-color: var(--white);
+  --btn-focus-outer-color: var(--secondary);
+}
+
+%btn-ghost {
+  --btn-background-color: transparent;
+  --btn-border-color: var(--secondary);
+  --btn-color: var(--secondary);
+}
+
+%btn-alternate {
+  --btn-background-color: var(--secondary);
+  --btn-border-color: var(--secondary);
+  --btn-background-hover-color: var(--primary);
+  --btn-border-hover-color: var(--primary);
+  --btn-focus-outer-color: var(--primary);
+}
+
+%btn-inverse {
+  --btn-background-color: var(--white);
+  --btn-border-color: var(--white);
+  --btn-color: var(--primary);
+  --btn-background-hover-color: var(--primary);
+  --btn-border-hover-color: var(--primary);
+  --btn-focus-inner-color: var(--white);
+  --btn-focus-outer-color: var(--primary);
+}
+
+%btn-inverse-ghost {
+  --btn-background-color: transparent;
+  --btn-border-color: var(--white);
+  --btn-color: var(--white);
+  --btn-background-hover-color: var(--white);
+  --btn-border-hover-color: var(--white);
+  --btn-hover-color: var(--primary);
+  --btn-focus-inner-color: var(--tertiary);
+  --btn-focus-outer-color: var(--white);
+}
+
+.xd-button--ghost {
+  @extend %btn-ghost;
+}
+
+.xd-button--alternate {
+  @extend %btn-alternate;
+}
+
+
+// If button invert ttoggle control is enabled
+// .is-style-light,
+// .is-style-medium {
+//   :where(.xd-button--invert) {
+//     @extend %btn-inverse;
+//   }
+
+//   :where(.xd-button--ghost.xd-button--invert) {
+//     @extend %btn-inverse-ghost;
+//   }
+// }
+
+// social links
+.xd-social-links {
+  &.xd-menu__social-links {
+    --icon-link-color: var(--menu-color);
+    --icon-link-hover-color: var(--menu-hover-color);
+  }
+
+  .xd-footer--bottom & {
+    --icon-link-color: var(--footer-color);
+    --icon-link-hover-color: var(--footer-hover-color);
+  }
+
+  .contact-form & {
+    // --icon-link-color: var(--secondary);
+    // --icon-link-hover-color: var(--primary);
+  }
+}
+
+// Style contexts
+.is-style-dark,
+.xd-alert,
+.slider-theme-dark,
+.xd-image--cover,
+.xd-video--image-cover,
+.xd-has-background-image.xd-has-background-image--overlay {
+  --d1-color: var(--white);
+  --d2-color: var(--white);
+  --h2-color: var(--white);
+  --h3-color: var(--white);
+  --h4-color: var(--white);
+  --h5-color: var(--white);
+  --h6-color: var(--white);
+  --p-color: var(--white);
+
+  --icon-color: var(--white);
+
+  --body-link-color: var(--white);
+  --body-link-hover-color: var(--grey-300);
+  --body-link-focus-color: var(--white);
+
+  // If different from body link
+  // --text-btn-color: var(--white);
+  // --text-btn-hover-color: var(--grey-300);
+  // --download-btn-color: var(--white);
+  // --download-btn-hover-color: var(--grey-300);
+
+  // Title link colors will use body link colors in most cases
+  // if these are not set here or in root context.
+  --title-link-color: var(--white);
+  --title-link-hover-color: var(--grey-300);
+
+  // Base icon link color is overridden in most cases. This is the default.
+  --icon-link-color: var(--white);
+  --icon-link-hover-color: var(--grey-300);
+
+  --slider-dot-color: var(--white);
+  --slider-arrow-background-color: rgba(255, 255, 255, 0.3);
+  --slider-arrow-color: var(--white);
+
+  a:hover &,
+  a:hover {
+    --slider-arrow-background-color: rgba(255, 255, 255, 0.15);
+    --card-button-background-color: rgba(255, 255, 255, 0.15);
+    // --slider-arrow-color: var(--white);
+  }
+
+  .xd-button:where(:not(.xd-button--invert)) {
+    @extend %btn-inverse;
+  }
+
+  .xd-button--ghost:where(:not(.xd-button--invert)) {
+    @extend %btn-inverse-ghost;
+  }
+}
+
+// .xd-nav,
+// .xd-flyout,
+.xd-footer {
+  // when the nav, flyout, or footer is dark
+  --body-link-focus-color: var(--white);
+}
+
+.is-style-standard-list-with-links,
+.uk-accordion-title {
+  --icon-link-color: var(--title-link-color, var(--body-link-color));
+  --icon-link-hover-color: var(--title-link-hover-color, var(--body-link-hover-color));
+}
+
+.xd-button--download {
+  --icon-link-color: var(--download-btn-color, var(--body-link-color));
+  --icon-link-hover-color: var(--download-btn-hover-color, var(--body-link-hover-color));
+}
+
+.page-header-theme-filled,
+.header-theme-filled {
+  --header-background-color: var(--menu-background-color);
+  --menu-button-color: var(--body);
+  --menu-navbar-hover-color: var(--secondary);
+
+  .xd-navbar {
+    .xd-button--inverse {
+      --btn-background-color: var(--primary);
+      --btn-border-color: var(--primary);
+      --btn-color: var(--white);
+    }
+
+    .xd-button--ghost-inverse {
+      --btn-background-color: transparent;
+      --btn-border-color: var(--secondary);
+      --btn-color: var(--secondary);
+      --btn-background-hover-color: var(--secondary);
+      --btn-border-hover-color: var(--secondary);
+      --btn-hover-color: var(--white);
+    }
+  }
+}
+
+.header-theme-transparent {
+  --header-background-color: transparent;
+  --menu-button-color: var(--menu-background-color);
+  --menu-button-background-color: var(--body);
+  --menu-navbar-hover-color: var(--secondary);
+}
+
+.uk-offcanvas-page {
+  --header-background-color: transparent;
+  --menu-button-color: var(--menu-background-color);
+  --menu-navbar-hover-color: var(--secondary);
+}
+
+.modal-open {
+  --header-background-color: transparent;
+  --menu-button-color: var(--body);
+  --menu-button-background-color: var(--white);
+  --menu-navbar-hover-color: var(--secondary);
+}
+

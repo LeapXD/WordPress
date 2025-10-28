@@ -1,0 +1,13 @@
+@use "variables" as * with ($root: ".editor-styles-wrapper", $scope: "editor");
+@use "mixins" as *;
+
+@use "theme" as *;
+@use "modules" as *;
+
+@use "typography" as *;
+
+@use "elements" as *;
+@use "layout" as *;
+
+@use "../../editor/scss/blocks" as *;
+@use "../../editor/scss/components" as *;

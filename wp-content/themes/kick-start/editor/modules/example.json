@@ -1,0 +1,297 @@
+{
+	"$schema": "../../../../themes/kicks/editor/schema/module-schema.json",
+	"title": "Example",
+	"supports": [{
+		"name": "xd/example",
+		"attributes": {
+			"date": {
+				"type": "string",
+				"default": ""
+			},
+			"boolean_attribute": {
+				"type": "boolean",
+				"default": ""
+			},
+			"string_attribute": {
+				"type": "string",
+				"default": ""
+			},
+			"number_attribute": {
+				"type": "number",
+				"default": 0
+			},
+			"integer_attribute": {
+				"type": "integer",
+				"default": 0
+			},
+			"array_attribute": {
+				"type": "array",
+				"default": []
+			},
+			"object_attribute": {
+				"type": "object",
+				"default": {}
+			},
+			"video": {
+				"type": "object",
+				"default": {}
+			},
+			"repeater": {
+				"type": "array",
+				"default": []
+			}
+
+		},
+		"inspectorControls": [{
+				"attribute": "video",
+				"type": "XDFieldGroup",
+				"name": "hero_video",
+				"fields": [{
+					"type": "XDFileUploadControl",
+					"name": "sm",
+					"label": "Mobile",
+					"allowedTypes": ["video/mp4", "video/webm"],
+					"schema": {
+						"type": "object"
+					}
+				}, {
+					"type": "XDFileUploadControl",
+					"name": "md",
+					"label": "Tablet",
+					"schema": ["video/mp4", "video/webm"],
+					"fieldType": {
+						"type": "object"
+					}
+				}, {
+					"type": "XDFileUploadControl",
+					"name": "lg",
+					"label": "Desktop",
+					"allowedTypes": ["video/mp4", "video/webm"],
+					"schema": {
+						"type": "object"
+					}
+				}]
+			}, {
+				"attribute": "boolean_attribute",
+				"activeState": "checked",
+				"type": "CheckboxControl",
+				"label": "CheckboxControl"
+			},
+			{
+				"attribute": "boolean_attribute",
+				"activeState": "checked",
+				"type": "ToggleControl",
+				"label": "ToggleControl boolean"
+			},
+			{
+				"attribute": "number_attribute",
+				"type": "TextControl",
+				"label": "TextControl number"
+			},
+			{
+				"attribute": "integer_attribute",
+				"type": "TextControl",
+				"label": "TextControl integer"
+			},
+			{
+				"attribute": "integer_attribute",
+				"type": "RangeControl",
+				"label": "Range Control",
+				"step": 5,
+				"min": 10,
+				"max": 80
+			},
+			{
+				"attribute": "string_attribute",
+				"type": "TextControl",
+				"label": "TextControl"
+			},
+			{
+				"attribute": "string_attribute",
+				"label": "XDRadioButtonGroup string",
+				"type": "XDRadioButtonGroup",
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one"
+				}, {
+					"label": "two",
+					"value": "two"
+				}, {
+					"label": "three",
+					"value": "three"
+				}]
+			},
+			{
+				"attribute": "string_attribute",
+				"label": "SelectControl string",
+				"type": "SelectControl",
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one"
+				}, {
+					"label": "two",
+					"value": "two"
+				}, {
+					"label": "three",
+					"value": "three"
+				}]
+			},
+			{
+				"attribute": "string_attribute",
+				"label": "XDButtonGroup string",
+				"type": "XDButtonGroup",
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one",
+					"icon": "gm/search"
+				}, {
+					"label": "two",
+					"value": "two",
+					"isDestructive": true,
+					"variant": "link"
+				}, {
+					"label": "three",
+					"value": "three"
+				}]
+			},
+			{
+				"attribute": "string_attribute",
+				"label": "RadioControl string",
+				"activeState": "selected",
+				"type": "RadioControl",
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one"
+				}, {
+					"label": "two",
+					"value": "two"
+				}, {
+					"label": "three",
+					"value": "three"
+				}]
+			},
+			{
+				"attribute": "array_attribute",
+				"label": "XDButtonGroup array",
+				"type": "XDButtonGroup",
+				"gridColumns": 3,
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one"
+				}, {
+					"label": "two",
+					"value": "two"
+				}, {
+					"label": "three",
+					"value": "three"
+				}, {
+					"label": "four",
+					"value": "four"
+				}, {
+					"label": "five",
+					"value": "five"
+				}]
+			},
+			{
+				"attribute": "array_attribute",
+				"label": "XDCheckboxGroup array",
+				"type": "XDCheckboxGroup",
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one"
+				}, {
+					"label": "two",
+					"value": "two"
+				}, {
+					"label": "three",
+					"value": "three"
+				}, {
+					"label": "four",
+					"value": "four"
+				}, {
+					"label": "five",
+					"value": "five"
+				}]
+			},
+			{
+				"attribute": "string_attribute",
+				"label": "XDCheckboxGroup string",
+				"type": "XDCheckboxGroup",
+				"options": [{
+					"label": "none",
+					"value": ""
+				}, {
+					"label": "one",
+					"value": "one"
+				}, {
+					"label": "two",
+					"value": "two"
+				}, {
+					"label": "three",
+					"value": "three"
+				}, {
+					"label": "four",
+					"value": "four"
+				}, {
+					"label": "five",
+					"value": "five"
+				}],
+				"help": "Don't do this. Use RadioControl for a singular option"
+			},
+			{
+				"attribute": "object_attribute",
+				"type": "XDFieldGroup",
+				"label": "Group",
+				"fields": [{
+					"name": "test",
+					"schema": "string",
+					"type": "TextControl",
+					"label": "test"
+				}, {
+					"name": "test2",
+					"type": "TextControl",
+					"schema": "string",
+					"label": "test2",
+					"help": "Both of these fields save to the \"object_attribute\" attribute"
+				}]
+			},
+			{
+				"activeState": "currentDate",
+				"attribute": "date",
+				"type": "DateTimePicker",
+				"custom:onChange": "repeaterKeyDown"
+			},
+			{
+				"attribute": "repeater",
+				"type": "XDRepeaterField",
+				"fields": [{
+					"name": "repeater_text",
+					"label": "Text",
+					"type": "TextControl",
+					"custom:onChange": "repeaterKeyDown",
+					"schema": {
+						"type": "string"
+					}
+				}]
+			}
+		]
+	}]
+}

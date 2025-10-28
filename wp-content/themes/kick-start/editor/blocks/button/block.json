@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../kicks/editor/schema/block-schema.json",
+  "name": "xd/button",
+  "title": "Button",
+  "supports": {
+    "//xd/button-style-invert": true,
+    "custom": {
+      "merge": true
+    }
+  }
+}

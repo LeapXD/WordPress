@@ -1,0 +1,16 @@
+{
+  "name": "xd/cta",
+  "title": "CTA",
+  "supports": {
+    "custom": {
+      "merge": true,
+      "mergeVariations": true
+    }
+  },
+  "variations": [
+    {
+      "scope": ["block"],
+      "name": "xd/poster"
+    }
+  ]
+}

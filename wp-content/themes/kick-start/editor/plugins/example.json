@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../../themes/kicks/editor/schema/plugin-schema.json",
+  "name": "example-plugin",
+  "title": "Example Plugin",
+  "panels": ["PluginDocumentSettingPanel"],
+  "locations": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "not-a-post-valid-type"
+      }
+    ]
+  ],
+  "fieldGroups": [
+    {
+      "title": "Example Field Group",
+      "fields": [
+        {
+          "name": "example_field",
+          "label": "Example Field",
+          "type": "TextControl",
+          "custom:onChange": "repeaterKeyDown",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "attribute": "repeater",
+          "type": "XDRepeaterField",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "repeater_text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "name": "repeater",
+          "label": "Repeater",
+          "fields": [
+            {
+              "name": "repeater_text",
+              "label": "Text",
+              "type": "TextControl",
+              "custom:onChange": "repeaterKeyDown",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+@use "variables" with ($root: ":root", $scope: "main");
+@use "mixins" as *;
+
+//theme
+@use "theme" as *;
+@use "typography" as *;
+@use "modules" as *;
+@use "regions" as *;
+@use "layout" as *;
+@use "forms" as *;
+@use "components" as *;
+@use "elements" as *;
+// @use "blocks/**/*.scss" as *;

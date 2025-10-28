@@ -1,0 +1,143 @@
+{
+    "key": "group_5ef10bde0ac81",
+    "title": "Single Location Map",
+    "fields": [
+        {
+            "key": "field_5ef10bde10d1f",
+            "label": "Marker Icon",
+            "name": "centre_pin_icon",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5ef10bde10db2",
+            "label": "Marker color",
+            "name": "centre_pin_color",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": ""
+        },
+        {
+            "key": "field_5ef10bde10e45",
+            "label": "Min Zoom",
+            "name": "min_zoom",
+            "type": "number",
+            "instructions": "The minimum zoom level is 0. Setting this number higher than 0 will restrict how far the map may zoom out.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 11,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5ef10bde10edd",
+            "label": "Max zoom",
+            "name": "max_zoom",
+            "type": "number",
+            "instructions": "The maximum zoom level is 20. Setting this number lower than 20 will restrict how far the map may zoom in",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 17,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5ef10bde10f6d",
+            "label": "Zoom",
+            "name": "zoom",
+            "type": "number",
+            "instructions": "Map initial zoom level",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 15,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5ef10bde11001",
+            "label": "Centre pin",
+            "name": "centre_pin",
+            "type": "google_map",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "center_lat": "48.424342",
+            "center_lng": "-123.3647646",
+            "zoom": 15,
+            "height": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/single-location-map"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}
