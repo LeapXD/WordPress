@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+
+{% block hero %}
+	{% include "partials/hero/hero-small.twig" %}
+{% endblock %}
+
+{% block content %}
+	<article
+	id="post-{{ post.id }}"
+	class="{{ post.class }}"
+	>
+	<div class="entry-content">
+	{{ post.content }}
+	</div>
+	</article>
+{% endblock %}

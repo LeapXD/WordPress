@@ -1,0 +1,18 @@
+@use "variables" as * with (
+	$root: ":root",
+	$scope: "main",
+	$content: ".entry-content"
+	);
+
+@use "mixins" as *;
+
+@use "core" as *;
+//theme
+@use "theme" as *;
+@use "typography" as *;
+@use "modules" as *;
+@use "regions" as *;
+@use "layout" as *;
+@use "forms" as *;
+@use "components" as *;
+@use "elements" as *;

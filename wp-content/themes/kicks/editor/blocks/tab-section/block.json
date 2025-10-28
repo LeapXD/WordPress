@@ -1,0 +1,27 @@
+{
+  "apiVersion": 2,
+  "name": "xd/tab-section",
+  "title": "Tabbed Section",
+  "icon": "gm/photo-album",
+  "description": "Tabbed section",
+  "category": "standard",
+  "keywords": ["tab", "section"],
+  "parent": ["xd/tabbed-block"],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [{
+        "wrap": {
+          "block": "xd-tabbed-menu__section xd-tab-section__inner"
+        },
+        "allowedBlocks": ["xd/menu-item", "core/heading"],
+        "template": [
+          ["core/heading", { "level": 5, "placeholder": "Section heading" }],
+          ["xd/menu-item"],
+          ["xd/menu-item"]
+        ],
+        "templateLock": false
+      }]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.xd-image.xd-image {
+  max-width: 100%;
+  width: var(--xd-image-width, 100%);
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
+  overflow: hidden;
+
+  &.wp-block {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  picture,
+  video {
+    grid-area: 1 / 1 / 2 / 2;
+    display: block;
+    width: 100%;
+  }
+
+  &--cover,
+  .xd-image-gallery__inserter & {
+    width: 100%;
+  }
+}
+
+.xd-image {
+  &.aligncenter {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.alignright {
+    margin-left: auto;
+  }
+}
+
+:where(.xd-image) {
+  height: auto;
+}
+
+:where(.xd-image-gallery__inserter .xd-image,.xd-image--cover) {
+  height: 100%;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="18px" viewBox="0 0 15 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>UI Icon/download/$ui-05</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Button-/-Large-/-Download-/-Enabled" transform="translate(0.000000, -3.000000)" fill="#3785DF" fill-rule="nonzero" stroke="#3685DF">
+            <g id="UI-Icon/download/$ui-05" transform="translate(1.000000, 4.000000)">
+                <path d="M7,0 L7,11.043 L10.8227488,7 L11.5,7.64027347 L6.50158722,12.92736 L1.5,7.64317351 L2.1768728,7.00249999 L6,11.042 L6,0 L7,0 Z" id="arrow"></path>
+                <path d="M12.0714286,15 L12.0714286,13 L13,13 L13,15 C13,15.5522847 12.5522847,16 12,16 L1,16 C0.44771525,16 6.76353751e-17,15.5522847 0,15 L0,13 L0,13 L0.928571429,13 L0.928571429,15 L12.0714286,15 Z" id="bottom"></path>
+            </g>
+        </g>
+    </g>
+</svg>

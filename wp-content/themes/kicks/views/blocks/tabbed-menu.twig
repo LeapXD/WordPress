@@ -1,0 +1,18 @@
+{% extends 'components/block-with-title.twig' %}
+
+{% block preInnerBlocks %}
+		{{ parent() }}
+{% endblock %}
+
+{% block preInnerBlocksContent %}
+	{% if attributes.title %}
+		{{ block('blockTitle') }}
+	{% endif %}
+	<div class="xd-tabbed-menu__switcher" {{ wrap.preInnerBlocks.dataset }}>
+	{% for tab in attributes.tabs %}
+		<h6>
+			<a href="#">{{ tab.title }}</a>
+		</h6>
+	{% endfor %}
+	</div>
+{% endblock %}

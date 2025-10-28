@@ -1,0 +1,26 @@
+.xd-image-slider {
+  display: flex;
+  flex-wrap: wrap;
+
+  > .xd-image.xd-image {
+    width: 25%;
+    flex-wrap: wrap;
+    height: auto;
+    aspect-ratio: 16/9;
+
+    button {
+      display: none;
+    }
+  }
+
+  &__inserter {
+    min-width: 100%;
+
+    .xd-image {
+      height: auto !important;
+      width: 100%;
+      aspect-ratio: initial;
+      margin-bottom: 0;
+    }
+  }
+}

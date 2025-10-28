@@ -1,0 +1,123 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Image",
+  "name": "image",
+  "initialOpen": true,
+  "supports": [
+    {
+      "name": "xd/image-video-message",
+      "inspectorControls": [
+        {
+          "attribute": "none",
+          "type": "XDMessagePanel",
+          "label": "Video Poster image",
+          "help": "The poster image will will be displayed while the video is buffering. The video size will be determined by the dimensions of the poster image"
+        }
+      ]
+    },
+    {
+      "name": "xd/image-desktop",
+      "attributes": {
+        "imageDesktop": {
+          "type": "object",
+          "default": {
+            "id": "",
+            "url": ""
+          }
+        },
+        "showCaption": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "inspectorControls": [
+        {
+          "label": "Primary image",
+          "type": "XDImageControl",
+          "attribute": "imageDesktop"
+        },
+        {
+          "label": "Show caption",
+          "type": "ToggleControl",
+          "activeState": "checked",
+          "attribute": "showCaption"
+        }
+      ]
+    },
+    {
+      "name": "xd/image-mobile",
+      "attributes": {
+        "imageMobile": {
+          "type": "object",
+          "default": {
+            "id": "",
+            "url": ""
+          }
+        }
+      },
+      "inspectorControls": [
+        {
+          "label": "Mobile Crop",
+          "type": "XDImageControl",
+          "attribute": "imageMobile",
+          "help": "(Optional) image cropped for mobile devices"
+        }
+      ]
+    },
+    {
+      "name": "xd/image-align",
+      "attributes": {
+        "imageAlign": {
+          "type": "string",
+          "default": "alignleft",
+          "className": true
+        }
+      },
+      "blockControls": [
+        {
+          "label": "Align Image",
+          "attribute": "imageAlign",
+          "type": "XDToolbarDropdownMenu",
+          "group": "image-align",
+          "options": [
+            {
+              "iconPosition": "left",
+              "icon": "wp/positionLeft",
+              "label": "Left",
+              "value": "alignleft"
+            },
+            {
+              "iconPosition": "left",
+              "icon": "wp/positionCenter",
+              "label": "Center",
+              "value": "aligncenter"
+            },
+            {
+              "iconPosition": "left",
+              "icon": "wp/positionRight",
+              "label": "Right",
+              "value": "alignright"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xd/image-width",
+      "attributes": {
+        "imageWidth": {
+          "type": "string",
+          "default": "100%",
+          "cssVariable": true
+        }
+      },
+      "inspectorControls": [
+        {
+          "label": "Image Width",
+          "type": "XDWidthControl",
+          "attribute": "imageWidth"
+        }
+      ]
+    }
+  ]
+}

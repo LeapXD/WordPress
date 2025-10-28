@@ -1,0 +1,57 @@
+<div class="xd-footer--top xd-footer__top--full xd-py--sm">
+  <div class="container">
+    <div class="row">
+      <div class="xd-footer__column col-10 offset-1 col-md-3 offset-md-1">
+        {% if templateProps.footer.footerLogo %}
+          <a
+            href="{{ templateProps.footer.footerLogo.url }}"
+            class="xd-footer__logo"
+            aria-label="{{ site.name }} Home Page"
+            {{ templateProps.footer.footerLogo.rel }}
+            {{ templateProps.footer.footerLogo.target }}
+          >
+            {{ templateProps.footer.footerLogo.image }}
+          </a>
+        {% endif %}
+        {% if templateProps.footer.footerButtons.newsletterButton %}
+          <div class="xd-footer__subscribe">
+            <p>{{ templateProps.footer.footerButtons.newsletterTag|nl2br }}</p>
+            {{ templateProps.footer.footerButtons.newsletterButton.content }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="xd-footer__column col-12 col-md-3 col-xl-2 offset-md-2 offset-xl-3">
+        <p class="title">Get In Touch</p>
+        <p>{{ templateProps.companyDetails.address|nl2br }}</p>
+        {% if templateProps.companyDetails.directions %}
+          <p>
+            <a href="{{ templateProps.companyDetails.directions.url }}" target="_blank" rel="noopener noreferrer">View on Map</a>
+          </p>
+        {% endif %}
+        {% if templateProps.companyDetails.phone1.phone1Number %}
+          <p>
+            <a class="xd-phone-number" href="tel:{{ templateProps.companyDetails.phone1.phone1Number }}">{{ templateProps.companyDetails.phone1.phone1DisplayNumber ? templateProps.companyDetails.phone1.phone1DisplayNumber : templateProps.companyDetails.phone1.phone1Number }}</a>
+          </p>
+          {% if templateProps.companyDetails.phone2.phone2Number %}
+            <p>
+              <a class="xd-phone-number" href="tel:{{ templateProps.companyDetails.phone2.phone2Number }}">{{ templateProps.companyDetails.phone2.phone2DisplayNumber ? templateProps.companyDetails.phone2.phone2DisplayNumber : templateProps.companyDetails.phone2.phone2Number }}</a>
+            </p>
+          {% endif %}
+        {% endif %}
+        {% if templateProps.footer.footerButtons.contactLink %}
+          <p>
+            <a href="{{ templateProps.footer.footerButtons.contactLink.url }}">{{ templateProps.footer.footerButtons.contactLink.title }}</a>
+          </p>
+        {% endif %}
+      </div>
+
+      <div class="xd-footer__column col-12 col-md-3">
+        {% if templateProps.footer.footerMenu %}
+          <p class="title">Navigation</p>
+          {{ footer_menu(templateProps.footer.footerMenu) }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.xd-two-tile {
+  &__inner {
+    .xd-image {
+      min-height: 0;
+    }
+  }
+
+  .xd-media-placeholder {
+    background-color: #f2f2f2;
+    border: 1px dotted #aaa;
+
+    &::before {
+      content: initial;
+    }
+  }
+
+  .xd-image {
+    padding: 0;
+  }
+
+  .components-placeholder__illustration {
+    display: none;
+  }
+}

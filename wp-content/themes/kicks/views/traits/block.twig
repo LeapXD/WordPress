@@ -1,0 +1,104 @@
+{% block block %}
+  {% if parent.block %}
+    <div
+      {{ blockProps.id }}
+      class="{{ blockProps.className }}"
+      {{ blockProps.dataset }}
+      {{ blockProps.aria }}
+      {{ blockProps.role }}
+      {{ blockProps.style }}
+    >
+      {{ block('blockContent') }}
+    </div>
+  {% else %}
+    <section
+      {{ blockProps.id }}
+      class="{{ wrap.block.className }}"
+      {{ blockProps.dataset }}
+      {{ blockProps.aria }}
+      {{ blockProps.role }}
+      {{ blockProps.style }}
+    >
+      {{ block('blockContent') }}
+    </section>
+  {% endif %}
+{% endblock %}
+
+{% block blockContent %}
+  {{ block('backgroundImage') }}
+  {{ block('outer') }}
+{% endblock %}
+
+{% block backgroundImage %}
+  {% if blockProps.backgroundImage %}
+    {% include 'components/background-image.twig' with { backgroundImage: blockProps.backgroundImage } %}
+  {% endif %}
+{% endblock %}
+
+{% block outer %}
+  {% if wrap.outer.className %}
+    <div {{ wrap.outer.id }} class="{{ wrap.outer.className }}">
+      {{ block('outerContent') }}
+    </div>
+  {% else %}
+    {{ block('outerContent') }}
+  {% endif %}
+{% endblock %}
+
+{% block outerContent %}
+  {{ block('inner') }}
+{% endblock %}
+
+{% block inner %}
+  {% if wrap.inner.className %}
+    <div {{ wrap.inner.id }} class="{{ wrap.inner.className }}">
+      {{ block('innerContent') }}
+    </div>
+  {% else %}
+    {{ block('innerContent') }}
+  {% endif %}
+{% endblock %}
+
+{% block innerContent %}
+  {{ block('content') }}
+{% endblock %}
+
+{% block content %}
+  {{ block('preInnerBlocks') }}
+  {{ block('innerBlocks') }}
+  {{ block('postInnerBlocks') }}
+{% endblock %}
+
+{% block preInnerBlocks %}
+  {% if block('preInnerBlocksContent') is defined and block('preInnerBlocksContent')|trim is not empty %}
+    <div {{ wrap.preInnerBlocks.id }} class="{{ wrap.preInnerBlocks.className }}">
+      {{ block('preInnerBlocksContent') }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block innerBlocks %}
+  {% if block('innerBlocksContent')|trim is not empty %}
+    {% if wrap.innerBlocks.className %}
+      <div {{ wrap.innerBlocks.id }} class="{{ wrap.innerBlocks.className }}">
+        {{ block('innerBlocksContent') }}
+      </div>
+    {% else %}
+      {{ block('innerBlocksContent') }}
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block postInnerBlocks %}
+  {% if block('postInnerBlocksContent') is defined and block('postInnerBlocksContent')|trim is not empty %}
+    <div {{ wrap.postInnerBlocks.id }} class="{{ wrap.postInnerBlocks.className }}">
+      {{ block('postInnerBlocksContent') }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block innerBlocksContent %}
+  {% if content|trim is not empty %}
+    {{ content }}
+  {% endif %}
+{% endblock %}

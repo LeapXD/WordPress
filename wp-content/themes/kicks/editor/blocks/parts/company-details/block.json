@@ -1,0 +1,138 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "gm/domain",
+  "name": "xd/company-details",
+  "title": "Company Details",
+  "keywords": ["Company", "Details"],
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "default": ""
+    },
+    "address": {
+      "type": "string",
+      "default": ""
+    },
+    "phone1": {
+      "type": "object",
+      "default": {}
+    },
+    "phone2": {
+      "type": "object",
+      "default": {}
+    },
+    "directions": {
+      "type": "object",
+      "default": {}
+    },
+    "hours": {
+      "type": "string",
+      "default": ""
+    },
+    "socialShareImage": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "supports": {
+    "custom": {
+      "multiple": false,
+      "register": true,
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "label": "Company Legal Name",
+              "attribute": "companyName",
+              "type": "TextControl",
+              "autoComplete": "off"
+            },
+            {
+              "label": "Address",
+              "attribute": "address",
+              "type": "TextareaControl",
+              "autoComplete": "off",
+              "rows": 8
+            },
+            {
+              "label": "Directions",
+              "type": "XDLinkControl",
+              "attribute": "directions"
+            },
+            {
+              "label": "Phone 1",
+              "type": "XDFieldGroup",
+              "attribute": "phone1",
+              "fields": [
+                {
+                  "type": "TextControl",
+                  "label": "Phone Label",
+                  "name": "phone1Label"
+                },
+                {
+                  "type": "TextControl",
+                  "label": "Phone Number",
+                  "name": "phone1Number"
+                },
+                {
+                  "type": "TextControl",
+                  "label": "Display Number (Optional)",
+                  "name": "phone1DisplayNumber"
+                }
+              ]
+            },
+            {
+              "label": "Phone 2",
+              "type": "XDFieldGroup",
+              "attribute": "phone2",
+              "fields": [
+                {
+                  "type": "TextControl",
+                  "label": "Phone Label",
+                  "attribute": "phone2Label",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "TextControl",
+                  "label": "Phone Number",
+                  "attribute": "phone2Number",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "TextControl",
+                  "label": "Display Number (Optional)",
+                  "attribute": "phone2DisplayNumber",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Hours",
+              "attribute": "hours",
+              "type": "TextareaControl",
+              "autoComplete": "off",
+              "rows": 8
+            },
+            {
+              "label": "Optional Social Share Override",
+              "attribute": "socialShareImage",
+              "type": "XDImageControl"
+            }
+          ]
+        }
+      ],
+      "innerBlocks": [
+        {
+          "allowedBlocks": []
+        }
+      ]
+    }
+  }
+}

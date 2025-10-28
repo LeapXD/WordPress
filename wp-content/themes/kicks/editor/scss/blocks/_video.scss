@@ -1,0 +1,12 @@
+.xd-video {
+  &::after {
+    display: none;
+  }
+
+  video {
+    position: static !important;
+    pointer-events: none;
+    height: auto;
+    display: block;
+  }
+}

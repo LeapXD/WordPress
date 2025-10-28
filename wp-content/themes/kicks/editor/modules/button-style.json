@@ -1,0 +1,95 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Button Style",
+  "name": "button-style",
+  "initialOpen": true,
+  "supports": [
+    {
+      "name": "xd/button-style",
+      "attributes": {
+        "buttonStyle": {
+          "type": "string",
+          "default": "xd-button--primary",
+          "className": true
+        },
+        "invertColor": {
+          "type": "boolean",
+          "className": "xd-button--invert"
+        }
+      }
+    },
+    {
+      "name": "xd/button-style-controls",
+      "inspectorControls": [
+        {
+          "attribute": "buttonStyle",
+          "type": "XDButtonGroup",
+          "options": [
+            {
+              "label": "Primary",
+              "value": "xd-button--primary"
+            },
+            {
+              "label": "Ghost",
+              "value": "xd-button--ghost"
+            },
+            {
+              "label": "Inverse",
+              "value": "xd-button--inverse"
+            },
+            {
+              "label": "Ghost Inverse",
+              "value": "xd-button--ghost-inverse"
+            },
+            {
+              "label": "Download",
+              "value": "xd-button--download xd-button--text"
+            },
+            {
+              "label": "Text",
+              "value": "xd-button--text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xd/button-style-controls-v2",
+      "inspectorControls": [
+        {
+          "attribute": "buttonStyle",
+          "type": "XDButtonGroup",
+          "options": [
+            {
+              "label": "Primary",
+              "value": "xd-button--primary"
+            },
+            {
+              "label": "Ghost",
+              "value": "xd-button--ghost"
+            },
+            {
+              "label": "Download",
+              "value": "xd-button--download xd-button--text"
+            },
+            {
+              "label": "Text",
+              "value": "xd-button--text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xd/button-style-invert",
+      "inspectorControls": [
+        {
+          "attribute": "invertColor",
+          "type": "ToggleControl",
+          "label": "Invert colors",
+          "activeState": "checked"
+        }
+      ]
+    }
+  ]
+}

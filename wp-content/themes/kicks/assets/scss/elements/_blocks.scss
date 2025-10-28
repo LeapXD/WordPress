@@ -1,0 +1,51 @@
+@use '../mixins/' as *;
+
+/*
+Intended to solve a rendering glitch where images with object-fit: cover
+have a height rounded to the nearest pixel.
+*/
+:where(.entry-content > *:not(
+[class*="xd-my--"],
+[class*="xd-mt--"]
+)) {
+  margin-top: -1px;
+}
+
+[class*="__inner"] {
+  >*:first-child {
+    margin-top: 0;
+  }
+
+  >*:last-child {
+    margin-bottom: 0;
+  }
+
+  .xd-image:not(:last-child) {
+    margin-bottom: 1.5rem;
+
+    @include mq(m) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .xd-has-background-image & {
+    position: relative;
+    z-index: 1;
+  }
+
+  .xd-buttons:not(:first-child) {
+    margin-top: 2rem;
+
+    @include mq(m) {
+      margin-top: 2.5rem;
+    }
+  }
+
+  .xd-buttons:not(:last-child) {
+    margin-bottom: 2rem;
+
+    @include mq(m) {
+      margin-bottom: 2.5rem;
+    }
+  }
+}

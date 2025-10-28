@@ -1,0 +1,9 @@
+{% embed 'components/thumbnail-card.twig' %}
+  {% block card %}
+    {{ block('header') }}
+    {{ block('body') }}
+  {% endblock %}
+  {% block cardSubTitleContent %}
+    {{ post.teamMemberPosition }}
+  {% endblock %}
+{% endembed %}

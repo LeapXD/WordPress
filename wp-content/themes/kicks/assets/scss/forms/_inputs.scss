@@ -1,0 +1,200 @@
+@use '../elements/buttons' as *;
+
+label,
+legend {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  padding: 0;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--label-color);
+}
+
+input:where(:not([type="checkbox"], [type="radio"], [type="submit"])),
+select,
+textarea {
+  display: block;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  min-height: 48px;
+  border-radius: 0;
+  border: 1px solid var(--input-border);
+  font-size: var(--p1-font-size);
+  font-family: var(--primary-font-family);
+  color: var(--input-color);
+  background-color: var(--input-background);
+  appearance: none;
+  transition: none;
+}
+
+textarea {
+  min-height: 120px;
+  max-width: 100%;
+  min-width: 100%;
+  resize: vertical;
+}
+
+input,
+textarea,
+select,
+form button {
+  &:focus-visible {
+    outline: 2px dotted var(--input-focus);
+    outline-offset: 2px;
+  }
+}
+
+form button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  @extend .xd-button;
+
+  cursor: pointer;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1.5rem;
+
+  :where(select,textarea,input:not([type="checkbox"], [type="radio"], [type="submit"])) {
+    margin-bottom: 0;
+  }
+}
+
+.select-container {
+  display: grid;
+  align-items: center;
+
+  --icon-color: var(--input-accent);
+
+  select {
+    margin-bottom: 0;
+    grid-area: 1 / 1 / 2 / 2;
+    padding-right: 3rem;
+  }
+
+  form & {
+    margin-bottom: 1.5rem;
+  }
+
+  .xd-icon {
+    grid-area: 1 / 1 / 2 / 2;
+    justify-self: flex-end;
+    transform: translateX(-1rem) translateY(2px);
+    width: 15px;
+    height: 15px;
+    right: 1rem;
+    z-index: 2;
+  }
+}
+
+/**
+<div class="xd-checkbox-container">
+	<label class="xd-checkbox">
+		<input type="checkbox">
+		<span class="xd-checkbox__checkmark"></span>
+		Checkbox 1
+	</label>
+	<label class="xd-checkbox">
+		<input type="checkbox">
+		<span class="xd-checkbox__checkmark"></span>
+		Checkbox 2
+	</label>
+</div>
+
+<div class="xd-radio-container">
+	<label class="xd-radio">
+		<input type="radio" name="radio">
+		<span class="xd-radio__checkmark"></span>
+		radio 1
+	</label>
+	<label class="xd-radio">
+		<input type="radio" name="radio">
+		<span class="xd-radio__checkmark"></span>
+		radio 2
+	</label>
+</div>
+**/
+.xd-checkbox-container,
+.xd-radio-container {
+  column-count: 3;
+
+  @media screen and (max-width: 580px) {
+    column-count: 2;
+  }
+
+  @media screen and (max-width: 450px) {
+    column-count: 1;
+  }
+}
+
+.xd-checkbox,
+.xd-radio {
+  position: relative;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  break-inside: avoid-column;
+
+  &:has(input:focus) {
+    outline: 2px dotted var(--input-focus);
+    outline-offset: 2px;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &__checkmark {
+    margin-right: 0.7rem;
+    display: inline-block;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    background-color: var(--input-background);
+    border: 1px solid var(--input-border);
+    position: relative;
+
+    &::after {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background-color: var(--input-accent);
+      transform: translate(-50%, -50%);
+    }
+
+    input:checked + & {
+      &::after {
+        content: "";
+      }
+    }
+  }
+}
+
+.xd-radio {
+  &__checkmark {
+    border-radius: 50%;
+
+    input:checked + & {
+      &::after {
+        border-radius: 50%;
+      }
+    }
+  }
+}

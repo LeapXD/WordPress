@@ -1,0 +1,5 @@
+{
+  "name": "gravityforms/form",
+  "parent": ["xd/form"],
+  "apiVersion": 2
+}

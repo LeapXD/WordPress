@@ -1,0 +1,99 @@
+{
+  "apiVersion": 2,
+  "attributes": {
+    "postType": { "type": "string", "default": "promotion" },
+    "slider": { "type": "boolean", "default": false },
+    "postCard": { "type": "integer", "default": 0 },
+    "readMore": { "type": "object", "default": {} },
+    "paddingTop": {
+      "type": "string",
+      "default": "xd-pt--xs",
+      "className": true
+    },
+    "paddingBottom": {
+      "type": "string",
+      "default": "xd-pb--xs",
+      "className": true
+    }
+  },
+  "name": "xd/promotion-cards",
+  "title": "Promotion Cards",
+  "icon": "admin-post",
+  "viewStyle": ["block-styles/post-cards", "block-styles/promotion-cards"],
+  "editorStyle": ["block-styles/post-cards", "block-styles/promotion-cards"],
+  "description": "Insert a collection of cards linking to your promotions",
+  "category": "standard",
+  "keywords": ["card", "cards"],
+  "supports": {
+    "xd/title": true,
+    "xd/padding-controls-all": true,
+    "xd/color-theme": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "attributes": { "postType": "promotion" } },
+          "wrap": {
+            "block": "container xd-post-cards xd-post-cards--promotions",
+            "innerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        },
+        {
+          "context": { "attributes": { "slider": true } },
+          "wrap": {
+            "block": "container xd-post-cards xd-post-cards--slider",
+            "editorInnerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Display",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "attribute": "slider",
+                  "type": "XDRadioButtonGroup",
+                  "label": "Display mode",
+                  "options": [
+                    { "label": "Grid", "value": false },
+                    { "label": "Slider", "value": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Card Selection",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDPostSelectControl",
+                  "blockType": "xd/promotion-card"
+                }
+              ]
+            },
+            {
+              "title": "Read More",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "attribute": "readMore",
+                  "type": "XDLinkControl",
+                  "label": "Button"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

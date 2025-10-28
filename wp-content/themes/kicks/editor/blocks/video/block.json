@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/video",
+  "title": "Video",
+  "description": "Video",
+  "category": "standard",
+  "icon": "gm/movie",
+  "keywords": ["video"],
+  "supports": {
+    "xd/id": true,
+    "xd/image-video-message": true,
+    "xd/image-mobile": true,
+    "xd/image-desktop": true,
+    "xd/video": true,
+    "xd/video-modal": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "xd-image xd-image--cover"
+          },
+          "allowedBlocks": []
+        },
+        {
+          "context": {
+            "parent": ["xd/container", "xd/column", "xd/two-tile", "xd/card"]
+          },
+          "wrap": {
+            "block": "xd-image xd-video--image-cover"
+          },
+          "allowedBlocks": []
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "type": "XDVideoControl",
+              "attribute": "videoDesktop",
+              "isPreview": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

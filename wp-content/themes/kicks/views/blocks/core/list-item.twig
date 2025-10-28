@@ -1,0 +1,15 @@
+{% if linkListItem %}
+  <li class="{{ blockProps.className }}">
+    <a
+      {{ target }}
+      {{ rel }}
+      href="{{ href }}"
+    >
+      <span>{{ content }}</span>{{ icon }}
+    </a>
+  </li>
+{% elseif checkMarkItem %}
+  <li class="{{ blockProps.className }}">{{ icon }}<span>{{ content }}</span></li>
+{% else %}
+  {{ content }}
+{% endif %}

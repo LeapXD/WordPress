@@ -1,0 +1,51 @@
+{
+  "apiVersion": 2,
+  "attributes": {
+    "postType": { "type": "string", "default": "floorplan" },
+    "postCard": { "type": "integer", "default": 0 }
+  },
+  "name": "xd/floorplan-accordion",
+  "title": "Floorplan Accordion",
+  "icon": "admin-home",
+  "viewStyle": ["block-styles/accordion", "block-styles/floorplan-accordion", "block-styles/lists"],
+  "editorStyle": ["block-styles/accordion", "block-styles/floorplan-accordion", "block-styles/lists"],
+  "description": "Insert an accordion with floorplan details",
+  "category": "standard",
+  "keywords": ["accordion"],
+  "supports": {
+    "xd/title": true,
+    "xd/margin": true,
+    "xd/margin-controls": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "attributes": { "postType": "floorplan" } },
+          "wrap": {
+            "block": "xd-accordion container",
+            "inner": "row",
+            "innerBlocks": "col-10 offset-1"
+          },
+          "allowedBlocks": [],
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Floorplan Selection",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDPostSelectControl",
+                  "blockType": "xd/floorplan-accordion-element"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{% embed 'components/block-with-title.twig' %}
+
+	{% block preInnerBlocks %}
+		{% if attributes.title %}
+			<div class="col-10 offset-1">
+				{{ parent() }}
+			</div>
+		{% endif %}
+	{% endblock %}
+
+	{% block innerBlocksContent %}
+		{% include 'components/floorplan-accordion.twig' %}
+	{% endblock %}
+{% endembed %}

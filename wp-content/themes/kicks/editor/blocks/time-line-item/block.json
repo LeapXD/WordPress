@@ -1,0 +1,75 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/timeline-item",
+  "title": "Time Line Item",
+  "description": "Time Line Item",
+  "category": "standard",
+  "icon": "gm/view-timeline",
+  "keywords": ["time", "line"],
+  "parent": ["xd/timeline"],
+  "attributes": {
+    "year": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "viewScript": ["blocks/time-line-item"],
+  "supports": {
+    "xd/id": true,
+    "xd/padding": true,
+    "xd/padding-controls": true,
+    "xd/color-theme": true,
+    "xd/image-desktop": true,
+    "xd/image-mobile": true,
+    "xd/video": true,
+    "xd/video-modal": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "isDefault": true,
+          "wrap": {
+            "postInnerBlocksInside": true,
+            "block": "container xd-timeline__item",
+            "outer": "row",
+            "preInnerBlocks": "xd-timeline__image col-8 col-md-7 col-xl-4 offset-2 offset-md-3 offset-xl-1",
+            "innerBlocks": "xd-timeline__inner col-8 col-md-7 col-xl-4 offset-2 offset-md-3 offset-xl-2"
+          },
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "core/list",
+            "core/quote",
+            "xd/buttons",
+            "core/separator",
+            "xd/image",
+            "xd/image-icon",
+            "xd/video",
+            "xd/accordion",
+            "xd/form"
+          ],
+          "template": [["core/heading", { "level": 4 }], ["core/paragraph"]]
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "type": "RichText",
+              "className": "xd-timeline__year d1",
+              "attribute": "year",
+              "tagName": "h3",
+              "allowedFormats": [],
+              "placeholder": "Year"
+            },
+            {
+              "type": "XDImage",
+              "attribute": "imageDesktop"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

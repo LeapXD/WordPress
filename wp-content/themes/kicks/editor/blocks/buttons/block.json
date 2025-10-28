@@ -1,0 +1,38 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/buttons",
+  "title": "Buttons",
+  "icon": "wp/buttons",
+  "description": "Prompt visitors to take action with a group of button-style links.",
+  "category": "standard",
+  "keywords": ["buttons"],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "xd-width-inline"
+          },
+          "allowedBlocks": ["xd/button"],
+          "template": [["xd/button"]]
+        }
+      ]
+    },
+    "__experimentalLayout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "flex"
+      }
+    },
+    "layout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "flex"
+      }
+    }
+  }
+}

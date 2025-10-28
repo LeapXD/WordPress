@@ -1,0 +1,46 @@
+{% extends 'archive.twig' %}
+
+{% block filters %}
+	{% if post.projectTypeOptions is not empty %}
+		<div class="row">
+			<div class="col-10 offset-1">
+				<div class="xd-archive__heading xd-py--sm">
+						<div class="post-type-archive-single-fam-floorplan__filters">
+							<form id="listings" class="filters filter--categories" data-filter-form="" action="#listings">
+				
+								{% if post.projectTypeOptions is not empty %}
+									<div class="select-input input-container">
+										<label class="h6" for="select-project-type">Project Type</label>
+										<div class="select-container">
+											<select id="select-project-type" name="project-type" >
+												<option value="">All</option>
+												{% for option in post.projectTypeOptions %}
+													<option {{ option.selected }} value="{{ option.slug }}">{{ option.name }}</option>
+												{% endfor %}
+											</select>
+											{{ get_icon('chevron-down') }}
+										</div>
+									</div>
+								{% endif %}
+								{# reset to page 1 on submit #}
+								<input type="hidden" name="paged" value="1"/>
+							</form>
+						</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block pagination %}
+	{% if pagination %}
+		<nav class="navigation posts-navigation pagination" aria-label="navigation">
+			<h2 class="screen-reader-text">Navigation</h2>
+			<div class="nav-links">{{ pagination }}</div>
+		</nav>
+	{% endif %}
+{% endblock %}
+
+{% block page_content %}
+	{{ post.content }}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'includes/card.twig' %}
+  
+  {% block heading %}
+    {% if post.price %}
+      <h6>
+        {{ post.price }}
+      </h6>
+    {% endif %}
+  {% endblock %}
+  
+  {% block title %}
+    <h3>
+      {{ block('titleContent') }}
+    </h3>
+  {% endblock %}
+  
+  {% block footerContent %}
+    <span class="xd-button">Room Details</span>
+  {% endblock %}

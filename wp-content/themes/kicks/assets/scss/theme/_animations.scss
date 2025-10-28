@@ -1,0 +1,9 @@
+@use "../mixins" as *;
+
+@include root {
+  --speed-very-fast: 150ms;
+  --speed-fast: 200ms;
+  --speed-medium: 300ms;
+  --speed-slow: 400ms;
+  --speed-very-slow: 500ms;
+}

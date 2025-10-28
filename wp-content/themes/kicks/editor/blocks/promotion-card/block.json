@@ -1,0 +1,42 @@
+{
+  "apiVersion": 2,
+  "name": "xd/promotion-card",
+  "title": "Promotion Card",
+  "icon": "gm/photo-album",
+  "description": "Promotion card",
+  "category": "standard",
+  "viewStyle": ["block-styles/post-card"],
+  "editorStyle": ["block-styles/post-card"],
+  "keywords": ["promotion", "card"],
+  "parent": ["xd/promotion-cards"],
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "col-12 col-md-6 col-xl-4 xd-post-card xd-post-card--promotion",
+            "serverSideRenderBlock": "xd-post-card"
+          },
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [{ "id": "remove-button", "type": "XDPostCardControls" }]
+        }
+      ]
+    }
+  }
+}

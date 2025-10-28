@@ -1,0 +1,39 @@
+.xd-hover {
+  opacity: 1;
+  transition: opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.xd-fade-up {
+  animation-duration: 0.66s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-name: xd-fade-up;
+}
+
+@keyframes xd-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

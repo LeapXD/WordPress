@@ -1,0 +1,35 @@
+<footer id="colophon" class="site-footer xd-footer {% if templateProps.globalButtons.stickyButtons.displayStickyButtons and templateProps.globalButtons.stickyButtons.sticky1.url %} sticky-buttons {% endif %}">
+
+{% if templateProps.footerTop %}
+	{% if templateProps.footerSmall %}
+		{% include 'partials/footer/footer-top-small.twig' %}
+	{% else %}
+		{% include 'partials/footer/footer-top-full.twig' %}
+	{% endif %}
+{% endif %}
+
+	<div class="xd-footer--bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8">
+					<div class="xd-footer__copyright">
+						&copy;
+						{{ 'now'|date('Y') }}
+						{{ templateProps.companyDetails.companyName }}. All Rights Reserved.
+						{% if templateProps.footer.footerNavMenu %}
+							<div class="xd-footer__footer-menu">
+								{{ footer_menu(templateProps.footer.footerNavMenu) }}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-12 col-lg-4">
+					<div class="xd-social-links xd-footer__social-links">
+						{{ templateProps.socialLinks.content }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</footer>

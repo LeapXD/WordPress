@@ -1,0 +1,132 @@
+@use '../mixins/' as *;
+
+.instagram-feed {
+  .ig_handle {
+    text-align: center;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .logo {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    color: var(--white);
+
+    svg {
+      transition: all .2s ease-in-out;
+      opacity: 0;
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      width: 30px;
+
+      @include mq(m) {
+        width: 50px;
+      }
+    }
+
+    &:hover svg {
+      opacity: 1;
+    }
+  }
+}
+
+.sbi_item {
+  &:nth-child(2),
+  &:nth-child(3),
+  &:nth-child(4) {
+    display: none;
+  }
+
+  @include mq('s') {
+    &:nth-child(2) {
+      display: block;
+    }
+  }
+
+  @include mq('l') {
+    &:nth-child(3),
+    &:nth-child(4) {
+      display: block;
+    }
+  }
+}
+
+.sb_instagram_feed {
+  .sbi_photo {
+    width: 100vw;
+    height: 100vw;
+
+    @include mq(m) {
+      width: 50vw;
+      height: 50vw;
+    }
+
+    @include mq(l) {
+      height: 25vw;
+      width: 25vw;
+    }
+
+    display: block;
+    position: relative;
+  }
+}
+
+.sb_instagram_grid {
+  .uk-grid {
+    padding: 10px !important;
+
+    &,
+    >* {
+      margin: 0;
+      padding: 0;
+    }
+
+    width: 100%;
+
+    li {
+      margin: 5px;
+      width: calc(100% - 10px);
+
+      @include mq('s') {
+        width: calc(50% - 10px);
+      }
+
+      @include mq(l) {
+        margin: 10px;
+        width: calc(25% - 20px);
+      }
+
+      @include mq("xl") {
+        width: calc(25% - 20px);
+      }
+    }
+
+    .sbi_photo_wrap,
+    .sbi_photo {
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
+      position: relative;
+    }
+
+    .sbi_photo {
+      position: relative;
+      display: block;
+      height: 0;
+      padding-bottom: 100%;
+
+      img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+    }
+  }
+}

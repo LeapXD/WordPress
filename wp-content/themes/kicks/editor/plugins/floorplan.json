@@ -1,0 +1,78 @@
+{
+  "name": "listing",
+  "title": "Specifications",
+  "panels": ["PluginDocumentSettingPanel"],
+  "fieldGroups": [
+    {
+      "fields": [
+        {
+          "name": "price",
+          "label": "Price",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        {
+          "name": "floor_plan_label",
+          "label": "Label",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "placeholder": "e.g. Sold",
+          "help": "This will override the price field when filled in.",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        {
+          "name": "sq_ft",
+          "label": "Square feet",
+          "type": "TextControl",
+          "inputType": "number",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        {
+          "name": "feature_sheet",
+          "label": "Feature Sheet",
+          "type": "XDFileUploadControl",
+          "schema": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "floor_plan_download",
+          "label": "Floorplans Download",
+          "type": "XDFileUploadControl",
+          "schema": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "virtual_tour",
+          "label": "Virtual Tour",
+          "type": "XDLinkControl",
+          "schema": {
+            "type": "object"
+          },
+          "settings": [],
+          "showLinkTextControl": false
+        }
+      ],
+      "locations": [
+        [
+          {
+            "param": "post_type",
+            "operator": "==",
+            "value": "floorplan"
+          }
+        ]
+      ]
+    }
+  ]
+}

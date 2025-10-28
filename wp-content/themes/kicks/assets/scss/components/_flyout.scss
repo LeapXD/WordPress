@@ -1,0 +1,86 @@
+@use '../mixins/' as *;
+
+.xd-flyout {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--overlay-3);
+
+  &.uk-open {
+    display: flow-root;
+  }
+
+  &__wrapper {
+    background-color: var(--flyout-background);
+    position: absolute;
+    z-index: 1010;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    transition: transform 0.55s cubic-bezier(0.55, 0.36, 0.19, 1);
+    left: calc(-1 * var(--flyout-width));
+    width: var(--flyout-width);
+
+    .uk-offcanvas-flip & {
+      left: auto;
+      right: calc(-1 * var(--flyout-width));
+    }
+
+    .uk-open > & {
+      transform: translateX(var(--flyout-width));
+
+      .uk-offcanvas-flip & {
+        transform: translateX(calc(-1 * var(--flyout-width)));
+      }
+    }
+  }
+
+  &__bar {
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  & &__bar {
+    left: 0;
+    right: 0;
+  }
+
+  &--has-navbar-spacing &__bar {
+    top: 80px;
+  }
+
+  .accessible-close-button {
+    &:focus {
+      left: auto;
+      margin: auto;
+      right: 8px;
+      top: 88px;
+    }
+  }
+
+  &--has-navbar-spacing .accessible-close-button:focus {
+    top: 8px;
+  }
+
+  .xd-container {
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+
+    @include mq(m) {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+}
+
+.uk-offcanvas-bar-animation {
+  transition: left 0.55s cubic-bezier(0.55, 0.36, 0.19, 1);
+}

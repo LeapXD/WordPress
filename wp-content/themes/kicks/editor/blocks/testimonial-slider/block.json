@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/testimonial-slider",
+  "title": "Testimonial Slider",
+  "icon": "gm/chat",
+  "description": "Insert a collection of testimonials",
+  "category": "standard",
+  "keywords": ["slider", "testimonial"],
+  "supports": {
+    "xd/margin": true,
+    "xd/margin-controls": true,
+    "custom": {
+      "//": "!!!This block is deprecated and is kept for sites that make use of it!!!",
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "container xd-card-slider flex-slider xd-card-slider--testimonial",
+            "inner": "xd-card-slider__content row",
+            "innerBlocks": "col-10 col-lg-8 offset-1 offset-lg-2"
+          },
+          "allowedBlocks": ["xd/testimonial"],
+          "template": [["xd/testimonial"], ["xd/testimonial"], ["xd/testimonial"]]
+        }
+      ]
+    }
+  }
+}

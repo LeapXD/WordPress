@@ -1,0 +1,27 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+  <article class="error-404-page not-found uk-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3">
+          <header class="page-header uk-margin-bottom-small">
+            <div class="page-icon">
+              <img src="{{ theme.parent.link }}/build/images/svg/airplane.svg" alt="404-airplane"/>
+            </div>
+            <h1 class="page-title">
+              {{ __('Oh no! This page does not exist.', 'xd') }}
+            </h1>
+          </header>
+
+          <div class="page-content xd-pb--lg">
+            <p class="body-1">
+              {{ __("Not all those who wander are lost, but you definitely are. Let's get you back on track.", 'xd') }}
+            </p>
+            <a href="/" class="xd-button xd-button--ghost">{{ __('Go to Homepage') }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+{% endblock %}

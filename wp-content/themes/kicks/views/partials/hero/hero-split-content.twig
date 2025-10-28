@@ -1,0 +1,13 @@
+{# note: this temmplate is not included anywhere. It's rendered in to the hero in templates.php #}
+{% if post.heroSubTitle %}
+  <h1 class="h5">{{ post.heroTitle }}</h1>
+  <h2 class="xd-font__display-2">{{ post.heroSubTitle }}</h2>
+{% else %}
+  <h1 class="xd-font__display-2">{{ post.heroTitle }}</h1>
+{% endif %}
+{% if post.heroImage.video.modal.src %}
+  {% include 'components/modal-video-link.twig' with { video: post.heroImage.video } %}
+{% endif %}
+{% if post.heroFooterText %}
+  <p class="title-lg">{{ post.heroFooterText|nl2br }}</p>
+{% endif %}

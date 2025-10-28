@@ -1,0 +1,221 @@
+@use '../mixins/' as *;
+
+.xd-image {
+  display: block;
+  max-width: 100%;
+  width: var(--xd-image-width, var(--xd-image-src-width, 100%));
+
+  picture {
+    display: block;
+    width: 100%;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  &--icon {
+    width: calc(var(--xd-image-width, var(--xd-image-src-width, 50px)) * 0.8);
+
+    @include mq(m) {
+      width: var(--xd-image-width, var(--xd-image-src-width, 58px));
+    }
+
+    img {
+      object-fit: contain;
+    }
+  }
+
+  &--caption &__caption {
+    --p-color: var(--white);
+
+    grid-area: 1 / 1 / 2 / 2;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    z-index: 1;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .xd-image-slider & &__caption,
+  .entry-content > & &__caption {
+    margin-left: pixeltorem(30);
+
+    @include mq(m) {
+      max-width: 80%;
+    }
+
+    @include mq(l) {
+      margin-left: pixeltorem(65);
+      max-width: 50%;
+    }
+  }
+
+  .xd-image-slider & &__caption {
+    margin-bottom: pixeltorem(50);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(80);
+    }
+  }
+
+  &--modal-video &__caption {
+    margin-bottom: pixeltorem(50);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(65);
+    }
+  }
+
+  .xd-image-slider &--modal-video &__caption {
+    margin-left: pixeltorem(65);
+    margin-bottom: pixeltorem(78);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(95);
+    }
+  }
+}
+
+.entry-content > .xd-image[class*="xd-video--"],
+.xd-content:where(
+  .xd-height-stretch, .xd-height-custom) > :where(
+    .xd-content__inner) > :where(
+      .xd-image:only-child),
+.xd-image--caption,
+.xd-image--cover,
+.xd-background-image {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  picture,
+  video {
+    grid-area: 1 / 1 / 2 / 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  img,
+  video {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.0001);
+  }
+
+  &:link:hover {
+    img,
+    video {
+      transform: scale(1.06);
+    }
+  }
+
+  a:hover & {
+    img,
+    video {
+      transform: scale(1.06);
+    }
+  }
+
+  &[data-video-playing] {
+    img {
+      visibility: hidden;
+    }
+  }
+}
+
+.xd-container__inner > .xd-image--caption {
+  height: auto;
+}
+
+.entry-content > .xd-image[class*="xd-video--"] {
+  width: var(--xd-image-width, var(--xd-image-src-width, 100%));
+}
+
+%image-overlay {
+  height: 100%;
+  width: 100%;
+  background: var(--overlay-bottom-gradient);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // mix-blend-mode: ;
+}
+
+.xd-image--caption,
+.xd-image--modal-video {
+  &.xd-image {
+    position: relative;
+
+    .xd-video__play-button {
+      top: auto;
+      right: auto;
+      left: 1.5rem;
+      bottom: 1.5rem;
+      transform: none;
+
+      .xd-image-slider & {
+        bottom: 3rem;
+
+        @include mq(l) {
+          bottom: 3.5rem;
+        }
+      }
+    }
+
+    &::after {
+      @extend %image-overlay;
+    }
+  }
+}
+
+.xd-has-background-image {
+  position: relative;
+  z-index: 0;
+
+  .iphone & {
+    display: grid;
+  }
+
+  .xd-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  &--fixed {
+    overflow: hidden;
+    clip-path: inset(0 0 0 0);
+
+    .xd-background-image {
+      position: fixed;
+    }
+  }
+
+  &--overlay {
+    .xd-background-image::after {
+      @extend %image-overlay;
+
+      background: var(--overlay-3);
+    }
+  }
+}

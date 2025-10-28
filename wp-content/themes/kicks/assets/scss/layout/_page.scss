@@ -1,0 +1,52 @@
+
+@use '../mixins/' as *;
+@use '../variables/' as *;
+
+$root-elements: "hr,blockquote,p,ul,ol,h2,h3,h4,h5,h6,.xd-width-inline";
+
+:where(#{$content} > :where(#{$root-elements})) {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc((100%/12*10) - (var(--spacing-xs) *2));
+
+  @include mq(m) {
+    max-width: calc((100%/12*8) - (var(--spacing-xs) + (var(--spacing-xs) /(12 / 8))));
+  }
+
+  @include mq(xl) {
+    max-width: calc((100%/12*6) - (var(--spacing-xs) + (var(--spacing-xs) /(12 / 6))));
+  }
+
+  + section {
+    margin-top: var(--spacing-sm);
+  }
+
+  section + & {
+    margin-top: var(--spacing-sm);
+  }
+
+  @include editor() {
+    max-width: calc((100%/12*6) - 2rem - (var(--spacing-xs) * 1.5)) !important;
+  }
+}
+
+:where(#{$content}:has( > :first-child:where(#{$root-elements}))) {
+  padding-top: var(--spacing-lg);
+}
+
+:where(#{$content}:has( > :last-child:where(#{$root-elements}))) {
+  padding-bottom: var(--spacing-lg);
+}
+
+@include main{
+ :where(.xd-flyout__body > :where(#{$root-elements})) {
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+    
+    @include mq(m) {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+  
+}

@@ -1,0 +1,329 @@
+{
+  "title": "JSON schema for XD Modules",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "attributes": {
+      "$ref": "https://schemas.wp.org/trunk/block.json#/properties/attributes"
+    },
+    "attributeClassName": {
+      "oneOf": [
+        {
+          "type": "object",
+          "default": {},
+          "patternProperties": {
+            "[a-zA-Z]": {
+              "description": "The key refers to a property of the attribute when the attribute is an object. When true is selected, the selected property value will be applied to the block class. When a string literal is entered, the string will be applied to the block class when the property value is true",
+              "oneOf": [
+                {
+                  "type": "boolean",
+                  "default": true
+                },
+                {
+                  "type": "string",
+                  "default": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "description": "When set to true, the attribute value will be applied to the className",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "description": "This string will be applied to the attribute when the attribute value is true",
+          "type": "string",
+          "default": ""
+        }
+      ]
+    },
+    "ifCondition": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Check that this feature is truthy in the context, or equal to the context if the context is a string or array.",
+          "default": ""
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Each feature name must be truthy in context (if context is object), or the condition must contain the context (if context is a string or array).",
+          "default": [""]
+        },
+        {
+          "type": "object",
+          "description": "A map of feature names to expected values. Each must match the corresponding value in context.",
+          "patternProperties": {
+            "^[a-zA-Z_][a-zA-Z0-9_-]*$": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "default": ""
+                },
+                {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "default": [""]
+                }
+              ]
+            }
+          },
+          "default": {},
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer",
+      "default": 2,
+      "description": "Version of the schema"
+    },
+    "name": {
+      "type": "string",
+      "description": "Module name"
+    },
+    "supports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Support Name",
+            "pattern": "xd/.+|^anchor$"
+          },
+          "attributes": {
+            "type": "object",
+            "patternProperties": {
+              "[a-zA-Z]": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "enum": ["null", "boolean", "object", "array", "string", "integer", "number"]
+                      },
+                      {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "enum": ["null", "boolean", "object", "array", "string", "integer", "number"]
+                        }
+                      }
+                    ]
+                  },
+                  "className": {
+                    "$ref": "#/definitions/attributeClassName"
+                  },
+                  "innerBlocksClassName": {
+                    "$ref": "#/definitions/attributeClassName"
+                  },
+                  "outerClassName": {
+                    "$ref": "#/definitions/attributeClassName"
+                  },
+                  "innerClassName": {
+                    "$ref": "#/definitions/attributeClassName"
+                  },
+                  "preInnerBlocksClassName": {
+                    "$ref": "#/definitions/attributeClassName"
+                  },
+                  "postInnerBlocksClassName": {
+                    "$ref": "#/definitions/attributeClassName"
+                  },
+                  "cssTransform": {
+                    "type": "object",
+                    "default": {},
+                    "description": "Defines a transformation pattern for outputting a css variable. The key can be either a regular expression for string type attributes, or an object key for an object type attribute",
+                    "patternProperties": {
+                      "[a-zA-Z]": {
+                        "oneOf": [
+                          {
+                            "description": "The regular expression and replacement pattern, or the object key to perform replacement on",
+                            "type": "string",
+                            "default": ""
+                          },
+                          {
+                            "description": "The name of the attributes object key for which the css attribute should be transformed",
+                            "type": "object",
+                            "patternProperties": {
+                              ".*": {
+                                "description": "The regular expression and replacement pattern",
+                                "type": "string",
+                                "default": ""
+                              },
+                              "default": {}
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "cssVariable": {
+                    "description": "Output the attribute as a css variable in the blocks style attribute",
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["title", "name"],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Panel title"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Panel name"
+                },
+                "initialOpen": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Whether the panel should be open by default"
+                },
+                "className": {
+                  "type": "string",
+                  "description": "Panel class"
+                },
+                "if": {
+                  "$ref": "#/definitions/ifCondition"
+                }
+              }
+            }
+          },
+          "inspectorControls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "attribute": {
+                  "type": "string",
+                  "description": "Name is used for data storage on block"
+                },
+                "when": {
+                  "type": "array",
+                  "description": "Array of AND groups for conditional visibility. Each group is an array of conditions with 'attribute', 'operator', and 'value'.",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "attribute": { "type": "string" },
+                        "operator": { "type": "string" },
+                        "value": {}
+                      },
+                      "required": ["attribute", "operator"]
+                    }
+                  }
+                },
+                "label": {
+                  "type": "string"
+                },
+                "type": {
+                  "anyOf": [
+                    { "default": "XDImageControl" },
+                    { "default": "XDCheckboxGroup" },
+                    { "default": "XDFileUploadControl" },
+                    { "default": "XDButtonGroup" },
+                    { "default": "XDRadioButtonGroup" },
+                    { "default": "TextControl" },
+                    { "default": "TextareaControl" },
+                    { "default": "SelectControl" },
+                    { "default": "RangeControl" },
+                    { "default": "ToggleControl" },
+                    { "default": "DateTimePicker" },
+                    { "default": "XDFieldGroup" },
+                    { "default": "XDSearchControl" },
+                    { "default": "XDRepeaterField" },
+                    { "default": "XDLinkControl" },
+                    { "default": "XDEmbedControl" },
+                    { "default": "XDGalleryPreview" },
+                    { "default": "XDVideoControl" },
+                    { "default": "XDFeaturedImageControl" },
+                    { "default": "XDMultiSelectControl" },
+                    { "default": "XDWidthControl" },
+                    { "default": "XDMessagePanel" }
+                  ],
+                  "type": "string",
+                  "description": "For all types, See https://developer.wordpress.org/block-editor/reference-guides/components/"
+                },
+                "activeState": {
+                  "type": "string",
+                  "description": "The field property that should receive its state. Eg. 'value', or 'checked'",
+                  "default": "value"
+                },
+                "exposeProps": {
+                  "type": "boolean",
+                  "description": "Forwards all props through to component rather than just primitive props like value and onChange"
+                },
+                "method": {
+                  "type": "string",
+                  "description": "The event that is fired when the field changes. Eg  onChange, or onClick"
+                }
+              }
+            }
+          },
+          "blockControls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["attribute", "type"],
+              "properties": {
+                "attribute": {
+                  "type": "string",
+                  "description": "Name is used for data storage on block"
+                },
+                "if": {
+                  "$ref": "#/definitions/ifCondition"
+                },
+                "group": {
+                  "type": "string",
+                  "description": "Name of group in toolbar. Use th same name on multiple toolbar controls to show them in the same group"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "type": {
+                  "anyOf": [
+                    {
+                      "default": "XDLinkToolBarButton"
+                    }
+                  ],
+                  "type": "string",
+                  "description": "For all types, See https://developer.wordpress.org/block-editor/reference-guides/components/"
+                },
+                "activeState": {
+                  "type": "string",
+                  "description": "The field property that should receive its state. Eg. 'value', or 'checked'",
+                  "default": "value"
+                },
+                "exposeProps": {
+                  "type": "boolean",
+                  "description": "Forwards all props through to component rather than just primitive props like value and onChange"
+                },
+                "method": {
+                  "type": "string",
+                  "description": "The event that is fired when the field changes. Eg  onChange, or onClick"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["name"]
+}

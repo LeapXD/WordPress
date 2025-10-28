@@ -1,0 +1,188 @@
+@use "sass:math";
+@use '../mixins' as *;
+@use '../variables' as *;
+
+.uk-modal {
+  z-index: 1009;
+  // prevent modals getting hidden if they hapen to be targetted by a scrollspy rule
+  visibility: visible !important;
+}
+
+// for modal slider and full screen video modal variants.
+.xd-modal {
+  background: var(--modal-overlay);
+  overflow-x: hidden;
+  padding-top: 80px;
+
+  &.xd-search-modal {
+    background-color: var(--white);
+
+    .uk-modal-dialog,
+    .uk-modal-body {
+      pointer-events: all;
+    }
+  }
+
+  &.uk-open {
+    display: flex !important;
+    align-items: flex-start;
+  }
+
+  .uk-close {
+    background: white;
+    border-radius: 100%;
+    overflow: hidden;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .uk-modal-body {
+    padding: 0;
+  }
+
+  .uk-modal-dialog {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: math.div(100, 12) *10%;
+
+    @include mq(m) {
+      width: math.div(100, 12) *8%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .xd-image {
+      width: fit-content;
+      margin: auto;
+    }
+  }
+
+  &--video {
+    background-color: black;
+  }
+
+  &:has(.xd-gravityform-iframe,.gform_wrapper) {
+    background-color: var(--white);
+
+    --modal-overlay: var(--light);
+  }
+
+  // .xd-gravityform-iframe,
+  // .gform_wrapper {
+  //   background-color: var(--light);
+  // }
+
+  &--full {
+    padding-bottom: 3rem;
+
+    &.uk-open {
+      display: block !important;
+    }
+
+    .uk-modal-body {
+      background: none;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    .uk-modal-dialog {
+      width: auto;
+      background-color: transparent;
+    }
+
+    .uk-modal-dialog,
+    .uk-modal-body,
+    .uk-slider,
+    .uk-slider-container,
+    .uk-slider-items {
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .uk-slider-container {
+      margin-bottom: -4rem;
+      padding-bottom: 3rem;
+    }
+
+    @include mq(xs, s) {
+      .uk-slider-container {
+        margin-left: -30px;
+        margin-right: -30px;
+      }
+
+      &-slider__caption {
+        transform: translateY(120%);
+      }
+    }
+
+    iframe {
+      border: none;
+      background-color: transparent;
+      pointer-events: all;
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      display: block;
+
+      video {
+        background-color: transparent !important;
+      }
+    }
+
+    .xd-image {
+      video {
+        pointer-events: all;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      picture {
+        display: flex;
+      }
+
+      img {
+        pointer-events: all;
+        height: 100%;
+        width: auto;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+    }
+  }
+
+  .uk-dotnav {
+    pointer-events: all;
+    position: relative;
+    z-index: 1;
+  }
+
+  .caption {
+    color: var(--white);
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+
+  .xd-slider__arrow {
+    bottom: -0.5rem;
+    pointer-events: all;
+    z-index: 2;
+  }
+
+  .xd-container {
+    width: 100%;
+    height: 100%;
+
+    &__inner {
+      height: 100%;
+    }
+  }
+}

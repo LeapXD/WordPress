@@ -1,0 +1,17 @@
+.google-map-address-results {
+  option {
+    text-wrap: wrap;
+    word-wrap: break-word;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #888;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+
+  .components-select-control__input {
+    padding-right: 0.5rem !important;
+  }
+}

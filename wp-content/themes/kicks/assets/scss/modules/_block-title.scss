@@ -1,0 +1,25 @@
+.xd-block-title {
+  margin-bottom: var(--spacing-sm);
+
+  .xd-title {
+    margin-bottom: 0;
+  }
+
+  &--align-left {
+    .xd-title {
+      text-align: left;
+    }
+  }
+
+  &--align-center {
+    .xd-title {
+      text-align: center;
+    }
+  }
+
+  &--align-right {
+    .xd-title {
+      text-align: right;
+    }
+  }
+}

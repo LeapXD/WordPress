@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "name": "xd/image-icon",
+  "apiVersion": 2,
+  "title": "Icon",
+  "category": "standard",
+  "description": "Insert an icon to make a visual statement.",
+  "keywords": ["image", "icon"],
+  "icon": "gm/eco",
+  "attributes": {
+    "imageDesktop": {
+      "type": "object",
+      "default": {
+        "id": "",
+        "url": ""
+      }
+    }
+  },
+  "supports": {
+    "xd/image-align": true,
+    "custom": {
+      "innerBlocks": [{ "wrap": { "block": "xd-image xd-image--icon" } }],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Icon",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "allowedTypes": ["image/svg+xml"],
+                  "label": "Icon",
+                  "type": "XDImageControl",
+                  "className": "xd-image-icon",
+                  "attribute": "imageDesktop"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

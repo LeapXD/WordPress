@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="{{ templateProps.className }}" {{ fn('language_attributes') }}>
+  <head>
+    <meta charset="{{ site.charset }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="profile" href="http://gmpg.org/xfn/11"/>
+    {{ function('wp_head') }}
+  </head>
+
+  <body class="{{ templateProps.bodyClass }}">
+    {{ do_action('xd_body') }}
+    <a
+      class="skip-link screen-reader-text uk-hidden"
+      href="#content"
+    >
+      {{ __('Skip to content', 'xd') }}
+    </a>
+
+    {% if templateProps.alertBar.show %}
+      {% include 'partials/modal/alert.twig' %}
+    {% endif %}
+
+    {% include 'partials/nav/navbar.twig' %}
+
+    {% if templateProps.menuFlyout.enabled %}
+      {% include 'partials/sidebar-menu.twig' %}
+    {% endif %}
+
+    <div id="page" class="xd-page">
+      <div id="content" class="site-content">
+        <main id="main" class="site-main">
+          {% block hero null %}
+          {% block content null %}
+        </main>
+      </div>
+
+      {% include 'partials/footer/footer.twig' %}
+    </div>
+
+    {% include 'partials/modal/modals.twig' %}
+
+    {{ function('wp_footer') }}
+  </body>
+</html>

@@ -1,0 +1,86 @@
+{% block slider %}
+  <div
+    class="uk-slider xd-slider {{ slider.className ?? className }} {{ slider.showNavOnDesktop ? 'xd-slider--show-nav-on-desktop' : '' }} uk-position-relative"
+    {{ slider.id }}
+    {{ slider.dataset }}
+    {{ slider.aria }}
+    {{ slider.role }}
+  >
+    <div class="uk-slider-container">
+      <div class="uk-slider-items row">
+        {{ block('slides') }}
+      </div>
+      
+      {% if slider.showNav is null or slider.showNav %}
+        {{ block('nav') }}
+      {% endif %}
+      {% if slider.showDotnav is null or slider.showDotnav %}
+        {{ block('dotnav') }}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block slides %}
+  {% for slide in slider.slides %}
+    {% block slide %}
+      {% if slide.className %}
+        <div class="{{ slide.className }}">
+          {{ block('slideContent') }}
+        </div>
+      {% else %}
+        {{ block('slideContent') }}
+      {% endif %}
+    {% endblock %}
+  {% endfor %}
+{% endblock %}
+
+{% block slideContent %}
+  {% if slide.content %}
+    {{ slide.content }}
+  {% else %}
+    {{ slide }}
+  {% endif %}
+{% endblock %}
+
+{% block nav %}
+  {{ block('leftArrow') }}
+  {{ block('rightArrow') }}
+{% endblock %}
+
+{% block leftArrow %}
+  <a
+    class="xd-slider__arrow xd-slider__arrow--prev uk-invisible"
+    href
+    aria-role="link"
+    aria-disabled="true"
+    data-uk-slider-item="previous"
+    hidden
+  >
+    {% block leftArrowIcon %}
+      {{ get_icon(slider.arrowLeft ?? slider.arrow ?? 'slider-arrow') }}
+    {% endblock %}
+    <span class="screen-reader-text">Previous Slide</span>
+  </a>
+{% endblock %}
+
+{% block rightArrow %}
+  <a
+    class="xd-slider__arrow xd-slider__arrow--next uk-invisible"
+    href
+    aria-role="button"
+    data-uk-slider-item="next"
+    hidden
+  >
+    {% block rightArrowIcon %}
+      {{ get_icon(slider.arrowRight ?? slider.arrow ?? 'slider-arrow') }}
+    {% endblock %}
+    <span class="screen-reader-text">Next Slide</span>
+  </a>
+{% endblock %}
+
+{% block dotnav %}
+  <div class="slider-nav-wrapper">
+    <ul class="uk-slider-nav uk-dotnav"></ul>
+  </div>
+{% endblock %}

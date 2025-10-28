@@ -1,0 +1,95 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Video",
+  "name": "video",
+  "initialOpen": true,
+  "supports": [
+    {
+      "name": "xd/video",
+      "attributes": {
+        "videoMobile": {
+          "type": "object",
+          "default": {
+            "id": "",
+            "url": "",
+            "width": "",
+            "height": "",
+            "orientation": ""
+          },
+          "className": {
+            "url": "xd-video--mobile"
+          }
+        },
+        "videoTablet": {
+          "type": "object",
+          "default": {
+            "id": "",
+            "url": "",
+            "width": "",
+            "height": "",
+            "orientation": ""
+          },
+          "className": {
+            "url": "xd-video--tablet"
+          }
+        },
+        "videoDesktop": {
+          "type": "object",
+          "default": {
+            "id": "",
+            "url": "",
+            "width": "",
+            "height": "",
+            "orientation": ""
+          },
+          "className": {
+            "url": "xd-video--desktop"
+          }
+        }
+      },
+      "inspectorControls": [
+        {
+          "label": "Desktop Video",
+          "type": "XDVideoControl",
+          "attribute": "videoDesktop"
+        },
+        {
+          "label": "Tablet Video",
+          "type": "XDVideoControl",
+          "attribute": "videoTablet",
+          "help": "Video cropped for tablet devices"
+        },
+        {
+          "label": "Mobile Video",
+          "type": "XDVideoControl",
+          "attribute": "videoMobile",
+          "help": "Video cropped for mobile devices"
+        }
+      ]
+    },
+    {
+      "name": "xd/video-modal",
+      "attributes": {
+        "videoModal": {
+          "type": "object",
+          "default": {
+            "title": "",
+            "url": "",
+            "rel": "",
+            "target": ""
+          }
+        }
+      },
+      "inspectorControls": [
+        {
+          "type": "XDEmbedControl",
+          "name": "videoModal",
+          "label": "Modal Video",
+          "attribute": "videoModal",
+          "help": "Enter a streaming URL. Eg. Vimeo or YouTube",
+          "settings": []
+        }
+      ]
+    }
+  ]
+}

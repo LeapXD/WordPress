@@ -1,0 +1,111 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/columns",
+  "title": "Two Column",
+  "description": "Two columns of content that wrap on mobile and tablet",
+  "category": "standard",
+  "icon": "gm/view-column-2",
+  "viewStyle": ["block-styles/columns", "block-styles/quick-facts"],
+  "editorStyle": ["block-styles/columns", "block-styles/quick-facts"],
+  "keywords": ["columns", "content"],
+  "attributes": {
+    "columnsType": {
+      "type": "string",
+      "default": "two-column"
+    },
+    "quickFacts": {
+      "type": "boolean",
+      "default": false,
+      "innerBlocksClassName": "xd-quick-facts__columns"
+    }
+  },
+  "variations": [
+    {
+      "name": "xd/quick-facts",
+      "title": "Quick Facts",
+      "icon": "gm/pin",
+      "description": "Three column quick facts.",
+      "attributes": { "quickFacts": true, "columnsType": "three-column" },
+      "isActive": ["quickFacts", "columnsType"]
+    },
+    {
+      "scope": ["inserter", "transform"],
+      "name": "xd/columns",
+      "title": "Two Column",
+      "category": "standard",
+      "icon": "gm/view-column-2",
+      "description": "Two columns of content that wrap on mobile and tablet",
+      "attributes": { "columnsType": "two-column" },
+      "isActive": ["columnsType"],
+      "isDefault": true
+    },
+    {
+      "scope": ["inserter", "transform"],
+      "name": "xd/three-column",
+      "title": "Three Column",
+      "description": "Three columns of content that wrap on mobile and tablet",
+      "category": "standard",
+      "icon": "gm/view-week",
+      "attributes": { "columnsType": "three-column" },
+      "isActive": ["columnsType"]
+    },
+    {
+      "scope": ["inserter", "transform"],
+      "name": "xd/four-column",
+      "title": "Four Column",
+      "description": "Four columns of content that wrap on mobile and tablet",
+      "category": "standard",
+      "icon": "gm/calendar-view-week",
+      "attributes": { "columnsType": "four-column" },
+      "isActive": ["columnsType"]
+    }
+  ],
+  "supports": {
+    "anchor": true,
+    "xd/padding": true,
+    "xd/padding-controls": true,
+    "xd/color-theme": true,
+    "xd/title": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "isDefault": true,
+          "wrap": {
+            "block": "container xd-columns--two",
+            "outer": "row",
+            "preInnerBlocks": "col-10 col-md-8 col-lg-10 offset-1 offset-md-2 offset-lg-1",
+            "innerBlocks": "xd-columns__columns xd-two-column__columns col-10 col-md-8 col-lg-10 offset-1 offset-md-2 offset-lg-1"
+          },
+          "allowedBlocks": ["xd/column"],
+          "template": [["xd/column"], ["xd/column"]],
+          "templateLock": false,
+          "orientation": "horizontal"
+        },
+        {
+          "context": { "variation": ["xd/three-column", "xd/quick-facts"] },
+          "wrap": {
+            "block": "container xd-columns--three",
+            "outer": "row",
+            "preInnerBlocks": "col-10 col-md-8 col-lg-10 offset-1 offset-md-2 offset-lg-1",
+            "innerBlocks": "xd-columns__columns xd-three-column__columns col-10 col-md-8 col-lg-10 offset-1 offset-md-2 offset-lg-1"
+          },
+          "allowedBlocks": ["xd/column"],
+          "template": [["xd/column"], ["xd/column"], ["xd/column"]]
+        },
+        {
+          "context": { "variation": ["xd/four-column"] },
+          "wrap": {
+            "block": "container xd-columns--four",
+            "outer": "row",
+            "preInnerBlocks": "col-10 offset-1",
+            "innerBlocks": "xd-columns__columns xd-four-column__columns col-10 offset-1"
+          },
+          "allowedBlocks": ["xd/column"],
+          "template": [["xd/column"], ["xd/column"], ["xd/column"], ["xd/column"]]
+        }
+      ]
+    }
+  }
+}

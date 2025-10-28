@@ -1,0 +1,258 @@
+{
+  "title": "JSON schema for XD plugins",
+  "$schema": "https://json-schema.org/draft-04/schema",
+  "definitions": {
+    "schema": {
+      "$ref": "https://json-schema.org/draft-04/schema",
+      "description": "Configures the WordPress rest api and meta field type. See https://developer.wordpress.org/rest-api/extending-the-rest-api/schema/"
+    },
+    "equalityConditions": {
+      "type": "string",
+      "enum": ["==", "!="]
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "param": {
+                  "type": "string",
+                  "enum": ["post_type"]
+                },
+                "value": {
+                  "type": "string",
+                  "default": "",
+                  "anyOf": [
+                    {
+                      "default": "page"
+                    },
+                    {
+                      "default": "post"
+                    }
+                  ]
+                },
+                "operator": {
+                  "$ref": "#/definitions/equalityConditions"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "param": {
+                  "type": "string",
+                  "enum": ["post_state"]
+                },
+                "value": {
+                  "type": "string",
+                  "default": "",
+                  "anyOf": [
+                    {
+                      "default": "page_on_front"
+                    },
+                    {
+                      "default": "page_for_posts"
+                    }
+                  ]
+                },
+                "operator": {
+                  "$ref": "#/definitions/equalityConditions"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "param": {
+                  "type": "string",
+                  "enum": ["slug", "page_template"]
+                },
+                "value": {
+                  "type": "string",
+                  "default": ""
+                },
+                "operator": {
+                  "$ref": "#/definitions/equalityConditions"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "required": ["name", "title", "fieldGroups", "panels"],
+  "properties": {
+    "locations": {
+      "type": "array",
+      "$ref": "#/definitions/locations",
+      "description": "Context in which plugin is available"
+    },
+    "panels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "PluginBlockSettingsMenuItem",
+          "PluginDocumentSettingPanel",
+          "PluginMoreMenuItem",
+          "PluginPostPublishPanel",
+          "PluginPostStatusInfo",
+          "PluginPrePublishPanel",
+          "PluginSidebar",
+          "PluginSidebarMoreMenuItem",
+          "XDFeaturedImagePanel"
+        ]
+      },
+      "description": "The panel location where plugin will display"
+    },
+    "name": {
+      "type": "string",
+      "description": "A unique name to identify the plugin"
+    },
+    "label": {
+      "type": "string"
+    },
+    "fieldGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "fields"],
+        "properties": {
+          "locations": {
+            "type": "array",
+            "$ref": "#/definitions/locations",
+            "description": "Context in which field group is available"
+          },
+          "title": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "label", "type", "schema"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name is used for meta key and identification in javascript"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "type": {
+                  "anyOf": [
+                    {
+                      "default": "XDImageControl"
+                    },
+                    {
+                      "default": "XDFeaturedImageControl"
+                    },
+                    {
+                      "default": "XDFileUploadControl"
+                    },
+                    {
+                      "default": "XDCheckboxGroup"
+                    },
+                    {
+                      "default": "XDButtonGroup"
+                    },
+                    {
+                      "default": "XDRadioButtonGroup"
+                    },
+                    {
+                      "default": "TextControl"
+                    },
+                    {
+                      "default": "TextareaControl"
+                    },
+                    {
+                      "default": "SelectControl"
+                    },
+                    {
+                      "default": "RangeControl"
+                    },
+                    {
+                      "default": "ToggleControl"
+                    },
+                    {
+                      "default": "DateTimePicker"
+                    },
+                    {
+                      "default": "XDFieldGroup"
+                    }
+                  ],
+                  "type": "string",
+                  "description": "For all types, See https://developer.wordpress.org/block-editor/reference-guides/components/"
+                },
+                "locations": {
+                  "type": "array",
+                  "$ref": "#/definitions/locations",
+                  "description": "Context in which field is available"
+                },
+                "activeState": {
+                  "type": "string",
+                  "description": "The field property that should receive its state. Eg. 'value', or 'checked'",
+                  "default": "value"
+                },
+                "exposeProps": {
+                  "type": "boolean",
+                  "description": "Forwards all props through to component rather than just primitive props like value and onChange"
+                },
+                "method": {
+                  "type": "string",
+                  "description": "The event that is fired when the field changes. Eg  onChange, or onClick"
+                },
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/schema",
+                  "default": {}
+                },
+                "when": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "field": {
+                        "type": "string"
+                      },
+                      "condition": {
+                        "type": "string",
+                        "enum": ["<", "<=", "==", "!=", ">=", ">", "includes", "excludes"]
+                      },
+                      "value": {
+                        "oneOf": [
+                          {
+                            "type": "string",
+                            "default": ""
+                          },
+                          {
+                            "type": "number",
+                            "default": 0
+                          },
+                          {
+                            "type": "boolean"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "help": {
+                  "type": "string",
+                  "description": "Display a comment about the component"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

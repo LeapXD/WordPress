@@ -1,0 +1,55 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/accordion",
+  "title": "Accordion",
+  "description": "Accordion block with collapsible content",
+  "category": "standard",
+  "icon": "gm/reorder",
+  "keywords": ["accordion", "content", "collapse", "list"],
+  "viewStyle": ["block-styles/accordion"],
+  "editorStyle": ["block-styles/accordion"],
+  "attributes": {
+    "accordionMultipleOpen": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "xd-width-inline",
+            "outer": "uk-accordion",
+            "inner": false,
+            "preInnerBlocks": false,
+            "innerBlocks": false,
+            "postInnerBlocks": false
+          },
+          "allowedBlocks": ["xd/accordionelement"],
+          "template": [["xd/accordionelement"], ["xd/accordionelement"], ["xd/accordionelement"]]
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Options",
+              "initialOpen": false,
+              "controls": [
+                {
+                  "type": "ToggleControl",
+                  "activeState": "checked",
+                  "label": "Allow Multiple Open",
+                  "attribute": "accordionMultipleOpen"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

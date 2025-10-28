@@ -1,0 +1,8 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "name": "core/list-item",
+  "title": "List Item",
+  "supports": {
+    "customClassName": false
+  }
+}

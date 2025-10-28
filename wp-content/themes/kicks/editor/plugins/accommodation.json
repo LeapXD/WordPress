@@ -1,0 +1,30 @@
+{
+  "name": "accommodation",
+  "title": "Accommodation Details",
+  "panels": ["PluginDocumentSettingPanel"],
+  "fieldGroups": [
+    {
+      "fields": [
+        {
+          "name": "price",
+          "label": "Price",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": "From $0"
+          }
+        }
+      ],
+      "locations": [
+        [
+          {
+            "param": "post_type",
+            "operator": "==",
+            "value": "accommodation"
+          }
+        ]
+      ]
+    }
+  ]
+}

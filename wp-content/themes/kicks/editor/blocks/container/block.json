@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/container",
+  "title": "Container",
+  "description": "Container",
+  "category": "standard",
+  "icon": "gm/width-wide",
+  "viewStyle": ["block-styles/container"],
+  "editorStyle": ["block-styles/container"],
+  "keywords": ["container", "layout"],
+  "supports": {
+    "anchor": true,
+    "xd/id": true,
+    "xd/padding": true,
+    "xd/padding-controls": true,
+    "xd/container-width": true,
+    "xd/color-theme": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "postType": ["flyout"] },
+          "wrap": {
+            "innerBlocks": {
+              "remove": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3",
+              "add": "xd-container__inner"
+            },
+            "editorInnerBlocks": "col-6 offset-3"
+          }
+        },
+        {
+          "context": { "postType": ["modal"] },
+          "wrap": {
+            "innerBlocks": {
+              "remove": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3",
+              "add": "xd-container__inner"
+            }
+          }
+        },
+        {
+          "isDefault": true,
+          "wrap": {
+            "block": "container",
+            "outer": "row",
+            "innerBlocks": "xd-container__inner"
+          },
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "core/list",
+            "core/quote",
+            "core/cover",
+            "xd/buttons",
+            "core/separator",
+            "xd/image",
+            "xd/image-icon",
+            "xd/video",
+            "xd/accordion",
+            "xd/form"
+          ],
+          "template": [["core/paragraph"]]
+        }
+      ],
+      "modules": [
+        {
+          "allowedModules": ["xd/id", "xd/color-theme", "xd/padding", "xd/padding-controls"],
+          "context": { "postType": ["flyout", "modal"] }
+        },
+        {
+          "allowedModules": true
+        }
+      ]
+    }
+  }
+}

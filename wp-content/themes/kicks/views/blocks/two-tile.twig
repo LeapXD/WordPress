@@ -1,0 +1,8 @@
+{% embed 'includes/block.twig' %}
+  {% block preInnerBlocksContent %}
+    {% include 'components/image.twig' with {image: image} only %}
+  {% endblock %}
+  {% block innerBlocksContent %}
+    {{ content }}
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,55 @@
+{
+  "apiVersion": 2,
+  "name": "xd/menu-item",
+  "title": "Menu Item",
+  "icon": "gm/photo-album",
+  "description": "Menu item",
+  "category": "standard",
+  "keywords": ["menu", "item"],
+  "parent": ["xd/tab-section"],
+  "attributes": {
+    "itemName": {
+      "type": "string",
+      "default": ""
+    },
+    "price": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [{
+        "template": [
+          ["core/paragraph"]
+        ],
+        "templateLock": false
+      }],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "itemName",
+              "autoComplete": "off",
+              "type": "RichText",
+              "tagName": "p",
+              "identifier": "item",
+              "placeholder": "Item Name",
+              "className": "xd-menu-item__name"
+            },
+            {
+              "attribute": "price",
+              "autoComplete": "off",
+              "type": "RichText",
+              "tagName": "p",
+              "identifier": "price",
+              "placeholder": "Price",
+              "className": "xd-menu-item__price"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

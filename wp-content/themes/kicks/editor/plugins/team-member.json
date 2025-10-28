@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/plugin-schema.json",
+  "name": "team",
+  "title": "Team Member Details",
+  "panels": ["PluginDocumentSettingPanel"],
+  "fieldGroups": [
+    {
+      "fields": [
+        {
+          "name": "team_member_position",
+          "label": "Team Member Position",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "team_member_phone_number",
+          "label": "Phone Number",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "team_member_email_address",
+          "label": "Email Address",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "locations": [
+        [
+          {
+            "param": "post_type",
+            "operator": "==",
+            "value": "team_member"
+          }
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../schema/plugin-schema.json",
+  "name": "featured-image",
+  "title": "",
+  "panels": ["XDFeaturedImagePanel"],
+  "fieldGroups": [
+    {
+      "title": "",
+      "fields": [
+        {
+          "name": "featured_image",
+          "label": "Featured Image",
+          "type": "XDFeaturedImageControl",
+          "schema": {
+            "type": "object",
+            "default": {
+              "id": "",
+              "url": ""
+            }
+          }
+        },
+        {
+          "name": "featured_image_mobile",
+          "label": "Featured Image Mobile Crop",
+          "type": "XDImageControl",
+          "schema": {
+            "type": "object",
+            "default": {
+              "id": "",
+              "url": ""
+            }
+          },
+          "help": "(Optional) image cropped for mobile devices",
+          "locations": [
+            [
+              {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "team_member"
+              },
+              {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "project"
+              }
+            ]
+          ]
+        },
+        {
+          "name": "featured_image_card",
+          "label": "Card Image",
+          "type": "XDImageControl",
+          "schema": {
+            "type": "object",
+            "default": {
+              "id": "",
+              "url": ""
+            }
+          },
+          "help": "(Optional) image shows on page card",
+          "locations": [
+            [
+              {
+                "param": "post_state",
+                "operator": "!=",
+                "value": "page_on_front"
+              },
+              {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "project"
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

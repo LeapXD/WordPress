@@ -1,0 +1,60 @@
+{% block modal %}
+  <div
+    {{ modal.id }}
+    class="uk-modal xd-modal {{ modal.className ?? className }} {{ modal.type }} "
+    {{ modal.dataset }}
+    {{ modal.aria }}
+    {{ modal.role }}
+  >
+    {{ block('modalDialog') }}
+  </div>
+{% endblock %}
+
+{% block modalDialog %}
+  <div
+    {{ modal.dialog.id }}
+    class="uk-modal-dialog {{ modal.dialog.className ?? '' }}"
+    {{ modal.dialog.dataset }}
+    {{ modal.dialog.aria }}
+    {{ modal.dialog.role }}
+  >
+    {{ block('modalContent') }}
+  </div>
+{% endblock %}
+
+{% block modalContent %}
+  {{ block('modalCloseButton') }}
+  {{ block('modalHeader') }}
+  {{ block('modalBody') }}
+  {{ block('modalFooter') }}
+{% endblock %}
+
+{% block modalCloseButton %}
+  {% if modal.hasCloseButton %}
+    <button class="uk-modal-close-default uk-icon uk-close" type="button" uk-close>{{ get_icon('close') }}</button>
+  {% endif %}
+{% endblock %}
+
+{% block modalHeader %}
+  {% if block('modalHeaderContent') is defined %}
+    <div class="uk-modal-header">
+      {{ block('modalHeaderContent') }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block modalBody %}
+  <div class="uk-modal-body">
+    {% if block('modalBodyContent') is defined %}
+      {{ block('modalBodyContent') }}
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block modalFooter %}
+  {% if block('modalFooterContent') is defined %}
+    <div class="uk-modal-footer">
+      {{ block('modalFooterContent') }}
+    </div>
+  {% endif %}
+{% endblock %}

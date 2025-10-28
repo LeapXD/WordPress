@@ -1,0 +1,7 @@
+{% for accordionElement in menu %}
+  <li class="xd-menu__item xd-menu__item--top-level">
+    <div data-menu-items class="xd-menu__item">
+      {% include 'partials/nav/menu-item.twig' %}
+    </div>
+  </li>
+{% endfor %}

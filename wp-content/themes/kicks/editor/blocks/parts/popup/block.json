@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "attributes": {
+    "displayPopup": { "type": "boolean", "default": false },
+    "image": {
+      "type": "object",
+      "default": {
+        "id": "",
+        "url": ""
+      }
+    }
+  },
+
+  "icon": "gm/domain",
+  "name": "xd/popup",
+  "title": "Popup",
+  "keywords": ["Popup"],
+  "supports": {
+    "custom": {
+      "multiple": false,
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": { "editorInnerBlocks": "xd-popup__inner", "preInnerBlocks": "pre-inner-blocks" },
+          "allowedBlocks": ["core/heading", "core/paragraph", "xd/buttons"],
+          "template": [["core/heading", { "level": 3 }], ["core/paragraph"], ["xd/buttons"]]
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "displayPopup",
+              "type": "ToggleControl",
+              "label": "Display Popup",
+              "activeState": "checked"
+            },
+            {
+              "attribute": "image",
+              "type": "XDImageControl",
+              "label": "Image - Optional",
+              "help": "Optional"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

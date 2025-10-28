@@ -1,0 +1,63 @@
+<div class="xd-floorplan__content">
+	<div class="xd-floorplan__details">
+		<div class="xd-floorplan__floorplate">
+			{% for floorPlate in accordionElement.floorPlates %}
+				{% include 'components/image.twig' with {image:floorPlate} %}
+			{% endfor %}
+		</div>
+		<div class="xd-floorplan__units">
+			<p class="title-lg">
+				Units:
+			</p>
+			<ul class="is-style-standard-list">
+				{% for unit in accordionElement.units %}
+					<li class="xd-floorplan__unit {{ unit.sold ? 'xd-floorplan__unit--sold' : '' }}">
+						<p>{{ unit.unit }}</p>
+						<p>{{ unit.sold ? 'Sold' : 'Available'}}</p>
+					</li>						
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="xd-buttons">
+			{% if accordionElement.floorPlanDownload %}
+				<a href="{{ accordionElement.floorPlanDownload.url }}" 
+						{{ accordionElement.floorPlanDownload.rel }}
+						{{ accordionElement.floorPlanDownload.target }}
+						download
+						class="xd-button--text xd-button--download ">
+						{{ get_icon('download') }}
+					Floorplan
+				</a>
+			{% endif %}
+			{% if accordionElement.featureSheet %}
+				<a href="{{ accordionElement.featureSheet.url }}" 
+						{{ accordionElement.featureSheet.rel }}
+						{{ accordionElement.featureSheet.target }}
+						download
+						class="xd-button--text xd-button--download ">
+						{{ get_icon('download') }}
+					Feature sheet
+				</a>
+			{% endif %}
+		</div>
+		{% if accordionElement.modal %}
+			<a data-ui-toggle="{{ accordionElement.modal.ui }}"
+					href="#" 
+					class="xd-button">
+				Virtual tour
+			</a>
+			{% embed 'includes/modal.twig' with {modal:accordionElement.modal} %}
+				{% block modalBodyContent %}
+					{% embed 'components/embed-lazyload.twig' %}
+						{% block embedLazyloadContent %}
+							<iframe src="{{ modal.src.url }}" frameborder="0"></iframe>
+						{% endblock %}
+					{% endembed %}
+				{% endblock %}
+			{% endembed %}
+		{% endif %}
+	</div>
+	<div class="xd-floorplan__slider">
+		{% include 'includes/slider.twig' with {slider:accordionElement.slider} %}
+	</div>
+</div>

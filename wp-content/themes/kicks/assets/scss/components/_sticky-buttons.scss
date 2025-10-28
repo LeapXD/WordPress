@@ -1,0 +1,29 @@
+@use '../mixins/' as *;
+
+.xd-sticky-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 800;
+  display: flex;
+
+  @include mq(m) {
+    display: none;
+  }
+
+  .xd-button {
+    flex: 1 1 0;
+    min-width: 50%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+
+    &:nth-of-type(2) {
+      --btn-background-color: var(--secondary);
+      --btn-border-color: var(--secondary);
+      --btn-color: var(--white);
+    }
+  }
+}

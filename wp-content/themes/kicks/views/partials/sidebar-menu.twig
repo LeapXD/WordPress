@@ -1,0 +1,33 @@
+{% embed 'includes/flyout.twig' with { flyout: templateProps.menuFlyout } %}
+  {% block flyoutContent %}
+    <div class="xd-menu__container" tabindex="-1">
+      <div class="xd-menu__body">
+        {{ primary_menu() }}
+      </div>
+
+      <div class="xd-menu__footer">
+        {% if templateProps.globalButtons.flyoutButton %}
+          <div class="xd-menu__buttons">
+            {{ templateProps.globalButtons.flyoutButton.content }}
+          </div>
+        {% endif %}
+
+        {% if templateProps.searchModal.enabled %}
+          <div class="xd-menu__search">
+            <a
+              href="#search"
+              class="xd-button xd-button--ghost"
+              data-ui-toggle="{{ templateProps.searchModal.ui }}"
+            >
+              Search
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="xd-social-links xd-menu__social-links">
+          {{ templateProps.socialLinks.content }}
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endembed %}

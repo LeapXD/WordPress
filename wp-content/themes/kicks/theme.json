@@ -1,0 +1,90 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+
+  "templateParts": [
+    {
+      "name": "company-details",
+      "title": "Company Details",
+      "area": "uncategorized"
+    },
+    {
+      "name": "social-links",
+      "title": "Social Links",
+      "area": "uncategorized"
+    },
+    {
+      "name": "global-buttons",
+      "title": "Global Buttons",
+      "area": "uncategorized"
+    },
+    {
+      "name": "alert-bar",
+      "area": "uncategorized",
+      "title": "Alert Bar"
+    },
+    {
+      "name": "map-options",
+      "area": "uncategorized",
+      "title": "Map Options"
+    },
+    {
+      "name": "popup",
+      "area": "uncategorized",
+      "title": "Popup"
+    },
+    {
+      "name": "footer",
+      "area": "uncategorized",
+      "title": "Footer"
+    }
+  ],
+  "settings": {
+    "border": {
+      "radius": false,
+      "style": false,
+      "width": false,
+      "color": false
+    },
+    "appearanceTools": false,
+    "color": {
+      "background": false,
+      "custom": false,
+      "text": false,
+      "customDuotone": false,
+      "customGradient": false,
+      "link": false,
+      "duotone": [],
+      "gradients": [],
+      "palette": []
+    },
+    "typography": {
+      "dropCap": false,
+      "fontFamilies": [],
+      "fontSizes": [],
+      "letterSpacing": false,
+      "textTransform": false,
+      "textDecoration": false,
+      "fontWeight": false,
+      "fontStyle": false,
+      "customFontSize": false,
+      "lineHeight": false
+    },
+    "spacing": {
+      "padding": true
+    },
+    "layout": {
+      "contentSize": "calc(100% - 2rem)",
+      "wideSize": "100%"
+    }
+  },
+  "styles": {
+    "elements": {
+      "link": {
+        "typography": {
+          "textDecoration": "none"
+        }
+      }
+    }
+  }
+}

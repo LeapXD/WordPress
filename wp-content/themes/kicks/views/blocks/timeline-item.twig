@@ -1,0 +1,33 @@
+{% embed 'includes/block.twig' %}
+  
+{% block blockContent %}
+  <div class="xd-timeline__marker-clip">
+    <div class="xd-timeline__marker-container">
+      <div class="xd-timeline__marker"></div>
+    </div>
+  </div>
+  {{ parent() }}
+{% endblock %}
+{% block innerBlocks %}
+  <div class="xd-timeline__line"></div>
+  {{ parent() }}
+{% endblock %}
+{% block preInnerBlocksContent %}
+  {% embed 'includes/image.twig'
+    with {
+      image: image,
+      attributes: attributes
+    } only
+  %}
+    {% block image %}
+      <h3 class="d1 xd-timeline__year">
+        {{ attributes.year }}
+      </h3>
+      {{ parent() }}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}
+{% block innerBlocksContent %}
+  {{ content }}
+{% endblock %}
+{% endembed %}

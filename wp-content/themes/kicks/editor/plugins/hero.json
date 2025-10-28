@@ -1,0 +1,164 @@
+{
+  "$schema": "../schema/plugin-schema.json",
+  "name": "hero",
+  "title": "Hero",
+  "panels": ["PluginDocumentSettingPanel"],
+  "fieldGroups": [
+    {
+      "title": "Hero text",
+      "fields": [
+        {
+          "name": "hero_title",
+          "label": "Title",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string"
+          },
+          "locations": [
+            [
+              {
+                "param": "post_state",
+                "operator": "==",
+                "value": "page_on_front"
+              }
+            ]
+          ]
+        },
+        {
+          "name": "hero_sub_title",
+          "label": "Sub title",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "locations": [
+            [
+              {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+              }
+            ]
+          ],
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "hero_button",
+          "label": "Hero Button",
+          "type": "XDLinkControl",
+          "locations": [
+            [
+              {
+                "param": "post_state",
+                "operator": "==",
+                "value": "page_on_front"
+              }
+            ]
+          ],
+          "schema": {
+            "type": "object",
+            "default": {
+              "url": "",
+              "title": "",
+              "target": "",
+              "rel": ""
+            }
+          }
+        },
+        {
+          "name": "hero_footer_text",
+          "label": "Footer Text",
+          "type": "TextareaControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string"
+          },
+          "locations": [
+            [
+              {
+                "operator": "==",
+                "param": "post_state",
+                "value": "page_on_front"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locations": [
+        [
+          {
+            "operator": "==",
+            "param": "post_type",
+            "value": "page"
+          }
+        ]
+      ],
+      "title": "Background Video",
+      "fields": [
+        {
+          "type": "XDFieldGroup",
+          "name": "hero_video",
+          "schema": {
+            "type": "object",
+            "default": {
+              "sm": {
+                "portrait": true,
+                "maxWidth": "720",
+                "maxFileSize": "6291456"
+              },
+              "md": {
+                "portrait": true
+              }
+            }
+          },
+          "fields": [
+            {
+              "type": "XDVideoControl",
+              "name": "lg",
+              "label": "Desktop",
+              "allowedTypes": ["video/mp4", "video/webm"],
+              "help": "Recommended size: 1920 x 1080",
+              "schema": {
+                "type": "object"
+              }
+            },
+            {
+              "type": "XDVideoControl",
+              "name": "md",
+              "label": "Tablet",
+              "allowedTypes": ["video/mp4", "video/webm"],
+              "help": "Recommended size: 1024 x 1366",
+              "schema": {
+                "type": "object"
+              }
+            },
+            {
+              "type": "XDVideoControl",
+              "name": "sm",
+              "label": "Mobile",
+              "help": "Recommended size: 720 x 1280",
+              "allowedTypes": ["video/mp4", "video/webm"],
+              "schema": {
+                "type": "object"
+              }
+            },
+            {
+              "type": "XDEmbedControl",
+              "name": "modal_src",
+              "label": "Full video url",
+              "schema": {
+                "type": "object"
+              },
+              "defaultTitle": "View Full Video",
+              "showLinkTextControl": true,
+              "help": "Enter a streaming URL. Eg. Vimeo or YouTube"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

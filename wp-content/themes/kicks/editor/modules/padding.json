@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Padding",
+  "name": "padding",
+  "initialOpen": true,
+  "supports": [
+    {
+      "name": "xd/padding",
+      "attributes": {
+        "paddingTop": {
+          "type": "string",
+          "default": "xd-pt--sm",
+          "className": true
+        },
+        "paddingBottom": {
+          "type": "string",
+          "default": "xd-pb--sm",
+          "className": true
+        }
+      }
+    },
+    {
+      "name": "xd/padding-controls",
+      "inspectorControls": [
+        {
+          "type": "XDRadioButtonGroup",
+          "label": "Top",
+          "attribute": "paddingTop",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "Small",
+              "value": "xd-pt--sm"
+            },
+            {
+              "label": "Large",
+              "value": "xd-pt--lg"
+            }
+          ]
+        },
+        {
+          "type": "XDRadioButtonGroup",
+          "label": "Bottom",
+          "attribute": "paddingBottom",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "Small",
+              "value": "xd-pb--sm"
+            },
+            {
+              "label": "Large",
+              "value": "xd-pb--lg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xd/padding-controls-all",
+      "inspectorControls": [
+        {
+          "type": "XDRadioButtonGroup",
+          "label": "Top",
+          "attribute": "paddingTop",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "Tiny",
+              "value": "xd-pt--xs"
+            },
+            {
+              "label": "Small",
+              "value": "xd-pt--sm"
+            },
+            {
+              "label": "Large",
+              "value": "xd-pt--lg"
+            }
+          ]
+        },
+        {
+          "type": "XDRadioButtonGroup",
+          "label": "Bottom",
+          "attribute": "paddingBottom",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "Tiny",
+              "value": "xd-pb--xs"
+            },
+            {
+              "label": "Small",
+              "value": "xd-pb--sm"
+            },
+            {
+              "label": "Large",
+              "value": "xd-pb--lg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xd/padding-controls-tiny",
+      "inspectorControls": [
+        {
+          "type": "XDRadioButtonGroup",
+          "label": "Top",
+          "attribute": "paddingTop",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "Tiny",
+              "value": "xd-pt--xs"
+            }
+          ]
+        },
+        {
+          "type": "XDRadioButtonGroup",
+          "label": "Bottom",
+          "attribute": "paddingBottom",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "Tiny",
+              "value": "xd-pb--xs"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+.widget_block {
+  > * {
+    margin: 0;
+  }
+}
+
+.widget_social_links {
+  margin-top: 2.5rem;
+
+  span {
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:active {
+      opacity: 0.75;
+    }
+  }
+}
+
+.customize-partial-edit-shortcut-button {
+  margin-top: 0;
+}

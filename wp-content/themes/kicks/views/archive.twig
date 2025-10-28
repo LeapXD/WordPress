@@ -1,0 +1,51 @@
+{% extends 'base.twig' %}
+
+{% block hero %}
+  {% include 'partials/hero/hero-small.twig' %}
+{% endblock %}
+
+{% block content %}
+  <div class="archive__posts xd-post-cards">
+    <div class="container">
+      {% block filters %}
+        {% if post.categoryOptions is not empty %}
+          <div class="row">
+            <div class="col-10 offset-1">
+              <div class="xd-archive__heading xd-py--sm">
+                <form id="posts" class="filters filter--categories" data-filter-form action="#posts">
+                  <div class="select-input input-container">
+                    <label for="category-select" class="h6">Sort by Category</label>
+                    <div class="select-container">
+                      <select id="category-select" class="filter__options" name="category_name" data-filter="category">
+                        {% for category in post.categoryOptions %}
+                          <option value="{{ category.url }}#posts" {{ category.selected }}>
+                            {{ category.name }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                      {{ get_icon('chevron-down') }}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+      <div class="row">
+        {% if cards is not empty %}
+          {% for card in cards %}
+            {{ card }}
+          {% endfor %}
+        {% else %}
+          {# todo no results markup #}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% block pagination %}
+    {{ get_the_posts_pagination() }}
+  {% endblock %}
+
+  {% block page_content null %}
+{% endblock %}

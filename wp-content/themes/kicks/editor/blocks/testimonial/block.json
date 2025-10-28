@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "gm/chat",
+  "viewStyle": ["block-styles/testimonial-slider"],
+  "editorStyle": ["block-styles/testimonial-slider"],
+  "name": "xd/testimonial",
+  "title": "Testimonial",
+  "keywords": ["testimonial", "slider"],
+  "parent": ["xd/testimonial-slider"],
+  "attributes": {
+    "content": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "custom": {
+      "//": "!!!This block is deprecated and is kept for sites that make use of it!!!",
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "xd-card xd-testimonial-card xd-card--testimonial col-12",
+            "outer": "xd-testimonial-card__content xd-card__content",
+            "innerBlocks": "xd-testimonial-card__inner xd-card__inner",
+            "preInnerBlocks": "xd-testimonial-slider__inner"
+          },
+          "allowedBlocks": []
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "allowedFormats": [],
+              "tagName": "h4",
+              "type": "RichText",
+              "attribute": "content",
+              "placeholder": "Testimonial...."
+            },
+            {
+              "allowedFormats": [],
+              "tagName": "h6",
+              "type": "RichText",
+              "attribute": "name",
+              "placeholder": "Testimonial author"
+            },
+            {
+              "allowedFormats": [],
+              "tagName": "p",
+              "type": "RichText",
+              "attribute": "location",
+              "placeholder": "Testimonial author city, province/state",
+              "className": "title"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

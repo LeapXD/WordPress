@@ -1,0 +1,11 @@
+{
+  "name": "core/paragraph",
+  "example": {
+    "innerBlocks": []
+  },
+  "supports":{
+    "spacing": {
+      "margin":true
+    }
+  }
+}

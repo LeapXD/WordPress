@@ -1,0 +1,68 @@
+@use '../mixins/' as *;
+
+#xd-modal-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  .uk-modal-dialog {
+    max-width: 85% !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+
+    @include mq(m) {
+      max-width: 75% !important;
+    }
+  }
+
+  .xd-popup-container {
+    padding: 0;
+    background-color: var(--white);
+    display: flex;
+    height: auto;
+    flex-direction: column;
+
+    @include mq(xl) {
+      flex-direction: row;
+    }
+  }
+}
+
+.xd-popup {
+  &__image {
+    min-height: 33vh;
+    flex: 0 0 50%;
+    position: relative;
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      position: absolute;
+
+      @include mq(xl) {
+        position: relative;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__inner {
+    padding: 2rem;
+
+    @include mq(l) {
+      padding: 4rem;
+    }
+
+    .xd-button {
+      margin-top: 0;
+    }
+  }
+}

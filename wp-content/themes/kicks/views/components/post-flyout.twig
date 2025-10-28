@@ -1,0 +1,9 @@
+{% extends 'includes/flyout.twig' %}
+
+{% block headerContent %}
+  {% include 'components/image.twig' with { image: post.flyoutImage } only %}
+{% endblock %}
+
+{% block titleContent %}
+  {{ post.title }}
+{% endblock %}

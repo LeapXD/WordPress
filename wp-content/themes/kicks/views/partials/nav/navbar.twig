@@ -1,0 +1,52 @@
+<div class="xd-navbar">
+  <div id="xd-sticky-navbar" data-ui="sticky" data-uk-sticky="animation: uk-animation-slide-top-medium; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent; top: 500; show-on-up: true;" class="uk-sticky">
+    <nav id="site-navigation" role="menubar" class="xd-nav uk-navbar" style="position: relative; z-index: 980;">
+      <div class="uk-navbar-left uk-nav  uk-navbar-transparent {{ has_alt_logo() ? 'has-alt-logo' : '' }}">
+        {% if has_custom_logo() %}
+          {{ get_custom_logo() }}
+        {% else %}
+          <a href="/">{{ site.name }}</a>
+        {% endif %}
+
+        {% if has_alt_logo() %}
+          {{ get_alt_logo() }}
+        {% endif %}
+      </div>
+
+      <div class="xd-nav__primary-menu xd-nav__primary-menu--align-right k-navbar-right">
+        {% if has_nav_menu('navbar-menu') %}
+          {{ nav_menu('navbar-menu') }}
+        {% endif %}
+      </div>
+
+      <div class="uk-navbar-right">
+        {% if templateProps.globalButtons.navButtons %}
+          <div class="xd-nav__cta-buttons">
+            {{ templateProps.globalButtons.navButtons.navButton1.content }}
+            {{ templateProps.globalButtons.navButtons.navButton2.content }}
+          </div>
+        {% endif %}
+
+        <div class="xd-nav__menu-buttons">
+          <a
+            class="xd-nav__menu-toggle show-on-desktop {{ templateProps.menuFlyout.enabled ? '' : 'xd-nav__menu-toggle--disabled' }}"
+            href="#"
+            data-xd-menu-button
+            role="menuitem"
+            data-ui-toggle="{{ templateProps.menuFlyout.ui }}"
+            aria-label="Toggle Menu"
+          >
+            {% if templateProps.menuFlyout.enabled %}
+              <span class="xd-nav__menu-label xd-nav__menu-label--open title-sm">Menu</span>
+            {% endif %}
+            <span class="xd-nav__menu-bars">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

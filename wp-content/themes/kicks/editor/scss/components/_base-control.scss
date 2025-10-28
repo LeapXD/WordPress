@@ -1,0 +1,24 @@
+.components-base-control .components-base-control {
+  margin-bottom: 0;
+
+  &.components-checkbox-control:last-child {
+    margin-bottom: 0;
+  }
+
+  &__checkbox-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__field {
+      display: flex;
+    }
+
+    .components-base-control {
+      flex: 1 0 50%;
+    }
+  }
+}
+
+* {
+  box-sizing: border-box;
+}

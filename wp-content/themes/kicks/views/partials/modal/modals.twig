@@ -1,0 +1,38 @@
+{% if templateProps.searchModal.enabled %}
+  {% include 'partials/modal/search.twig' %}
+{% endif %}
+
+{% if templateProps.globalButtons.sideStickyButton %}
+  {% include 'partials/modal/side-sticky-button.twig' %}
+{% endif %}
+
+{# Add Popup functionality if Homepage/front page #}
+{% if is_front_page() and templateProps.popup.displayPopup %}
+  {% include 'partials/modal/popup.twig' %}
+{% endif %}
+
+{% if templateProps.userPopups|length %}
+  {% for userPopupModal in templateProps.userPopups %}
+    {% include 'components/flexible-post-modal.twig' with {
+      modal: userPopupModal.modal,
+      post: userPopupModal.post
+    } only %}
+  {% endfor %}
+{% endif %}
+
+{% if templateProps.userFlyouts|length %}
+  {% for userFlyout in templateProps.userFlyouts %}
+    {% include 'components/flexible-post-flyout.twig' with {
+      flyout: userFlyout.flyout,
+      post: userFlyout.post
+    } only %}
+  {% endfor %}
+{% endif %}
+
+{% if templateProps.recaptchaSiteKey %}
+  {% include 'partials/modal/email-verify.twig' %}
+{% endif %}
+
+{% if templateProps.globalButtons.stickyButtons.displayStickyButtons and templateProps.globalButtons.stickyButtons.sticky1 %}
+  {% include 'partials/modal/sticky-buttons.twig' %}
+{% endif %}

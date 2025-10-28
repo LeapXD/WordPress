@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Color Theme",
+  "name": "color-theme",
+  "initialOpen": true,
+  "supports": [
+    {
+      "name": "xd/color-theme",
+      "attributes": {
+        "colorTheme": {
+          "type": "string",
+          "default": "is-style-light",
+          "className": {
+            "is-style-light": "is-style-light has-background-default",
+            "is-style-medium": "is-style-medium has-background-color",
+            "is-style-dark": "is-style-dark has-background-color"
+          }
+        }
+      },
+      "inspectorControls": [
+        {
+          "type": "XDButtonGroup",
+          "attribute": "colorTheme",
+          "options": [
+            {
+              "label": "Light",
+              "value": "is-style-light"
+            },
+            {
+              "label": "Medium",
+              "value": "is-style-medium"
+            },
+            {
+              "label": "Dark",
+              "value": "is-style-dark"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

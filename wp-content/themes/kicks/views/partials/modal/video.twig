@@ -1,0 +1,28 @@
+<div
+  id="xd-video-modal"
+  class="xd-video__modal uk-modal-container uk-flex-top"
+  uk-modal
+  data-modal-video
+>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div
+      class="xd-video__modal-video-container"
+      data-video-src="{{ get_modal_video_src() }}"
+    >
+      <template>
+        <iframe
+          uk-video
+          autoplay
+          allow="autoplay"
+          title="Modal Video"
+          src="{{ get_modal_video_src() }}"
+          width="100%"
+          height="100%"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ></iframe>
+      </template>
+    </div>
+  </div>
+</div>

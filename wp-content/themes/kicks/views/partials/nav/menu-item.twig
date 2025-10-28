@@ -1,0 +1,29 @@
+{% if not accordionElement.accordion %}
+  {# if the element doesn't have any children, just spit out a direct link #}
+  <a class="xd-menu__link {{ accordionElement.className }}" href="{{ accordionElement.url }}">{{ accordionElement.title }}</a>
+{% else %}
+  {# otherwise, spit out an accordion with the title containing the link title, and body containing the direct page link and the children #}
+  {% embed 'includes/accordion.twig' with { accordion: accordionElement.accordion } %}
+    {% block accordionElementHeading %}
+      <a data-menu-accordion-toggle class="xd-menu__link uk-accordion-title" href="#">
+        <span>{{ accordionElement.title }}</span>
+        <span class="xd-menu__accordion-button"><span class="xd-menu__accordion-button-line xd-menu__accordion-button-line--horizontal"></span><span class="xd-menu__accordion-button-line xd-menu__accordion-button-line--vertical"></span></span>
+      </a>
+    {% endblock %}
+    {% block accordionElements %}
+      <li class="xd-menu__item">
+        {{ block('accordionElementHeading') }}
+        <div data-menu-items class="xd-menu__items uk-accordion-content">
+          {% if accordionElement.url != '#' %}
+            {# if the url is not '#', then include a direct overview link to the page in the accordion body #}
+            <a class="xd-menu__link {{ accordionElement.className }}" href="{{ accordionElement.url }}">{{ accordionElement.title }} Overview</a>
+          {% endif %}
+          {% for accordionElement in accordion.elements %}
+            {# repeat above process for all child elements #}
+            {% include 'partials/nav/menu-item.twig' %}
+          {% endfor %}
+        </div>
+      </li>
+    {% endblock %}
+  {% endembed %}
+{% endif %}

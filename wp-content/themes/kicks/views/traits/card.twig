@@ -1,0 +1,105 @@
+{% block card %}
+  {% if post.isLinked %}
+    <a
+      class="{{ blockProps.className }}"
+      href="{{ post.link.url }}"
+      {{ post.link.target }}
+      {{ post.link.rel }}
+      {{ post.dataset }}
+      {{ post.aria }}
+    >
+      {{ block('cardContent') }}
+    </a>
+  {% else %}
+    <div
+      class="{{ post.className ?? className ?? blockProps.className }}"
+      {{ post.link.target }}
+      {{ post.link.rel }}
+      {{ post.dataset }}
+      {{ post.aria }}
+    >
+      {{ block('cardContent') }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block cardContent %}
+  {{ block('header') }}
+  {{ block('body') }}
+{% endblock %}
+
+{% block label %}
+  {% if block('labelContent') is defined and block('labelContent')|trim is not empty %}
+    <div class="xd-post-card__label">
+      <span class="title">{{ block('labelContent') }}</span>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block header %}
+  <div class="xd-post-card__header">
+    {{ block('label') }}
+    {{ block('headerContent') }}
+  </div>
+{% endblock %}
+
+{% block headerContent %}
+  {% if post.image %}
+    {% include 'components/image.twig' with { image: post.image } only %}
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  <div class="xd-post-card__body {{ post.bodyClass }}">
+    {{ block('bodyContent') }}
+  </div>
+{% endblock %}
+
+{% block bodyContent %}
+  <div class="xd-post-card__content xd-post-card__inner">
+    {{ block('heading') }}
+    {{ block('title') }}
+    {{ block('preview') }}
+  </div>
+  {{ block('footer') }}
+{% endblock %}
+
+{% block heading %}
+  {% if block('headingContent') is defined and block('headingContent')|trim is not empty %}
+    <p class="title-sm">
+      {{ block('headingContent') }}
+    </p>
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  <h5>
+    {{ block('titleContent') }}
+  </h5>
+{% endblock %}
+
+{% block titleContent %}
+  {{ post.title }}
+{% endblock %}
+
+{% block preview %}
+  <p>{{ block('previewContent') }}</p>
+{% endblock %}
+
+{% block previewContent %}
+  {{ post.excerpt({ read_more: '', words: 20 }) }}
+{% endblock %}
+
+{% block footer %}
+  <div class="xd-post-card__footer">
+    {{ block('footerContent') }}
+  </div>
+{% endblock %}
+
+{% block footerContent %}
+  {% if post.isLinked %}
+    <span class="xd-button xd-button--text">Read More</span>
+  {% else %}
+    <a class="xd-button xd-button--text" href="{{ post.link.url }}">Read More</a>
+  {% endif %}
+{% endblock %}

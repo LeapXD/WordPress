@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "xd/grid-layout",
+  "title": "Grid Layout",
+  "category": "layout",
+  "icon": "gm/view-quilt",
+  "description": "A responsive 24-column grid layout block.",
+  "supports": {
+    "html": false,
+    "xd/padding": true,
+    "xd/padding-controls-all": true
+  },
+  "attributes": {
+    "previewMode": {
+      "type": "string",
+      "default": "desktop"
+    },
+    "previewSyncOption": {
+      "type": "string",
+      "default": "local"
+    },
+    "rows": {
+      "type": "object",
+      "default": { "desktop": 1, "tablet": 1, "mobile": 1 }
+    },
+    "rowHeights": {
+      "type": "object",
+      "default": { "desktop": ["auto"], "tablet": ["auto"], "mobile": ["auto"] }
+    },
+    "hasModal": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "providesContext": {
+    "xd/grid:previewMode": "previewMode",
+    "xd/grid:rows": "rows"
+  },
+  "editorStyle": ["block-styles/grid-layout"],
+  "viewStyle": ["block-styles/grid-layout"]
+}

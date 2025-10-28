@@ -1,0 +1,168 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "gm/domain",
+  "name": "xd/footer",
+  "title": "Footer",
+  "keywords": ["Footer"],
+  "attributes": {
+    "footerLogo": {
+      "type": "object",
+      "default": {}
+    },
+    "footerType": {
+      "type": "string",
+      "default": "footer-top-full",
+      "enum": ["footer-top-small", "footer-top-full", "footer-top-none"]
+    },
+    "footerNavMenu": {
+      "type": "string",
+      "default": ""
+    },
+    "footerMenu": {
+      "type": "string",
+      "default": ""
+    },
+    "footerButtons": {
+      "type": "object",
+      "default": ""
+    }
+  },
+  "supports": {
+    "custom": {
+      "multiple": false,
+      "register": true,
+      "preInnerBlocksControls": [
+        {
+          "context": { "attributes": { "footerType": "footer-top-small" } },
+          "controls": [
+            {
+              "label": "Footer Logo",
+              "attribute": "footerLogo",
+              "type": "XDFieldGroup",
+              "fields": [
+                {
+                  "type": "XDLinkControl",
+                  "label": "Footer Logo Link",
+                  "attribute": "link",
+                  "showLinkTextControl": false,
+                  "schema": {
+                    "type": "object"
+                  }
+                },
+                {
+                  "type": "XDImageControl",
+                  "label": "Footer Logo Image",
+                  "style": {
+                    "--xd-image-width": "250px"
+                  },
+                  "attribute": "image",
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "context": { "attributes": { "footerType": "footer-top-full" } },
+          "controls": [
+            {
+              "label": "Footer Logo",
+              "attribute": "footerLogo",
+              "type": "XDFieldGroup",
+              "fields": [
+                {
+                  "type": "XDLinkControl",
+                  "label": "Footer Logo Link",
+                  "attribute": "link",
+                  "showLinkTextControl": false,
+                  "schema": {
+                    "type": "object"
+                  }
+                },
+                {
+                  "type": "XDImageControl",
+                  "label": "Footer Logo Image",
+                  "style": {
+                    "--xd-image-width": "250px"
+                  },
+                  "attribute": "image",
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Footer Buttons",
+              "type": "XDFieldGroup",
+              "attribute": "footerButtons",
+              "fields": [
+                {
+                  "label": "Newsletter Tagline",
+                  "attribute": "newsletterTag",
+                  "type": "TextareaControl",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "label": "Newsletter Page Link",
+                  "attribute": "newsletterLink",
+                  "type": "XDLinkControl",
+                  "schema": {
+                    "type": "object"
+                  }
+                },
+                {
+                  "label": "Contact Page Link",
+                  "attribute": "contactLink",
+                  "type": "XDLinkControl",
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Footer Menu",
+              "attribute": "footerMenu",
+              "type": "XDMenuPickerControl",
+              "schema": { "type": "string" }
+            }
+          ]
+        },
+        {}
+      ],
+      "innerBlocks": [
+        {
+          "context": { "attributes": { "footerType": "footer-top-small" } },
+          "allowedBlocks": ["core/paragraph"],
+          "template": [["core/paragraph", { "placeholder": "Enter footer copy here" }]],
+          "templateLock": false,
+          "wrap": true
+        },
+        {
+          "context": {},
+          "allowedBlocks": [],
+          "template": [],
+          "templateLock": "all"
+        }
+      ],
+      "postInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "label": "Footer Nav Menu",
+              "attribute": "footerNavMenu",
+              "type": "XDMenuPickerControl",
+              "schema": { "type": "string" }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

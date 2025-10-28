@@ -1,0 +1,13 @@
+{% extends 'includes/modal.twig' %}
+
+{% block modalBodyContent %}
+  {% if modal.embedTemplate %}
+    {% embed 'components/embed-lazyload.twig' %}
+      {% block embedLazyloadContent %}
+        {{ post.content }}
+      {% endblock %}
+    {% endembed %}
+  {% else %}
+    {{ post.content }}
+  {% endif %}
+{% endblock %}

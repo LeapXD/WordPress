@@ -1,0 +1,12 @@
+.xd-social-links {
+  display: flex;
+}
+
+.xd-social-link.xd-social-link {
+  margin-right: 1rem;
+  min-width: 60px;
+
+  &::before {
+    content: initial !important;
+  }
+}

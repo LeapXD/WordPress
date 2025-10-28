@@ -1,0 +1,24 @@
+.gform_fields {
+  display: flex;
+  column-gap: var(--spacing-xs);
+  row-gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.gform-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: var(--spacing-xs);
+}
+
+.xd-gravityform-iframe {
+  margin-left: -4px;
+  width: calc(100% + 8px);
+
+  &__body {
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+  }
+}

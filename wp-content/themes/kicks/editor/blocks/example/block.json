@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/example-block",
+  "title": "Example",
+  "description": "Example",
+  "category": "standard",
+  "icon": "gm/sunny",
+  "keywords": ["example"],
+  "usesContext": ["postId", "postType", "queryId"],
+  "supports": {
+    "xd/example": true,
+    "xd/image-background": true,
+    "xd/image-mobile": true,
+    "xd/link": true,
+    "xd/color-theme": true,
+    "xd/background-overlay": true,
+    "xd/background-overlay-controls": true,
+    "xd/background-blend-mode-controls": true,
+    "xd/background-opacity-controls": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": true,
+          "allowedBlocks": ["core/paragraph"]
+        }
+      ],
+      "modules": [
+        {
+          "context": {
+            "postType": ["post"]
+          },
+          "allowedModules": ["xd/id", "xd/margin", "xd/margin-controls", "xd/padding", "xd/padding-controls"]
+        },
+        {
+          "context": {
+            "postType": ["page"]
+          },
+          "allowedModules": true
+        }
+      ]
+    }
+  }
+}

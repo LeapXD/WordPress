@@ -1,0 +1,111 @@
+@use '../mixins' as *;
+
+.xd-search-modal {
+  .uk-modal-dialog {
+    height: 100vh;
+  }
+
+  .container {
+    height: 100%;
+  }
+
+  form {
+    margin-top: 30vh;
+  }
+
+  .uk-navbar-container {
+    background: none;
+  }
+}
+
+.search-form {
+  position: relative;
+}
+
+.xd-search__input {
+  background: none;
+  border: none;
+  border-bottom: thin solid var(--stroke);
+  padding: 0.5rem 1rem;
+  padding-right: 5rem;
+  font-size: 1.25rem;
+  width: 100%;
+  font-weight: 300;
+  appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+  border-radius: 0;
+
+  @include mq(m) {
+    padding: 0.5rem 1rem;
+    padding-right: 5rem;
+    font-size: 2rem;
+  }
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.xd-search__submit {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  overflow: hidden;
+  width: 32px;
+  height: 36px;
+  bottom: 0;
+
+  button {
+    appearance: none;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-appearance: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background: none;
+      border: none;
+    }
+
+    svg {
+      color: var(--body);
+      transform: translateY(1px);
+    }
+  }
+}
+
+.search-content {
+  margin-top: pixeltorem(32);
+  margin-bottom: 2.5rem;
+
+  @include mq(m) {
+    margin-top: pixeltorem(48);
+    margin-bottom: 4rem;
+  }
+}
+
+.search-page {
+  &__results {
+    display: grid;
+    row-gap: var(--spacing-sm);
+  }
+
+  &__result {
+    --body-link-color: var(--body);
+    --body-link-hover-color: var(--body);
+
+    &:hover {
+      h4 {
+        text-decoration: underline;
+      }
+    }
+  }
+}

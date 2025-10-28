@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema/plugin-schema.json",
+  "name": "ui",
+  "title": "User Interface",
+  "panels": ["PluginDocumentSettingPanel"],
+  "fieldGroups": [
+    {
+      "fields": [
+        {
+          "name": "modal",
+          "label": "Popup",
+          "postType": ["modal"],
+          "type": "XDPostRelationshipControl",
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "show_modal_on_load",
+          "label": "Show on Load",
+          "activeState": "checked",
+          "type": "ToggleControl",
+          "help": "Show the popup when the page loads.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "flyouts",
+          "multiple": true,
+          "label": "Flyouts",
+          "postType": ["flyout"],
+          "type": "XDPostRelationshipControl",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "locations": [
+        [
+          {
+            "param": "post_type",
+            "operator": "==",
+            "value": "page"
+          },
+          {
+            "param": "post_state",
+            "operator": "!=",
+            "value": "page_on_front"
+          }
+        ]
+      ]
+    }
+  ]
+}

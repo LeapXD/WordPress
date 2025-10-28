@@ -1,0 +1,21 @@
+{% extends 'includes/card.twig' %}
+
+  {% block labelContent %}
+    {% if post.price %}
+      {{ post.price }}
+    {% endif %}
+  {% endblock %}
+  
+  {% block headingContent %}
+    {{ post.offer_date }}
+  {% endblock %}
+  
+  {% block title %}
+    <h4>
+      {{ block('titleContent') }}
+    </h4>
+  {% endblock %}
+  
+  {% block footerContent %}
+    <span class="xd-button xd-button--text">Offer Details</span>
+  {% endblock %}

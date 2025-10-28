@@ -1,0 +1,39 @@
+{
+  "name": "promotion",
+  "title": "Promotion Details",
+  "panels": ["PluginDocumentSettingPanel"],
+  "fieldGroups": [
+    {
+      "fields": [
+        {
+          "name": "price",
+          "label": "Price",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": "From $0"
+          }
+        }, {
+          "name": "offer_date",
+          "label": "Offer Date",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        }
+      ],
+      "locations": [
+        [
+          {
+            "param": "post_type",
+            "operator": "==",
+            "value": "promotion"
+          }
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+@use '../mixins/' as *;
+
+.xd-thumbnail-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  row-gap: 3rem;
+  column-gap: 2%;
+  justify-content: center;
+
+  @include mq(m) {
+    column-gap: 2%;
+  }
+}

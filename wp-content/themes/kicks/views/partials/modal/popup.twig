@@ -1,0 +1,16 @@
+{% embed 'includes/modal.twig' with { modal: templateProps.popupModal } %}
+  {% block modalBodyContent %}
+    <div class="xd-popup-container">
+      {% if templateProps.popup.image.id %}
+        <div class="xd-popup__image">
+          {{ xd_get_picture(templateProps.popup.image.id) }}
+        </div>
+      {% endif %}
+      <div class="xd-popup__content">
+        <div class="xd-popup__inner">
+          {{ templateProps.popup.content }}
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endembed %}

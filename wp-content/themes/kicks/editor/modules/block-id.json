@@ -1,0 +1,14 @@
+{
+	"$schema": "../schema/module-schema.json",
+	"title": "ID",
+	"name": "block-id",
+	"supports": [{
+		"name": "xd/id",
+		"attributes": {
+			"id": {
+				"type": "string",
+				"default": ""
+			}
+		}
+	}]
+}

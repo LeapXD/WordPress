@@ -1,0 +1,35 @@
+{
+  "apiVersion": 2,
+  "name": "xd/tabbed-menu",
+  "title": "Tabbed Menu",
+  "icon": "gm/photo-album",
+  "description": "Tabbed menu",
+  "category": "standard",
+  "keywords": ["menu", "tabs"],
+  "viewStyle": ["block-styles/tabbed-menu"],
+  "editorStyle": ["block-styles/tabbed-menu"],
+  "attributes" : {
+    "tabs" : {
+      "type" : "array",
+      "default" : []
+    }
+  },
+  "supports": {
+    "xd/padding": true,
+    "xd/padding-controls": true,
+    "xd/title": true,
+    "xd/color-theme": true,
+    "custom": {
+      "innerBlocks": [{
+        "wrap": {
+          "block": "container",
+          "outer": "row",
+          "inner": "col-10 offset-1 col-md-8 offset-md-2 col-xl-6 offset-xl-3",
+          "innerBlocks": "uk-switcher xd-tabbed-menu__section-wrapper"
+        },
+        "allowedBlocks": ["xd/tab-section"],
+        "templateLock": false
+      }]
+    }
+  }
+}

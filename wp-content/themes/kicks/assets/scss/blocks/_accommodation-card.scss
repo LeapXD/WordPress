@@ -1,0 +1,75 @@
+@use '../mixins/' as *;
+
+.xd-post-card {
+  &--accommodation {
+    .xd-accommodation-cards & {
+      display: flex;
+
+      @include mq(l) {
+        flex-direction: row-reverse;
+      }
+
+      > * {
+        @include mq(l) {
+          flex: 0 0 50%;
+        }
+      }
+    }
+  }
+
+  &--accommodation &__header {
+    .xd-accommodation-cards & {
+      padding: 20px 20px 0;
+
+      @include mq(l) {
+        padding: 20px 20px 20px 10px;
+      }
+
+      .xd-image {
+        height: 85vw;
+
+        @include mq(m) {
+          min-height: 100%;
+        }
+
+        @include mq(l) {
+          height: 40vw;
+        }
+      }
+    }
+  }
+
+  &--accommodation &__body {
+    .xd-accommodation-cards & {
+      padding: 3rem 8.33333%;
+      justify-content: center;
+      border: none;
+
+      @include mq(m) {
+        padding: 3.5rem calc(16.66666% + 5px) 4rem;
+      }
+
+      @include mq(l) {
+        padding: 3.5rem calc(8.33333% + 2px) 4rem;
+      }
+    }
+  }
+
+  &--accommodation &__content {
+    .xd-accommodation-cards & {
+      flex: unset;
+
+      > * {
+        &:first-child {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .xd-button {
+    .xd-accommodation-cards & {
+      margin-top: 1.25rem;
+    }
+  }
+}

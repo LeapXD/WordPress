@@ -1,0 +1,16 @@
+{% extends 'components/block-with-title.twig' %}
+
+{% block preInnerBlocksContent %}
+  {% if attributes.title %}
+    <div class="container">
+      <div class="row">
+        <div class="col-11 col-md-10 col-offset-11 offset-1 offset-md-2 offset-xl-1">
+          <h3 class="xd-title">{{ attributes.title }}</h3>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block postInnerBlocksContent null %}
+  

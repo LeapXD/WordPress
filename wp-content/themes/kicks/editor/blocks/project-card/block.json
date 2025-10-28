@@ -1,0 +1,42 @@
+{
+  "apiVersion": 2,
+  "name": "xd/project-card",
+  "title": "Project Card",
+  "icon": "portfolio",
+  "description": "Project Card",
+  "category": "standard",
+  "viewStyle": ["block-styles/post-card", "block-styles/project-card", "block-styles/lists"],
+  "editorStyle": ["block-styles/post-card", "block-styles/project-card", "block-styles/lists"],
+  "keywords": ["project", "card"],
+  "parent": ["xd/project-cards"],
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "project"
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "col-12 col-12 col-md-6 col-xl-4 xd-post-card xd-post-card--project",
+            "serverSideRenderBlock": "xd-post-card"
+          },
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [{ "id": "remove-button", "type": "XDPostCardControls" }]
+        }
+      ]
+    }
+  }
+}

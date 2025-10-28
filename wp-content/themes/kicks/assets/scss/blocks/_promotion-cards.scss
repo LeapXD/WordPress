@@ -1,0 +1,11 @@
+@use '../mixins/' as *;
+
+.xd-post-cards {
+  &--promotions {
+    margin: 0;
+  }
+
+  &__button {
+    text-align: center;
+  }
+}

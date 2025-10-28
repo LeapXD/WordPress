@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "gm/domain",
+  "name": "xd/map-options",
+  "title": "Map Options",
+  "attributes": {
+    "mapJson": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "keywords": ["Map", "Json"],
+  "supports": {
+    "custom": {
+      "multiple": false,
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": []
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "mapJson",
+              "type": "TextareaControl",
+              "label": "Snazzy Maps Override Json",
+              "rows": 16
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

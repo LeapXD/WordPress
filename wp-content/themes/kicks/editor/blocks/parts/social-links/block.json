@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "wp/navigation",
+  "name": "xd/social-links",
+  "title": "Social Links",
+  "keywords": ["Social", "Links"],
+  "supports": {
+    "custom": {
+      "multiple": false,
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": ["xd/social-link"],
+          "template": [["xd/social-link"]],
+          "orientation": "horizontal"
+        }
+      ]
+    }
+  }
+}

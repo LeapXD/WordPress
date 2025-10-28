@@ -1,0 +1,8 @@
+{
+  "name": "xd/image",
+  "supports":{
+    "spacing": {
+      "margin":true
+    }
+  }
+}

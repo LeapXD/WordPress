@@ -1,0 +1,55 @@
+@use '../../../assets/scss/mixins/' as *;
+
+.xd-image-gallery {
+  .xd-image {
+    aspect-ratio: 1/1;
+    height: 100%;
+    margin: 0 !important;
+  }
+
+  &.is-selected > .xd-image {
+    .components-button {
+      display: none;
+    }
+  }
+
+  .is-selected.xd-image {
+    .components-button {
+      display: none;
+    }
+  }
+
+  &--4 {
+    .xd-image:nth-child(n+5) {
+      display: none;
+    }
+  }
+
+  &--5 {
+    .xd-image:nth-child(n+6) {
+      display: none;
+    }
+  }
+
+  &--8 {
+    .xd-image:nth-child(n+9) {
+      display: none;
+    }
+  }
+
+  padding-bottom: 240px !important;
+
+  .xd-image-picker {
+    position: absolute;
+    height: 200px;
+    left: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+
+    @include mq(m) {
+      left: 20px;
+      bottom: 20px;
+      width: calc(100% - 40px);
+    }
+  }
+}

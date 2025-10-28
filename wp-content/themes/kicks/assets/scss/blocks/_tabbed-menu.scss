@@ -1,0 +1,87 @@
+@use '../mixins/' as *;
+
+.xd-tabbed-menu {
+  --tab-color: var(--body);
+  --tab-hover-color: var(--primary);
+  --stroke: var(--body);
+
+  &__switcher {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column-gap: 2rem;
+    margin-top: 1rem;
+  
+    @include mq(m) {
+      margin-top: 1.3rem;
+    }
+
+    h6{
+      margin-bottom: 0;
+    }
+
+    a {
+      color: var(--tab-color);
+      margin-bottom: 0;
+
+      &::after {
+        content: "";
+        height: 1px;
+        width: 0;
+        display: block;
+        background-color: var(--tab-color);
+        transition: all 0.3s ease-in-out;
+        margin-top: 5px;
+      }
+
+      &:hover {
+        color: var(--tab-hover-color);
+      }
+    }
+
+    .uk-active {
+      a {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__section {
+    .wp-block-heading {
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--stroke);
+    }
+  }
+}
+
+.xd-menu-item {
+  margin-bottom: 2rem;
+
+  @include mq(m) {
+    margin-bottom: 2.5rem;
+  }
+  
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    grid-column-gap: 1rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+
+    @include mq(m) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+ + p{
+      margin-bottom: .25rem;
+    }
+  }
+
+}
+
+.uk-switcher>:not(.uk-active) {
+  display: none;
+}

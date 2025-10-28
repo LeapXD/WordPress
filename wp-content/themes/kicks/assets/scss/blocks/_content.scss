@@ -1,0 +1,23 @@
+@use '../mixins/' as *;
+
+.xd-content {
+  flex-wrap: nowrap;
+
+  &.xd-height-auto {
+    height: auto;
+  }
+
+  &.xd-height-stretch {
+    flex: 1;
+    overflow: hidden;
+
+    .xd-content__inner:has(.xd-image:only-child) {
+      height: 100%;
+    }
+  }
+
+  //Because none of xd-height-auto, xd-height-stretch, or xd-height-custom are set unless the block supports "height" as well as x"height-custom"
+  &:where(:not(.xd-height-auto, .xd-height-stretch)) {
+    height: var(--xd-height-custom);
+  }
+}

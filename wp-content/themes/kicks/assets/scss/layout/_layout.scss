@@ -1,0 +1,61 @@
+
+@use "sass:map";
+@use "../variables/" as *;
+@use "../mixins" as *;
+
+
+.error-404-page,
+.thank-you-page,
+.search-page {
+  padding-top: map.get($spacers-lg, "lg");
+
+  @include mq(m) {
+    padding-top: map.get($spacers-lg, "xl");
+  }
+
+  .page-icon {
+    margin-top: 2rem;
+  }
+}
+
+.error-404-page,
+.thank-you-page {
+  text-align: center;
+}
+
+.admin-bar {
+  margin: 0;
+
+  .uk-offcanvas,
+  .uk-modal,
+  .uk-sticky-fixed {
+    top: 32px !important;
+  }
+
+  &.uk-offcanvas-page,
+  &.uk-modal-page {
+    .uk-sticky {
+      top: 32px !important;
+    }
+  }
+
+  .uk-offcanvas,
+  .uk-modal {
+    height: calc(100vh - 32px) !important;
+  }
+}
+
+.menu-open body {
+  overflow: hidden !important;
+}
+
+figure {
+  margin: 0;
+}
+
+hr.wp-block-separator {
+  border-top: none;
+  border-bottom: 1px solid var(--stroke);
+  margin-top: 42px;
+  margin-bottom: 42px;
+}

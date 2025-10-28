@@ -1,0 +1,148 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "name": "xd/image-gallery",
+  "apiVersion": 2,
+  "title": "Image Gallery",
+  "category": "standard",
+  "description": "Gallery.",
+  "keywords": ["gallery"],
+  "icon": "gm/gallery-thumbnail",
+  "viewStyle": ["block-styles/image-gallery"],
+  "editorStyle": ["block-styles/image-gallery"],
+  "attributes": {
+    "hasModal": {
+      "type": "boolean",
+      "default": false
+    },
+    "galleryLayout": {
+      "type": "string",
+      "default": "4",
+      "className": {
+        "1": "xd-image-gallery--1",
+        "1l": "xd-image-gallery--columns xd-image-gallery--columns-11 xd-image-gallery--1 xd-image-gallery--columns-left",
+        "1r": "xd-image-gallery--columns xd-image-gallery--columns-11 xd-image-gallery--1 xd-image-gallery--columns-right",
+        "4": "xd-image-gallery--4",
+        "5l": "xd-image-gallery--5 xd-image-gallery--left",
+        "5c": "xd-image-gallery--5 xd-image-gallery--center",
+        "5r": "xd-image-gallery--5 xd-image-gallery--right",
+        "8": " xd-image-gallery--8"
+      }
+    },
+    "paddingTop": {
+      "type": "string",
+      "default": "xd-pt--xs",
+      "className": true
+    },
+    "paddingBottom": {
+      "type": "string",
+      "default": "xd-pb--xs",
+      "className": true
+    }
+  },
+  "supports": {
+    "xd/id": true,
+    "xd/color-theme": true,
+    "xd/padding-controls-tiny": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": ["xd/image"],
+          "template": [],
+          "orientation": "horizontal",
+          "templateLock": false,
+          "renderAppender": false,
+          "wrap": {
+            "block": "container",
+            "editorPostInnerBlocks": "xd-image-gallery__inserter"
+          }
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Gallery Layout",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "attribute": "galleryLayout",
+                  "type": "XDButtonGroup",
+                  "gridColumns": 4,
+                  "options": [
+                    {
+                      "icon": "xd/full-width-image-stacked-gallery",
+                      "label": "Stacked Image",
+                      "value": "1"
+                    },
+                    {
+                      "icon": "xd/stacked-gallery-left",
+                      "label": "Stacked Image Left",
+                      "value": "1l"
+                    },
+                    {
+                      "icon": "xd/stacked-gallery-right",
+                      "label": "Stacked Image Right",
+                      "value": "1r"
+                    },
+                    {
+                      "icon": "xd/four-image-gallery",
+                      "label": "Four Image",
+                      "value": "4"
+                    },
+                    {
+                      "icon": "xd/five-image-left-gallery",
+                      "label": "Five Image Left",
+                      "value": "5l"
+                    },
+                    {
+                      "icon": "xd/five-image-center-gallery",
+                      "label": "Five Image Center",
+                      "value": "5c"
+                    },
+                    {
+                      "icon": "xd/five-image-right-gallery",
+                      "label": "Five Image Right",
+                      "value": "5r"
+                    },
+                    {
+                      "icon": "xd/eight-image-gallery",
+                      "label": "Eight Image",
+                      "value": "8"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "initialOpen": true,
+              "title": "Gallery",
+              "controls": [
+                {
+                  "type": "XDGalleryControl",
+                  "id": "gallery-control"
+                },
+                {
+                  "activeState": "checked",
+                  "type": "ToggleControl",
+                  "attribute": "hasModal",
+                  "label": "Images open in modal widow"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "postInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "type": "XDGallery",
+              "id": "gallery"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

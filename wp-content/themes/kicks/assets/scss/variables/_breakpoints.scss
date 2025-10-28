@@ -1,0 +1,29 @@
+/* ----- BREAKPOINTS ---------------------------------------- */
+
+// Used in 'mq' mixin
+$breakpoints: (
+  bp-xs:         480,
+  bp-s:          576,
+  bp-ui-s:       640,
+  bp-m:          768,
+  bp-ui-m:       960,
+  bp-l:          992,
+  bp-ui-l:       1200,
+  bp-xl:         1200,
+  bp-xxl:        1440,
+  bp-xxxl:       1800,
+  bp-ui-xl:      1600,
+  bp-hd:         1920,
+  bp-retina:     2560,
+  bp-4k:         4056,
+);
+
+$grid-breakpoints: (
+  xs:  0,
+  sm:  576px,
+  md:  768px,
+  lg:  992px,
+	xl:  1200px,
+	// xxl: 1440px,
+	// xxxl: 1800px,
+)

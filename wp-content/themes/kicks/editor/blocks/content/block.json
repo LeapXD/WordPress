@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 3,
+  "name": "xd/content",
+  "title": "Content",
+  "description": "Content block for displaying text and media.",
+  "category": "standard",
+  "parent": ["xd/grid-cell"],
+  "icon": "gm/newsmode",
+  "keywords": ["content", "layout"],
+  "viewStyle": ["block-styles/content"],
+  "editorStyle": ["block-styles/content"],
+  "supports": {
+    "anchor": true,
+    "layout": {
+      "allowSwitching": false,
+      "allowOrientation": false,
+      "allowInheriting": true,
+      "allowJustification": false,
+      "allowSizingOnChildren": true,
+      "allowVerticalAlignment": true,
+      "allowEditing": true,
+      "allowCustomContentAndWideSize": false,
+      "default": {
+        "type": "flex",
+        "orientation": "vertical"
+      }
+    },
+    "xd/horizontal-align": {
+      "context": [
+        {
+          "when": {
+            "parent": ["xd/grid-cell"],
+            "ancestor": ["xd/grid-layout"]
+          },
+          "supports": ["left", "center", "right", "wide"]
+        }
+      ]
+    },
+    "xd/height": ["px", "%", "auto", "stretch", "custom"],
+    "spacing": {
+      "padding": true
+    },
+    "xd/color-theme": true,
+    "custom": {
+      "innerBlocks": [
+        {
+          "wrap": {
+            "innerBlocks": "xd-content__inner"
+          },
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "core/list",
+            "core/quote",
+            "core/cover",
+            "xd/buttons",
+            "core/separator",
+            "xd/image",
+            "xd/image-icon",
+            "xd/video",
+            "xd/accordion",
+            "xd/form"
+          ],
+          "template": [["core/paragraph"]]
+        }
+      ]
+    }
+  }
+}

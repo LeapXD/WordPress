@@ -1,0 +1,25 @@
+{% embed 'includes/modal.twig' with { modal: templateProps.searchModal } %}
+  {% block modalContent %}
+    <div class="container">
+      <div class="row">
+        <div class="col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3">
+          <form id="xd-modal-search" role="search" aria-labelledby="search_modal_search_field" method="get" class="search-form" action="/">
+            <div class="search-form">
+              <label for="s" class="screen-reader-text">Search</label>
+              <span class="screen-reader-text">Search for:</span>
+              <input aria-label="Site Search" id="search_modal_search_field" type="search" class="search-field xd-search__input" placeholder="Search …" value="{{ templateProps.searchQuery | escape }}" name="s" tabindex="0"/>
+
+              <label for="search-submit" class="xd-search__submit"><span class="screen-reader-text">search</span>
+              <button
+                name="search-submit"
+                type="submit"
+                class="search-submit"
+                value="Search"
+              >{{ get_icon('search') }}</button></label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endembed %}

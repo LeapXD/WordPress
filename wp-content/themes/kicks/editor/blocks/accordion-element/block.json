@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/accordionelement",
+  "title": "Accordion Element",
+  "category": "standard",
+  "icon": "gm/expand-more",
+  "parent": ["xd/accordion"],
+  "attributes": {
+    "accordionOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "accordionTitle": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": false,
+            "outer": false,
+            "inner": false,
+            "preInnerBlocks": "uk-accordion-title",
+            "innerBlocks": "uk-accordion-content",
+            "postInnerBlocks": false
+          },
+          "allowedBlocks": ["core/paragraph", "core/heading", "core/list", "xd/buttons", "core/separator"],
+          "template": [["core/paragraph"]]
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Accordion Element",
+              "initialOpen": false,
+              "controls": [
+                {
+                  "type": "ToggleControl",
+                  "activeState": "checked",
+                  "label": "Accordion Item Open",
+                  "attribute": "accordionOpen"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "accordionTitle",
+              "allowedFormats": [],
+              "tagName": "h5",
+              "type": "RichText",
+              "className": "xd-accordionelement__title",
+              "placeholder": "Title",
+              "identifier": "title"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

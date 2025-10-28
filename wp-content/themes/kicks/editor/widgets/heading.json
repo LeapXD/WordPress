@@ -1,0 +1,34 @@
+{
+  "name": "core/heading",
+  "example": {
+    "innerBlocks": []
+  },
+  "supports":{
+    "spacing": {
+      "margin":true
+    }
+  },
+  "styles": [
+    {
+      "name": "body-1",
+      "label": "Body 1"
+    },
+    {
+      "name": "body-2",
+      "label": "Body 2",
+      "isDefault": true
+    },
+    {
+      "name": "body-3",
+      "label": "Body 3"
+    },
+    {
+      "name": "title-lg",
+      "label": "Title Large"
+    },
+    {
+      "name": "title-sm",
+      "label": "Title Small"
+    }
+  ]
+}

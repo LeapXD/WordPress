@@ -1,0 +1,7 @@
+@use "variables" as * with (
+	$root: ":root",
+	$scope: "main",
+	$content: ".entry-content"
+	);
+
+@use "./blocks/index" as *;

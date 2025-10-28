@@ -1,0 +1,93 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/cta",
+  "title": "CTA",
+  "description": "Call to action",
+  "category": "standard",
+  "viewStyle": ["block-styles/cta"],
+  "editorStyle": ["block-styles/cta"],
+  "icon": "gm/call-to-action",
+  "keywords": ["call to action", "cta", "column"],
+  "attributes": {
+    "ctaType": {
+      "type": "string",
+      "default": "",
+      "className": true
+    },
+    "marginTop": {
+      "type": "string",
+      "default": ""
+    },
+    "marginBottom": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "variations": [
+    {
+      "name": "xd/cta-two-col",
+      "title": "Two Column CTA",
+      "icon": "gm/call-to-action",
+      "description": "Two column call to action.",
+      "attributes": { "ctaType": "xd-cta--two-column", "align": "center" },
+      "isActive": ["ctaType"],
+      "innerBlocks": [["xd/column"], ["xd/column"]]
+    },
+    {
+      "scope": ["block"],
+      "name": "xd/poster",
+      "title": "Poster",
+      "icon": "gm/wallpaper",
+      "description": "Poster",
+      "attributes": { "ctaType": "xd-cta--poster", "align": "left" },
+      "isActive": ["ctaType"],
+      "innerBlocks": [["core/heading"]]
+    }
+  ],
+  "supports": {
+    "xd/padding": true,
+    "xd/margin": true,
+    "xd/margin-controls": true,
+    "xd/image-background": true,
+    "xd/background-overlay": true,
+    "xd/video": true,
+    "xd/cta-alignment": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "variation": ["xd/cta-two-col"] },
+          "wrap": { "block": "container", "inner": "", "innerBlocks": "row" },
+          "allowedBlocks": ["xd/column"],
+          "templateLock": "insert",
+          "orientation": "horizontal"
+        },
+        {
+          "context": { "variation": ["xd/poster"] },
+          "wrap": {
+            "block": "container",
+            "outer": "row",
+            "innerBlocks": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 xd-cta__inner"
+          },
+          "allowedBlocks": ["core/paragraph", "core/heading", "xd/buttons", "core/separator"],
+          "template": [["core/heading"]],
+          "templateLock": "all"
+        },
+        {
+          "wrap": {
+            "block": "container",
+            "outer": "row",
+            "innerBlocks": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 xd-cta__inner"
+          },
+          "allowedBlocks": ["core/paragraph", "core/heading", "xd/buttons", "core/separator"],
+          "template": [
+            ["core/heading", { "textAlign": "center" }],
+            ["xd/buttons", { "layout": { "type": "flex", "justifyContent": "center" } }]
+          ],
+          "templateLock": false
+        }
+      ]
+    }
+  }
+}

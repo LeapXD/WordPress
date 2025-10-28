@@ -1,0 +1,25 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "keywords": ["columns", "content"],
+  "name": "xd/two-column-list",
+  "title": "Two column List",
+  "description": "Create two columns of bulleted, numbered, or stylized lists.",
+  "category": "standard",
+  "icon": "gm/view-column-2",
+  "viewStyle": ["block-styles/lists"],
+  "editorStyle": ["block-styles/lists"],
+  "parent": ["xd/container"],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": ["core/list"],
+          "template": [["core/list"], ["core/list"]],
+          "orientation": "horizontal"
+        }
+      ]
+    }
+  }
+}

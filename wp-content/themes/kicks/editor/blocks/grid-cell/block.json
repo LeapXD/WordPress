@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "xd/grid-cell",
+  "title": "Grid Cell",
+  "category": "layout",
+  "icon": "gm/select",
+  "description": "A resizable, responsive cell within a 24-column grid.",
+  "parent": ["xd/grid-layout"],
+  "supports": {
+    "custom": {
+      "innerBlocks": [
+        {
+          "orientation": "vertical",
+          "allowedBlocks": ["xd/content"],
+          "template": [["xd/content"]],
+          "templateLock": false
+        }
+      ]
+    },
+    "spacing": {
+      "padding": true
+    },
+    "html": false,
+    "xd/color-theme": true,
+    "layout": {
+      "allowSwitching": false,
+      "allowOrientation": false,
+      "allowInheriting": false,
+      "allowJustification": false,
+      "allowSizingOnChildren": true,
+      "allowVerticalAlignment": true,
+      "allowEditing": true,
+      "allowCustomContentAndWideSize": false,
+      "default": {
+        "type": "flex",
+        "orientation": "vertical"
+      }
+    }
+  },
+  "attributes": {
+    "colStart": { "type": "object", "default": { "desktop": 1, "tablet": 1, "mobile": 1 } },
+    "colSpan": { "type": "object", "default": { "desktop": 6, "tablet": 12, "mobile": 24 } },
+    "rowStart": { "type": "object", "default": { "desktop": 1, "tablet": 1, "mobile": 1 } },
+    "rowSpan": { "type": "object", "default": { "desktop": 1, "tablet": 1, "mobile": 1 } },
+    "gutters": {
+      "type": "object",
+      "default": {
+        "top": "full",
+        "right": "full",
+        "bottom": "full",
+        "left": "full"
+      }
+    }
+  },
+  "usesContext": ["xd/grid:previewMode", "xd/grid:rows", "xd/grid:itemsPerRow"]
+}

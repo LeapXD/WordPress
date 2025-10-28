@@ -1,0 +1,141 @@
+@use '../mixins/' as *;
+
+.xd-two-tile {
+  $p:&;
+
+  overflow: hidden;
+
+  @include mq(xs,xl) {
+    padding-bottom: var(--spacing-lg);
+  }
+
+  &__inner {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: var(--spacing-sm);
+
+    @include mq(l) {
+      padding-top: var(--spacing-lg);
+    }
+
+    @include mq(xl) {
+      padding-bottom: var(--spacing-lg);
+    }
+
+    #{$p}--content-top & {
+      margin-top: 0;
+
+      @include mq(xl) {
+        padding-top: 0;
+      }
+    }
+
+    #{$p}--content-bottom & {
+      margin-bottom: 0;
+
+      @include mq(xl) {
+        padding-bottom: 0;
+      }
+    }
+
+    .xd-image {
+      &:not(:first-child) {
+        margin-top: var(--spacing-sm);
+      }
+
+      &:not(:last-child) {
+        margin-bottom: var(--spacing-sm);
+      }
+
+      &--icon {
+        &:not(:first-child) {
+          margin-top: var(--spacing-sm);
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 2.5rem;
+        }
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    position: relative;
+
+    .xd-image {
+      max-width: unset;
+      width: calc(100% + 10px);
+      min-height: 100%;
+      height: 130vw;
+      max-height: 100vh;
+      margin-left: -10px;
+
+      @include mq(m) {
+        height: 100vw;
+        width: 100%;
+        margin-left: auto;
+      }
+
+      @include mq(xl) {
+        height: 95vh;
+
+        .xd-two-tile-inline & {
+          height: 85vh;
+        }
+      }
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__image,
+  &__inner {
+    transition: transform 1s ease-out;
+  }
+
+  .row.row-reverse {
+    @include mq(xl) {
+      flex-direction: row-reverse;
+    }
+
+    .xd-two-tile__image {
+      margin-right: auto;
+    }
+  }
+
+  &--image-wide {
+    #{$p}__image {
+      .xd-image {
+        margin-left: -10px;
+        width: calc(100% + 20px);
+
+        @include mq(m) {
+          margin-left: -20px;
+          width: calc(100% + 40px);
+        }
+
+        @include mq(xl) {
+          margin-left: -20px;
+          width: calc(100% + 30px);
+        }
+      }
+    }
+
+    .row.row-reverse {
+      #{$p}__image {
+        margin-right: 0;
+        margin-left: auto;
+
+        .xd-image {
+          @include mq(xl) {
+            margin-left: -10px;
+          }
+        }
+      }
+    }
+  }
+}

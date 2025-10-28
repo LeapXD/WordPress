@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "attributes": {
+    "displayAlertBar": { "type": "boolean", "default": false }
+  },
+  "icon": "gm/domain",
+  "name": "xd/alert-bar",
+  "title": "Alert Bar",
+  "keywords": ["Company", "Details"],
+  "supports": {
+    "multiple": false,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": ["core/paragraph"],
+          "template": [["core/paragraph", { "placeholder": "Enter a message..." }]],
+          "templateLock": "all"
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "displayAlertBar",
+              "type": "ToggleControl",
+              "label": "Display Alert Bar",
+              "activeState": "checked"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

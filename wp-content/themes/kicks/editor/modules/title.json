@@ -1,0 +1,86 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Title Alignment",
+  "name": "title-alignment",
+  "supports": [
+    {
+      "name": "xd/title",
+      "attributes": {
+        "title": {
+          "type": "string",
+          "default": ""
+        },
+        "titleClassName": {
+          "type": "string",
+          "default": "xd-block-title",
+          "preInnerBlocksClassName": true
+        },
+        "titleAlign": {
+          "type": "string",
+          "default": "xd-block-title--align-center",
+          "preInnerBlocksClassName": true
+        }
+      },
+      "blockControls": [
+        {
+          "label": "Align Title",
+          "attribute": "titleAlign",
+          "type": "XDToolbarDropdownMenu",
+          "group": "title-align",
+          "options": [
+            {
+              "icon": "wp/align-left",
+              "label": "Align Title Left",
+              "value": "xd-block-title--align-left"
+            },
+            {
+              "icon": "wp/align-center",
+              "label": "Align Title Center",
+              "value": "xd-block-title--align-center"
+            },
+            {
+              "icon": "wp/align-right",
+              "label": "Align Title Right",
+              "value": "xd-block-title--align-right"
+            }
+          ]
+        }
+      ],
+      "inspectorControls": [
+        {
+          "attribute": "titleAlign",
+          "type": "XDButtonGroup",
+          "gridColumns": 8,
+          "options": [
+            {
+              "icon": "wp/align-left",
+              "label": "Align Title Left",
+              "value": "xd-block-title--align-left"
+            },
+            {
+              "icon": "wp/align-center",
+              "label": "Align Title Center",
+              "value": "xd-block-title--align-center"
+            },
+            {
+              "icon": "wp/align-right",
+              "label": "Align Title Right",
+              "value": "xd-block-title--align-right"
+            }
+          ]
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "attribute": "title",
+          "autoComplete": "off",
+          "type": "RichText",
+          "tagName": "h3",
+          "identifier": "title",
+          "placeholder": "Title",
+          "className": "xd-title"
+        }
+      ]
+    }
+  ]
+}

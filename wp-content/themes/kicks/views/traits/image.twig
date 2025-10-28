@@ -1,0 +1,64 @@
+{% block image %}
+  {% if image.link %}
+    <a
+      {{ image.id }}
+      href="{{ image.link.url }}"
+      class="{{ xd_classnames(image.className, blockProps.className) }}"
+      {{ image.link.target }}
+      {{ image.link.rel }}
+      {{ image.dataset }}
+      {{ image.aria }}
+      {{ image.role }}
+      {{ image.style }}
+    >
+      {{ block('imageContent') }}
+    </a>
+  {% elseif image.className or blockProps.className or image.dataset %}
+    {% if parent.block or (block.name != 'xd/image' and block.name != 'xd/video') %}
+      <div
+        {{ image.id }}
+        class="{{ xd_classnames(image.className, blockProps.className) }}"
+        {{ image.dataset }}
+        {{ image.aria }}
+        {{ image.role }}
+        {{ image.style }}
+      >
+        {{ block('imageContent') }}
+      </div>
+    {% else %}
+      <section
+        {{ image.id }}
+        class="{{ xd_classnames(image.className,  blockProps.className) }}"
+        {{ image.dataset }}
+        {{ image.aria }}
+        {{ image.role }}
+        {{ image.style }}
+      >
+        {{ block('imageContent') }}
+      </section>
+    {% endif %}
+  {% else %}
+    {{ block('imageContent') }}
+  {% endif %}
+{% endblock %}
+
+{% block imageContent %}
+	{% if image.primary or image.secondary %}
+		{{ xd_get_picture(image.primary.id, image.secondary.id, image.options) }}
+	{% endif %}
+	{% if image.video %}
+		{% include 'components/video.twig' with { video: image.video } only %}
+	{% endif %}
+	{% if image.showCaption and image.caption is not empty %}
+		{{ block('imageCaption') }}
+	{% endif %}
+	{% if image.content %}
+    {{ image.content }}
+  {% endif %}
+{% endblock %}
+
+{% block imageCaption %}
+	<div class="xd-image__caption">
+		<p class="body-3">{{ image.caption }}</p>
+	</div>
+{% endblock %}

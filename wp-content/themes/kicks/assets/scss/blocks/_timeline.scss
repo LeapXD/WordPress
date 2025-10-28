@@ -1,0 +1,184 @@
+@use "sass:math";
+@use '../mixins/' as *;
+
+.xd-timeline {
+
+  $p:&;
+
+  .xd-block-title {
+    margin-bottom: 0;
+    padding-bottom: var(--spacing-sm);
+
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+
+  #{$p}__image {
+    position: relative;
+  }
+
+  #{$p}__year {
+    position: absolute;
+    z-index: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+    top: -2rem;
+
+    @include mq(m) {
+      top: -4rem;
+    }
+
+    @include mq(xl) {
+      right: -3.9rem;
+      top: -3.5rem;
+    }
+  }
+
+  #{$p}__inner {
+    margin-top: var(--spacing-sm);
+
+    @include mq(xl) {
+      margin-top: 0;
+    }
+  }
+
+  #{$p}__line {
+    position: absolute;
+    top: 0;
+    left: calc(10px + 100/12*1%);
+    width: 1px;
+    height: 100%;
+    background-color: var(--stroke);
+    z-index: 1;
+
+    @include mq(m) {
+      left: calc(100/12*2% + 20px);
+    }
+
+    @include mq(xl) {
+      left: 50%;
+    }
+  }
+
+  #{$p}__marker-clip {
+    position: absolute;
+    z-index: 1;
+    clip-path: inset(0 0 0 0);
+    width: 1rem;
+    transform: translateX(-50%);
+
+    @include mq(m) {
+      left: calc(100/12*2% + 20px);
+    }
+
+    @include mq(xl) {
+      left: 50%;
+    }
+
+    top: 0;
+    bottom: 0;
+    left: calc(10px + 100/12*1%);
+
+    @include mq(m) {
+      left: calc(100/12*2% + 20px);
+    }
+
+    @include mq(xl) {
+      left: 50%;
+    }
+  }
+
+  #{$p}__marker-container {
+    position: absolute;
+    z-index: 1;
+    top: -1rem;
+    bottom: -1rem;
+  }
+
+  #{$p}__marker {
+    position: sticky;
+    top: calc(var(--spacing-lg) + 2rem);
+    width: 1rem;
+    height: 1rem;
+    display: block;
+    margin-right: -1rem;
+    border-radius: 1rem;
+    background-color: var(--stroke);
+    z-index: 1;
+    float: left;
+  }
+
+  #{$p}__items {
+    position: relative;
+  }
+
+  #{$p}__item {
+    &:first-child {
+      #{$p}__marker-container,#{$p}__line {
+        top: var(--spacing-sm);
+      }
+    }
+
+    &:last-child {
+
+      #{$p}__marker-container {
+        bottom: 0;
+      }
+    }
+
+    &.xd-pb--sm:last-child {
+      #{$p}__line {
+        height: calc(100% - var(--spacing-sm));
+      }
+
+      #{$p}__marker-container {
+        bottom: var(--spacing-sm);
+      }
+    }
+
+    &.xd-pb--lg:last-child {
+      #{$p}__line {
+        height: calc(100% - var(--spacing-lg));
+      }
+      #{$p}__marker-container {
+        bottom: var(--spacing-lg);
+      }
+    }
+
+    @include mq(xl) {
+      &:nth-child(even) {
+        .row {
+          flex-direction: row-reverse;
+        }
+        #{$p}__image {
+          margin-left: 0;
+          margin-right: math.div(100, 12) *1%;
+        }
+        #{$p}__inner {
+          margin-left: 0;
+          margin-right: math.div(100, 12) *2%;
+        }
+        #{$p}__year {
+          right: auto;
+          left: -3.9rem;
+        }
+      }
+    }
+
+    &.is-style-light {
+      #{$p}__line {
+        background-color: var(--body);
+      }
+      #{$p}__marker {
+        background-color: var(--body);
+      }
+    }
+  }
+
+  &.has-block-title {
+    #{$p}__item:first-of-type {
+      padding-top: var(--spacing-sm);
+    }
+  }
+}

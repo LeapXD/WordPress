@@ -1,0 +1,42 @@
+{
+  "apiVersion": 2,
+  "name": "xd/accommodation-card",
+  "title": "Accommodation Card",
+  "icon": "gm/photo-album",
+  "description": "Accommodation card",
+  "category": "standard",
+  "keywords": ["accommodation", "card"],
+  "viewStyle": ["block-styles/post-card", "block-styles/accommodation-card"],
+  "editorStyle": ["block-styles/post-card", "block-styles/accommodation-card"],
+  "parent": ["xd/accommodation-cards"],
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "col-12 xd-post-card xd-post-card--accommodation",
+            "serverSideRenderBlock": "xd-post-card xd-post-card--accommodation"
+          },
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [{ "id": "remove-button", "type": "XDPostCardControls" }]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../variables' as *;
+@use '../mixins' as *;
+
+@include root {
+  --spacing-xs: #{map.get($xd-gutter, "mobile")};
+
+  @include mq(m) {
+    --spacing-xs: #{map.get($xd-gutter, "desktop")};
+  }
+
+  --spacing-sm: #{map.get($spacers-sm, "sm")};
+
+  @include mq(m) {
+    --spacing-sm: #{map.get($spacers-lg, "sm")};
+  }
+
+  --spacing-lg: #{map.get($spacers-sm, "lg")};
+
+  @include mq(m) {
+    --spacing-lg: #{map.get($spacers-lg, "lg")};
+  }
+
+  --spacing-xl: #{map.get($spacers-sm, "xl")};
+
+  @include mq(m) {
+    --spacing-xl: #{map.get($spacers-lg, "xl")};
+  }
+
+  --flyout-width: 100%;
+
+  @include mq(m) {
+    --flyout-width: 500px;
+  }
+}

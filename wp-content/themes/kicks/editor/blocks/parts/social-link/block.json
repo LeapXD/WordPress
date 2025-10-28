@@ -1,0 +1,81 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "wp/navigation",
+  "name": "xd/social-link",
+  "title": "Social Link",
+  "parent": ["xd/social-links"],
+  "keywords": ["Social", "Links"],
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "default": "facebook"
+    }
+  },
+  "supports": {
+    "xd/link": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [
+            {
+              "label": "Icon",
+              "attribute": "icon",
+              "type": "XDToolbarDropdownMenu",
+              "group": "icon",
+              "options": [
+                {
+                  "icon": "xd/facebook",
+                  "label": "Facebook",
+                  "value": "facebook"
+                },
+                {
+                  "icon": "xd/instagram",
+                  "label": "Instagram",
+                  "value": "instagram"
+                },
+                {
+                  "icon": "xd/linkedin",
+                  "label": "LinkedIn",
+                  "value": "linkedin"
+                },
+                {
+                  "icon": "xd/tiktok",
+                  "label": "Tiktok",
+                  "value": "tiktok"
+                },
+                {
+                  "icon": "xd/twitter",
+                  "label": "Twitter",
+                  "value": "twitter"
+                },
+                {
+                  "icon": "xd/twitter-x",
+                  "label": "X (Twitter)",
+                  "value": "twitter-x"
+                },
+                {
+                  "icon": "xd/youtube",
+                  "label": "YouTube",
+                  "value": "youtube"
+                },
+                {
+                  "icon": "xd/vimeo",
+                  "label": "Vimeo",
+                  "value": "vimeo"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

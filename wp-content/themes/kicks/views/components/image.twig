@@ -1,0 +1,2 @@
+{% set image = (image ?? {})|merge({ className: xd_classnames(image.className ?? {}, 'xd-image-component') }) %}
+{% include 'includes/image.twig' with { image: image } only %}

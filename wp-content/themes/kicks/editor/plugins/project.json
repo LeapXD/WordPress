@@ -1,0 +1,61 @@
+{
+  "name": "project",
+  "title": "Specifications",
+  "panels": ["PluginDocumentSettingPanel"],
+  "initialOpen": true,
+  "fieldGroups": [
+    {
+      "fields": [
+        {
+          "name": "completion",
+          "label": "Completion",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        {
+          "name": "card_label",
+          "label": "Card Label",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        {
+          "name": "residential_units",
+          "label": "Residential Units",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        {
+          "name": "commercial_units",
+          "label": "Commercial Units",
+          "type": "TextControl",
+          "autoComplete": "off",
+          "schema": {
+            "type": "string",
+            "default": ""
+          }
+        }
+      ],
+      "locations": [
+        [
+          {
+            "param": "post_type",
+            "operator": "==",
+            "value": "project"
+          }
+        ]
+      ]
+    }
+  ]
+}

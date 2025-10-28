@@ -1,0 +1,20 @@
+a {
+  text-decoration: none;
+  color: var(--body-link-color);
+  transition: all ease-out 300ms;
+  transition-property: color, background-color, border-color, box-shadow;
+
+  &:where(:focus-visible) {
+    outline: 2px dotted var(--body-link-focus-color);
+    outline-offset: 4px;
+  }
+
+  &:where(:hover,:active) {
+    color: var(--body-link-hover-color);
+  }
+}
+
+p a {
+  text-decoration: underline;
+  color: var(--body-link-color);
+}

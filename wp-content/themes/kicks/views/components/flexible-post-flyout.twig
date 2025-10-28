@@ -1,0 +1,14 @@
+{% extends 'includes/flyout.twig' %}
+
+  {% block flyoutBodyContent %}
+    {% if flyout.embedTemplate %}
+      {% embed 'components/embed-lazyload.twig' %}
+        {% block embedLazyloadContent %}
+          {{ block('body', 'includes/flyout.twig') }}
+        {% endblock %}
+      {% endembed %}
+    {% else %}
+      {{ block('body') }}
+    {% endif %}
+  {% endblock %}
+  

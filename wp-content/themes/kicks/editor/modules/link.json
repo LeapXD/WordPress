@@ -1,0 +1,58 @@
+{
+  "title": "Link",
+  "name": "link",
+  "supports": [
+    {
+      "name": "xd/link",
+      "attributes": {
+        "url": {
+          "type": "string",
+          "default": ""
+        },
+        "rel": {
+          "type": "string",
+          "default": ""
+        },
+        "target": {
+          "type": "string",
+          "default": ""
+        }
+      },
+      "inspectorControls": [
+        {
+          "attribute": "rel",
+          "advanced": true,
+          "type": "TextControl",
+          "label": "Link Rel"
+        }
+      ],
+      "blockControls": [
+        {
+          "group": "link-control",
+          "type": "XDLinkToolBarButton"
+        }
+      ]
+    },
+    {
+      "name": "xd/post-link",
+      "attributes": {
+        "entityId": {
+          "type": "integer",
+          "default": 0
+        },
+        "kind": {
+          "type": "string",
+          "default": ""
+        },
+        "type": {
+          "type": "string",
+          "default": ""
+        },
+        "title": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/card-slider",
+  "title": "Card Slider",
+  "description": "Display a slider of cards with flexible content",
+  "category": "standard",
+  "icon": "gm/view-carousel",
+  "keywords": ["cards", "content"],
+  "viewStyle": ["block-styles/card-slider"],
+  "editorStyle": ["block-styles/card-slider"],
+  "attributes": {
+    "sliderType": {
+      "type": "string",
+      "default": "flex-slider"
+    }
+  },
+  "variations": [
+    {
+      "scope": ["inserter"],
+      "name": "xd/card-slider",
+      "title": "Card Slider",
+      "category": "standard",
+      "icon": "gm/view-carousel",
+      "description": "Display a slider of cards with flexible content",
+      "attributes": { "sliderType": "flex-slider" },
+      "isActive": ["sliderType"],
+      "isDefault": true
+    },
+    {
+      "scope": ["inserter"],
+      "name": "xd/award-slider",
+      "title": "Award Slider",
+      "description": "Display a slider of award cards",
+      "category": "standard",
+      "icon": "awards",
+      "attributes": { "sliderType": "award-slider" },
+      "isActive": ["sliderType"]
+    },
+    {
+      "scope": ["inserter"],
+      "name": "xd/testimonials-slider",
+      "title": "Testimonial Slider",
+      "description": "Display a slider of testimonials",
+      "category": "standard",
+      "icon": "gm/chat",
+      "attributes": { "sliderType": "testimonial-slider" },
+      "isActive": ["sliderType"]
+    }
+  ],
+  "supports": {
+    "xd/padding": true,
+    "xd/padding-controls": true,
+    "xd/card-slider-width": true,
+    "xd/color-theme": true,
+    "xd/title": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "isDefault": true,
+          "wrap": {
+            "block": "container xd-card-slider--flex",
+            "outer": "row",
+            "innerBlocks": "col-10 offset-1",
+            "preInnerBlocks": "col-10 offset-1",
+            "editorInner": "col-10 offset-1",
+            "editorInnerBlocks": {
+              "add": "row",
+              "remove": "col-10 offset-1"
+            },
+            "editorPreInnerBlocks": {
+              "remove": "col-10 offset-1",
+              "add": "col-12"
+            }
+          },
+          "allowedBlocks": ["xd/card"],
+          "template": [["xd/card"], ["xd/card"], ["xd/card"]],
+          "templateLock": false,
+          "orientation": "horizontal"
+        },
+        {
+          "context": { "variation": ["xd/award-slider"] },
+          "wrap": {
+            "block": "container xd-card-slider--awards",
+            "outer": "row",
+            "inner": "xd-card-slider__content col-10 offset-1",
+            "editorInnerBlocks": "row"
+          },
+          "allowedBlocks": ["xd/card"],
+          "template": [["xd/card"], ["xd/card"], ["xd/card"]]
+        },
+        {
+          "context": { "variation": ["xd/testimonials-slider"] },
+          "wrap": {
+            "block": "container xd-card-slider--testimonial",
+            "inner": "xd-card-slider__content row",
+            "innerBlocks": "col-10 col-lg-8 offset-1 offset-lg-2"
+          },
+          "allowedBlocks": ["xd/card"],
+          "template": [["xd/card"], ["xd/card"], ["xd/card"]]
+        },
+        {
+          "context": { "variation": ["xd/card-slider"], "attributes": { "wideWidth": true } },
+          "wrap": {
+            "block": "container xd-card-slider--flex xd-card-slider--wide-width",
+            "outer": "row xd-card-slider__row-wide-width",
+            "innerBlocks": "col-11 offset-1 xd-card-slider__col-wide-width",
+            "preInnerBlocks": "col-10 offset-1",
+            "editorBlock": {
+              "remove": "xd-card-slider--wide-width"
+            },
+            "editorOuter": {
+              "remove": "xd-card-slider__row-wide-width"
+            },
+            "editorInner": "col-10 offset-1",
+            "editorInnerBlocks": {
+              "add": "row",
+              "remove": "col-11 offset-1 xd-card-slider__col-wide-width"
+            },
+            "editorPreInnerBlocks": {
+              "remove": "col-10 offset-1",
+              "add": "col-12"
+            }
+          }
+        }
+      ],
+      "modules": [
+        {
+          "context": {
+            "variation": ["xd/testimonials-slider"]
+          },
+          "allowedModules": ["xd/padding", "xd/padding-controls", "xd/color-theme"]
+        },
+        {
+          "context": {
+            "variation": ["xd/award-slider"]
+          },
+          "allowedModules": ["xd/padding", "xd/padding-controls", "xd/color-theme", "xd/title"]
+        },
+        {
+          "context": {},
+          "allowedModules": true
+        }
+      ]
+    }
+  }
+}

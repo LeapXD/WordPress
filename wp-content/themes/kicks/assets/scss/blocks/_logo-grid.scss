@@ -1,0 +1,38 @@
+@use '../mixins/' as *;
+
+.xd-logo-grid {
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 1.5rem;
+    justify-content: center;
+
+    @include mq(m) {
+      gap: 2.5rem 4rem;
+    }
+
+    @include mq(l) {
+      gap: 3rem 4.5;
+    }
+
+    .xd-block-title--align-left + & {
+      justify-content: flex-start;
+    }
+
+    .xd-block-title--align-right + & {
+      justify-content: flex-end;
+    }
+  }
+
+  .xd-image {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0;
+    width: calc(var(--xd-image-src-width) / 3);
+
+    @include mq(m) {
+      width: calc(var(--xd-image-src-width) / 2);
+    }
+  }
+}

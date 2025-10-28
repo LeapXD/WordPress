@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/logo-grid",
+  "title": "Logo Grid",
+  "description": "Add a collection of sponsors or awards to your page",
+  "category": "standard",
+  "icon": "gm/calendar-view-month",
+  "viewStyle": ["block-styles/logo-grid"],
+  "editorStyle": ["block-styles/logo-grid"],
+  "keywords": ["logo", "grid"],
+  "supports": {
+    "xd/margin": true,
+    "xd/margin-controls": true,
+    "xd/title": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "container",
+            "outer": "row",
+            "preInnerBlocks": "col-10 offset-1",
+            "innerBlocks": "col-10 offset-1 xd-logo-grid__content"
+          },
+          "allowedBlocks": ["xd/image"],
+          "template": [["xd/image"], ["xd/image"], ["xd/image"]],
+          "orientation": "horizontal"
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "initialOpen": true,
+              "title": "Gallery",
+              "controls": [
+                {
+                  "type": "XDGalleryControl",
+                  "id": "gallery-control"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

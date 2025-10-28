@@ -1,0 +1,95 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/form",
+  "title": "Form",
+  "description": "Add a Gravity Form to your page.",
+  "category": "standard",
+  "icon": "gm/check-box",
+  "keywords": ["form", "gravity", "forms"],
+  "attributes": {
+    "lazyLoad": {
+      "type": "boolean",
+      "default": true
+    },
+    "formId": {
+      "type": "integer",
+      "default": 0
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "xd-width-inline"
+          },
+          "allowedBlocks": [],
+          "template": [],
+          "templateLock": "all",
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "initialOpen": true,
+              "title": "Form Settings",
+              "controls": [
+                {
+                  "attribute": "formId",
+                  "label": "Select Form",
+                  "placeholder": "Search for a form",
+                  "type": "XDFormSelectControl"
+                },
+                {
+                  "label": "Show Title",
+                  "type": "ToggleControl",
+                  "attribute": "showTitle",
+                  "activeState": "checked",
+                  "help": "Show the form title above the form."
+                },
+                {
+                  "label": "Show Description",
+                  "type": "ToggleControl",
+                  "attribute": "showDescription",
+                  "activeState": "checked",
+                  "help": "Show the form description above the form."
+                },
+                {
+                  "label": "Lazy Load",
+                  "type": "ToggleControl",
+                  "attribute": "lazyLoad",
+                  "activeState": "checked",
+                  "help": "Enable lazy loading for this form. This will improve page load times by only loading the form when it is in view. Some form features may not work with lazy loading enabled."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "formId",
+              "label": "Select Form",
+              "placeholder": "Search for a form",
+              "type": "XDFormSelectControl"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

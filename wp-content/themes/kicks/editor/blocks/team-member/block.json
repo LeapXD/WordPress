@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/team-member-card",
+  "title": "Team Member",
+  "icon": "gm/photo-album",
+  "description": "Card",
+  "category": "standard",
+  "keywords": ["team", "member", "card"],
+  "parent": ["xd/post-cards"],
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "team_member"
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "xd-post-card--team-member xd-thumbnail-card",
+            "serverSideRenderBlock": "xd-thumbnail-card"
+          },
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [{ "id": "card-controls", "type": "XDPostCardControls" }]
+        }
+      ]
+    }
+  }
+}

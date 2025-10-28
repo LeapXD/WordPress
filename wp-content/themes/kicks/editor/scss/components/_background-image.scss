@@ -1,0 +1,30 @@
+.wp-block {
+  &.xd-has-background-image--fixed {
+    background-attachment: fixed;
+  }
+
+  &.xd-has-background-image.xd-has-background-image--overlay {
+    z-index: 0;
+
+    &::after {
+      z-index: -1 !important;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, var(--xd-background-opacity));
+      mix-blend-mode: var(--xd-background-blend-mode);
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    > *:not(.wp-block-title) {
+      position: relative;
+    }
+  }
+
+  &.xd-has-background-image {
+    background-image: var(--xd-background-image-desktop-url);
+    background-size: cover;
+  }
+}

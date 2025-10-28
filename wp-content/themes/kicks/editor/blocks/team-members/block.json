@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "attributes": {
+    "postType": { "type": "string", "default": "team_member" },
+    "postCard": { "type": "integer", "default": 0 }
+  },
+  "name": "xd/team-members",
+  "title": "Team Member Cards",
+  "icon": "gm/person",
+  "description": "Insert a collection of team member profiles",
+  "category": "standard",
+  "keywords": ["team", "member", "cards"],
+  "supports": {
+    "xd/title": true,
+    "xd/margin": true,
+    "xd/margin-controls": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": {
+            "block": "container",
+            "outer": "row",
+            "inner": "col-10 offset-1",
+            "innerBlocks": "xd-thumbnail-cards"
+          },
+          "allowedBlocks": [""],
+          "orientation": "horizontal",
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Card Selection",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDPostSelectControl",
+                  "blockType": "xd/team-member-card"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@use '../mixins/' as *;
+
+.xd-cta {
+  .row {
+    min-height: 60vw;
+    align-items: center;
+
+    @include mq(xl) {
+      min-height: 70vh;
+    }
+  }
+
+  &__inner {
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    z-index: 2;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+
+    @include mq(m) {
+      margin-top: 4.5rem;
+      margin-bottom: 4.5rem;
+    }
+  }
+
+  .xd-column {
+    &:nth-child(2) {
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: var(--stroke);
+
+        @include mq(m) {
+          width: 122%;
+          left: -11%;
+        }
+
+        @include mq(xl) {
+          height: 60%;
+          width: 1px;
+          left: -25%;
+          top: 20%;
+        }
+      }
+
+      @include mq(xl) {
+        margin-left: 16.66667%;
+      }
+    }
+  }
+}

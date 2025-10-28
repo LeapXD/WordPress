@@ -1,0 +1,68 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/card",
+  "title": "Card",
+  "description": "Card with flexible content",
+  "category": "standard",
+  "icon": "gm/photo-album",
+  "viewStyle": ["block-styles/card"],
+  "editorStyle": ["block-styles/card"],
+  "parent": ["xd/card-slider"],
+  "keywords": ["card", "content", "card"],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "isDefault": true,
+          "context": { "parent": ["xd/card-slider"], "parentVariation": ["xd/card-slider"] },
+          "wrap": {
+            "block": "xd-card--flex col-12 col-md-6 col-xl-4",
+            "innerBlocks": "xd-card__inner"
+          },
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "xd/buttons",
+            "core/separator",
+            "xd/image",
+            "xd/image-icon",
+            "xd/video"
+          ],
+          "template": [["xd/image"], ["core/heading", { "level": 6 }], ["core/paragraph"]],
+          "templateLock": false
+        },
+        {
+          "context": { "parent": ["xd/card-slider"], "parentVariation": ["xd/award-slider"] },
+          "wrap": {
+            "block": "xd-award-card xd-card--award col-12 col-md-6 col-xl-4",
+            "outer": "xd-award-card__content xd-card__content",
+            "innerBlocks": "xd-award-card__inner xd-card__inner"
+          },
+          "allowedBlocks": ["xd/image", "core/paragraph", "core/heading", "xd/buttons"],
+          "template": [
+            ["xd/image", { "imageAlign": "alignCenter" }],
+            ["core/heading", { "level": 6, "textAlign": "center", "placeholder": "Award Name" }],
+            ["core/paragraph", { "align": "center", "placeholder": "Details" }],
+            ["core/paragraph", { "align": "center", "className": "is-style-title-lg", "placeholder": "Year" }]
+          ]
+        },
+        {
+          "context": { "parent": ["xd/card-slider"], "parentVariation": ["xd/testimonials-slider"] },
+          "wrap": {
+            "block": "xd-testimonial-card xd-card--testimonial col-12",
+            "outer": "xd-testimonial-card__content xd-card__content",
+            "innerBlocks": "xd-testimonial-card__inner xd-card__inner"
+          },
+          "allowedBlocks": ["core/paragraph", "core/heading"],
+          "template": [
+            ["core/heading", { "level": 4, "textAlign": "center", "placeholder": "Testimonial" }],
+            ["core/heading", { "level": 6, "textAlign": "center", "placeholder": "Author" }],
+            ["core/paragraph", { "align": "center", "className": "is-style-title-lg", "placeholder": "City, Province" }]
+          ]
+        }
+      ]
+    }
+  }
+}

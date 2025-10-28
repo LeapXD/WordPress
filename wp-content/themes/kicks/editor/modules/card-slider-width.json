@@ -1,0 +1,28 @@
+{
+  "$schema": "../../editor/schema/module-schema.json",
+  "title": "Display",
+  "name": "card-slider",
+  "initialOpen": true,
+  "supports": [
+    {
+      "name": "xd/card-slider-width",
+      "attributes": {
+        "wideWidth": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "inspectorControls": [
+        {
+          "attribute": "wideWidth",
+          "type": "XDRadioButtonGroup",
+          "label": "Width",
+          "options": [
+            { "label": "Standard", "value": false },
+            { "label": "Wide", "value": true }
+          ]
+        }
+      ]
+    }
+  ]
+}

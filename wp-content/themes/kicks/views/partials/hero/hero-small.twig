@@ -1,0 +1,25 @@
+<div class="hero hero-inner-page hero-small {{ templateProps.heroClassName }}">
+	{% if post.heroImage.primary or post.heroImage.secondary %}
+		{% include 'components/background-image.twig' with { backgroundImage: post.heroImage } %}
+	{% endif %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-10 offset-1">
+				<div class="hero__content xd-py--sm">
+					<div>
+						{% if post.heroSubTitle %}
+							<h1 class="xd-font__title-lg">{{ post.title }}</h1>
+							<h2 class="xd-font__display-2">{{ post.heroSubTitle }}</h2>
+						{% else %}
+							<h1 class="xd-font__display-2">{{ post.title }}</h1>
+						{% endif %}
+						{% if post.heroImage.video.modal.src %}
+							{% include 'components/modal-video-link.twig' with { video: post.heroImage.video } %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

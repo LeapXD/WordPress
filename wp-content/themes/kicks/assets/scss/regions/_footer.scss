@@ -1,0 +1,247 @@
+@use "../mixins" as *;
+
+.xd-footer {
+  --p-color: var(--footer-color);
+
+  background-color: var(--footer-background-color);
+  color: var(--footer-color);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .xd-button {
+    margin-top: 1.5rem;
+  }
+
+  a:not(.xd-button),
+  a:not(.xd-button):visited {
+    color: var(--footer-color);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: var(--footer-hover-color);
+    }
+  }
+
+  &__logo {
+    width: 135px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.75rem;
+
+    @include mq(m) {
+      width: 150px;
+      margin-bottom: 1.25rem;
+      margin-left: unset;
+    }
+  }
+
+  &__subscribe {
+    margin-bottom: 2rem;
+
+    p {
+      max-width: 80%;
+      margin: 0 auto;
+
+      @include mq(m) {
+        margin: 0 0 1rem;
+      }
+
+      @include mq(l) {
+        max-width: 26ch;
+      }
+    }
+  }
+
+  .menu {
+    text-align: center;
+    list-style-type: none;
+    padding-left: 0;
+    justify-content: center;
+
+    @include mq(m) {
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    li {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &__column {
+    &:first-of-type {
+      position: relative;
+      margin-bottom: 2rem;
+
+      &::after {
+        content: "";
+        width: calc(100% + 16.6666% + 20px);
+        height: 1px;
+        display: block;
+        background-color: var(--grey-700);
+        position: absolute;
+        left: calc(-8.3333% - 10px);
+      }
+
+      @include mq(m) {
+        margin-bottom: 0;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    &:not(:first-of-type) {
+      font-size: var(--p4-font-size);
+    }
+
+    &:nth-of-type(2) {
+      display: none;
+
+      @include mq(m) {
+        display: block;
+      }
+    }
+  }
+
+  &--top {
+    text-align: center;
+    padding-top: 2.5rem;
+
+    @include mq(m) {
+      text-align: left;
+      padding-top: var(--spacing-sm);
+    }
+  }
+
+  &__top--small {
+    text-align: left;
+  }
+
+  &__top--small &__logo {
+    width: 100px;
+    min-width: 100px;
+    margin-left: 0;
+    margin-right: 0;
+
+    @include mq(l) {
+      margin-bottom: 0;
+      margin-right: 2rem;
+    }
+  }
+
+  &__top--small &__column {
+    @include mq(l) {
+      display: flex;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    &:first-of-type {
+      margin-bottom: 0;
+
+      &::after {
+        content: initial;
+      }
+    }
+  }
+
+  &--bottom {
+    background-color: var(--footer-bottom-background-color);
+    padding: 1.5rem 0;
+    font-size: var(--p4-font-size);
+
+    @include mq(l) {
+      padding: 1rem 0;
+    }
+
+    .sticky-buttons & {
+      margin-bottom: 2.5rem;
+
+      @include mq(m) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__social-links {
+    display: flex;
+    margin-top: 0;
+    justify-content: center;
+
+    @include mq(l) {
+      justify-content: flex-end;
+    }
+
+    a {
+      margin-left: 1rem;
+    }
+  }
+
+  &__footer-menu {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    @include mq(l) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 0;
+
+      @include mq(l) {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        padding-left: 0.75rem !important;
+      }
+
+      & > li {
+        padding: 0 0 0.25rem;
+        margin-bottom: 0.25rem;
+
+        @include mq(l) {
+          padding: 0 0.75rem;
+          position: relative;
+          margin-bottom: 0;
+
+          &::before {
+            content: "|";
+            left: -2px;
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+
+    @include mq(l) {
+      display: flex;
+      text-align: left;
+      margin-bottom: 0;
+    }
+  }
+
+  &__disclaimer {
+    display: flex;
+    align-items: center;
+
+    p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
+}

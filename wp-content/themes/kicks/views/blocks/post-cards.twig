@@ -1,0 +1,17 @@
+{% extends 'components/block-with-title.twig' %}
+
+{% block blockTitle %}
+  <div class="row">
+    <div class="col-10 offset-1">
+      <h3 class="xd-title">{{ attributes.title }}</h3>
+    </div>
+  </div>
+{% endblock %}
+
+{% block innerBlocksContent %}
+  {% if slider %}
+    {% include 'includes/slider.twig' %}
+  {% else %}
+    {{ parent() }}
+  {% endif %}
+{% endblock %}

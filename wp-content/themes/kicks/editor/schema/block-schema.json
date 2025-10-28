@@ -1,0 +1,523 @@
+{
+  "title": "JSON schema for XD blocks",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "booleanSupport": {
+      "type": "boolean",
+      "enum": [true]
+    },
+    "contextOption": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [""]
+    },
+    "contextOptions": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "boolean",
+          "enum": [true]
+        },
+        "postType": {
+          "$ref": "#/definitions/contextOption"
+        },
+        "parent": {
+          "$ref": "#/definitions/contextOption"
+        },
+        "variation": {
+          "$ref": "#/definitions/contextOption"
+        },
+        "parentVariation": {
+          "$ref": "#/definitions/contextOption"
+        },
+        "attributes": {
+          "type": "object",
+          "description": "Object keys attribute names where the values are the corresponding attributes value for context to be matched",
+          "patternProperties": {
+            "[a-zA-Z]": {
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string",
+                  "default": ""
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "wrapOptions": {
+      "oneOf": [
+        {
+          "type": "string",
+          "default": ""
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "add": {
+              "type": "string"
+            },
+            "remove": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "add": "",
+            "remove": ""
+          }
+        }
+      ]
+    },
+    "controlOptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "anyOf": [
+              {
+                "default": "TextControl"
+              },
+              {
+                "default": "XDImageControl"
+              },
+              {
+                "default": "XDFeaturedImageControl"
+              },
+              {
+                "default": "XDFileUploadControl"
+              },
+              {
+                "default": "XDCheckboxGroup"
+              },
+              {
+                "default": "XDButtonGroup"
+              },
+              {
+                "default": "XDRadioButtonGroup"
+              },
+              {
+                "default": "TextareaControl"
+              },
+              {
+                "default": "SelectControl"
+              },
+              {
+                "default": "RangeControl"
+              },
+              {
+                "default": "ToggleControl"
+              },
+              {
+                "default": "DateTimePicker"
+              },
+              {
+                "default": "XDFieldGroup"
+              }
+            ]
+          },
+          "attribute": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "featureOverlayObject": {
+      "description": "Unconditional object overlay merged as-is.",
+      "type": "object",
+      "not": { "required": ["when", "supports"] },
+      "default": {}
+    },
+    "featureRule": {
+      "description": "Conditional overlay: applies when `when` matches.",
+      "type": "object",
+      "required": ["when", "supports"],
+      "properties": {
+        "when": { "$ref": "#/definitions/featureWhen" },
+        "supports": { "$ref": "#/definitions/featureOverlay" }
+      },
+      "additionalProperties": false,
+      "default": { "when": {}, "supports": "" }
+    },
+    "featureOverlay": {
+      "description": "A per-feature overlay value to merge into the base supports value.",
+      "oneOf": [
+        { "type": "boolean", "enum": [true], "default": true },
+        { "type": "string", "default": "" },
+        { "type": "number", "default": 0 },
+        { "type": "array", "items": { "type": ["string", "number"] }, "default": [] },
+        { "$ref": "#/definitions/featureOverlayObject" } // <-- only the non-rule object
+      ]
+    },
+    "featureWhen": {
+      "description": "Rule conditions (AND across keys, OR within each key).",
+      "type": "object",
+      "properties": {
+        "parent": {
+          "oneOf": [
+            { "type": "string", "default": "" },
+            { "type": "array", "items": { "type": "string" }, "default": [] }
+          ]
+        },
+        "ancestor": {
+          "oneOf": [
+            { "type": "string", "default": "" },
+            { "type": "array", "items": { "type": "string" }, "default": [] }
+          ]
+        },
+        "postType": { "type": ["string", "array"], "items": { "type": "string" }, "default": "" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string", "default": "" },
+              { "type": "number", "default": 0 },
+              { "type": "array", "items": { "type": ["string", "number"] }, "default": [] }
+            ]
+          },
+          "default": {}
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "featureSupport": {
+      "description": "Support value with optional per-feature context overlays.",
+      "oneOf": [
+        { "type": "string", "default": "" },
+        { "type": "array", "items": { "type": "string" }, "default": [] },
+        {
+          "type": "object",
+          "description": "Object form allows base keys (e.g., align) plus a per-feature context array.",
+          "properties": {
+            "context": {
+              "description": "Applied in order. Items may be unconditional overlays or conditional rules.",
+              "type": "array",
+              "default": [],
+              "items": {
+                "oneOf": [{ "$ref": "#/definitions/featureOverlay" }, { "$ref": "#/definitions/featureRule" }]
+              }
+            }
+          },
+          "additionalProperties": true,
+          "default": {}
+        }
+      ]
+    },
+    "featureSupportOrBoolean": {
+      "description": "Backward/forward compatible: old boolean 'true' OR richer feature support.",
+      "oneOf": [
+        { "$ref": "#/definitions/booleanSupport" }, // true
+        { "$ref": "#/definitions/featureSupport" } // NOT boolean
+      ]
+    }
+  },
+  "type": "object",
+  "$ref": "https://schemas.wp.org/trunk/block.json",
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "properties": {
+        "supports": {
+          "type": "object",
+          "patternProperties": {
+            "^xd\\/[-a-z0-9]+$": {
+              "$ref": "#/definitions/featureSupportOrBoolean"
+            }
+          },
+          "properties": {
+            "custom": {
+              "type": "object",
+              "properties": {
+                "register": {
+                  "type": "boolean",
+                  "enum": [true]
+                },
+                "styles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "allowedStyles": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "default": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "modules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "allowedModules": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "default": ["xd/"]
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "innerBlocks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "allowedBlocks": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "template": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "object"
+                            }
+                          ]
+                        }
+                      },
+                      "templateLock": {
+                        "oneOf": [
+                          {
+                            "type": "boolean",
+                            "enum": [false]
+                          },
+                          {
+                            "type": "string",
+                            "enum": ["all", "insert"]
+                          }
+                        ]
+                      },
+                      "orientation": {
+                        "type": "string",
+                        "enum": ["horizontal", "vertical"]
+                      },
+                      "wrap": {
+                        "oneOf": [
+                          {
+                            "type": "boolean",
+                            "enum": [true]
+                          },
+                          {
+                            "type": "object",
+                            "default": {
+                              "block": "container",
+                              "outer": "row",
+                              "inner": false,
+                              "preInnerBlocks": false,
+                              "innerBlocks": "xd-component__inner",
+                              "postInnerBlocks": false
+                            },
+                            "properties": {
+                              "block": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "outer": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "inner": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "preInnerBlocks": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "innerBlocks": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "postInnerBlocks": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "editorBlock": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "editorOuter": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "editorInner": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "editorPreInnerBlocks": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "editorInnerBlocks": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "editorPostInnerBlocks": {
+                                "$ref": "#/definitions/wrapOptions"
+                              },
+                              "preInnerBlocksInside": {
+                                "$ref": "#/definitions/booleanSupport"
+                              },
+                              "postInnerBlocksInside": {
+                                "$ref": "#/definitions/booleanSupport"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "renderAppender": {
+                        "type": "boolean",
+                        "enum": [false]
+                      },
+                      "serverSideRender": {
+                        "$ref": "#/definitions/booleanSupport"
+                      }
+                    }
+                  }
+                },
+                "inspectorControls": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "panels": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "initialOpen": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "controls": {
+                              "$ref": "#/definitions/controlOptions"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "preInnerBlocksControls": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "controls": {
+                        "$ref": "#/definitions/controlOptions"
+                      }
+                    }
+                  }
+                },
+                "postInnerBlocksControls": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "controls": {
+                        "$ref": "#/definitions/controlOptions"
+                      }
+                    }
+                  }
+                },
+                "blockControls": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "$ref": "#/definitions/contextOptions"
+                      },
+                      "controls": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "anyOf": [
+                                {
+                                  "default": "XDLinkToolBarButton"
+                                },
+                                {
+                                  "default": "XDToolBarButton"
+                                },
+                                {
+                                  "default": "XDImageToolBarButton"
+                                }
+                              ]
+                            },
+                            "attribute": {
+                              "type": "string"
+                            },
+                            "label": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

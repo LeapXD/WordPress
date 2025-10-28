@@ -1,0 +1,226 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/two-tile",
+  "title": "Two tile",
+  "description": "Two tile",
+  "category": "standard",
+  "icon": "wp/media-and-text",
+  "viewStyle": ["block-styles/two-tile"],
+  "editorStyle": ["block-styles/two-tile"],
+  "keywords": ["container", "layout"],
+  "viewScript": ["blocks/two-tile"],
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "left",
+      "outerClassName": {
+        "left": "",
+        "right": "row-reverse"
+      }
+    },
+    "alignContent": {
+      "type": "string",
+      "default": "left",
+      "className": {
+        "top": "xd-two-tile--content-top",
+        "center": "xd-two-tile--content-center",
+        "bottom": "xd-two-tile--content-bottom"
+      }
+    },
+    "imageWidth": {
+      "type": "string",
+      "default": "wide",
+      "className": {
+        "inline": "",
+        "wide": "xd-two-tile--image-wide"
+      }
+    }
+  },
+  "variations": [
+    {
+      "scope": ["inserter", "transform"],
+      "name": "xd/two-tile",
+      "title": "Two tile",
+      "description": "Two tile",
+      "category": "standard",
+      "icon": "gm/format-image-left",
+      "attributes": {
+        "imageWidth": "wide"
+      },
+      "isActive": ["imageWidth"],
+      "isDefault": true
+    },
+    {
+      "scope": ["inserter", "transform"],
+      "name": "xd/two-tile-inline",
+      "title": "Inline two tile",
+      "icon": "wp/media-and-text",
+      "attributes": {
+        "imageWidth": "inline"
+      },
+      "isActive": ["imageWidth"]
+    }
+  ],
+  "supports": {
+    "xd/id": true,
+    "xd/padding": true,
+    "xd/padding-controls": true,
+    "xd/color-theme": true,
+    "xd/image-desktop": true,
+    "xd/image-mobile": true,
+    "xd/video": true,
+    "xd/video-modal": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "isDefault": true,
+          "wrap": {
+            "inner": false,
+            "postInnerBlocksInside": true,
+            "block": "container",
+            "outer": "row",
+            "preInnerBlocks": "xd-two-tile__image col-11 col-md-10 col-xl-5 offset-md-1",
+            "innerBlocks": "xd-two-tile__inner col-10 col-md-8 col-xl-4 offset-1 offset-md-2 offset-xl-1"
+          },
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "core/list",
+            "core/quote",
+            "xd/buttons",
+            "core/separator",
+            "xd/image",
+            "xd/image-icon",
+            "xd/video",
+            "xd/accordion",
+            "xd/form"
+          ],
+          "template": [["core/heading"], ["core/paragraph"], ["xd/buttons"]]
+        },
+        {
+          "context": {
+            "parent": ["core/widget-area"]
+          },
+          "wrap": {
+            "editorBlock": "xd-modal",
+            "block": "container",
+            "outer": "row",
+            "preInnerBlocks": "xd-two-tile__image col-12  col-xl-6",
+            "innerBlocks": "xd-two-tile__inner col-12 col-xl-6"
+          }
+        },
+        {
+          "context": {
+            "attributes": { "imageWidth": "wide" }
+          },
+          "wrap": {
+            "block": "container",
+            "outer": "row",
+            "preInnerBlocks": "xd-two-tile__image col-12  col-xl-6",
+            "innerBlocks": "xd-two-tile__inner col-10 col-md-8 col-xl-4 offset-1 offset-md-2 offset-xl-1"
+          }
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Align",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDButtonGroup",
+                  "gridColumns": 8,
+                  "attribute": "align",
+                  "options": [
+                    {
+                      "icon": "gm/format-image-left",
+                      "label": "Left",
+                      "value": "left"
+                    },
+                    {
+                      "icon": "gm/format-image-right",
+                      "label": "Right",
+                      "value": "right"
+                    }
+                  ]
+                },
+                {
+                  "type": "XDButtonGroup",
+                  "gridColumns": 8,
+                  "attribute": "alignContent",
+                  "label": "Align content",
+                  "options": [
+                    {
+                      "icon": "gm/align-flex-start",
+                      "label": "Top",
+                      "value": "top"
+                    },
+                    {
+                      "icon": "gm/align-flex-center",
+                      "label": "Middle",
+                      "value": "center"
+                    },
+                    {
+                      "icon": "gm/align-flex-end",
+                      "label": "Bottom",
+                      "value": "bottom"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [
+            {
+              "group": "align",
+              "type": "XDToolBarButton",
+              "attribute": "align",
+              "icon": "gm/format-image-left",
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "group": "align",
+              "type": "XDToolBarButton",
+              "attribute": "align",
+              "icon": "gm/format-image-right",
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "type": "XDImage",
+              "attribute": "imageDesktop"
+            }
+          ]
+        }
+      ],
+      "/*postInnerBlocksControls*/": [
+        {
+          "context": { "variation": ["xd/two-image-two-tile"] },
+          "controls": [
+            {
+              "type": "XDImage",
+              "attribute": "imageSmall"
+            }
+          ]
+        },
+        {
+          "context": {}
+        }
+      ]
+    }
+  }
+}

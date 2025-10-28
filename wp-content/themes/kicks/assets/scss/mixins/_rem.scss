@@ -1,0 +1,42 @@
+@use "sass:math";
+@use "../variables" as *;
+
+@function strip-unit($num) {
+  @return math.div($num, $num * 0 + 1);
+}
+
+@function pixeltorem($pixel) {
+  $result: math.div($pixel, $basefont-size);
+
+  @return #{$result}rem;
+}
+
+@function pixeltoem($pixel, $basesize: "") {
+  $base-px: $basefont-size;
+
+  @if $basesize !="" {
+    $base-px: $basesize;
+  }
+
+  $result: math.div($pixel, $base-px);
+
+  @return #{$result}em;
+}
+
+@function lineheight($line_height_px, $font_px) {
+  $result: math.div($line_height_px, $font_px);
+
+  @return #{$result}em;
+}
+
+@mixin font-size($font-size, $line-height: "", $letter-spacing: normal) {
+  font-size: pixeltorem($font-size);
+
+  @if $line-height !="" {
+    line-height: lineheight($line-height, $font-size);
+  }
+
+  @if $letter-spacing !=normal {
+    letter-spacing: pixeltoem($letter-spacing, $font-size);
+  }
+}

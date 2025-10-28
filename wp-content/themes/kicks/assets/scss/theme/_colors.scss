@@ -1,0 +1,5 @@
+@use "../mixins" as *;
+
+@include root {
+  --overlay-bottom-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 19.7%, rgba(0, 0, 0, 0) 37%);
+}

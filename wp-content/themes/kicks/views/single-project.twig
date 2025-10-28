@@ -1,0 +1,35 @@
+{% extends 'page.twig' %}
+	
+{% block hero %}
+	<div class="hero hero-project hero-inner-page hero-small ">
+		<div class="container">
+			<div class="row">
+				<div class="col-10 offset-1">
+					<div class="hero__content hero-project__content row">
+						<div class="hero-project__summary col-12">
+							<div class="row">
+								<div class="hero-project__title col-12">
+									<h2 class="xd-font__title-lg">Project</h1>
+									<h1 class="xd-font__display-2">{{ post.title }}</h1>
+								</div>
+								<div class="hero-project__list col-12">
+									<ul class="is-style-standard-list">
+										<li><strong>Completion:</strong> {{ post.completion }}</li>
+										<li><strong>Type:</strong> {{ post.projectTypes }}</li>
+										<li><strong>Location:</strong> {{ post.location }}</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="hero-project__details col-12">
+							<h3 class="title-lg">residential</h3>
+							<h2>{{ post.residentialUnits }}</h2>
+							<h3 class="title-lg">commercial</h3>
+							<h2>{{ post.commercialUnits }}</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

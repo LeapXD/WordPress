@@ -1,0 +1,74 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/post-card",
+  "title": "Post Card",
+  "icon": "gm/photo-album",
+  "viewStyle": ["block-styles/post-card"],
+  "editorStyle": ["block-styles/post-card"],
+  "description": "Post card",
+  "category": "standard",
+  "keywords": ["post", "card"],
+  "parent": ["xd/post-cards"],
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "variations": [
+    {
+      "icon": "gm/photo-album",
+      "name": "xd/page-card",
+      "title": "Page Card",
+      "isActive": ["postType"],
+      "attributes": {
+        "postType": "page"
+      }
+    },
+    {
+      "icon": "gm/photo-album",
+      "name": "xd/post-card",
+      "title": "Post Card",
+      "isDefault": true,
+      "isActive": ["postType"],
+      "attributes": {
+        "postType": "post"
+      }
+    }
+  ],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "variation": ["xd/page-card"] },
+          "wrap": {
+            "block": "col-12 col-lg-4 xd-post-card xd-post-card--page",
+            "serverSideRenderBlock": "xd-post-card xd-post-card--page"
+          },
+          "serverSideRender": true,
+          "allowedBlocks": []
+        },
+        {
+          "context": { "variation": ["xd/post-card"] },
+          "wrap": {
+            "block": "col-12 col-md-6 col-xl-4 xd-post-card--post",
+            "serverSideRenderBlock": "xd-post-card "
+          },
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [{ "id": "remove-button", "type": "XDPostCardControls" }]
+        }
+      ]
+    }
+  }
+}

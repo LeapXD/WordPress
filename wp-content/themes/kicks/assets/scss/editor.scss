@@ -1,0 +1,19 @@
+@use "variables" as * with (
+  $root: ":html :where(.editor-styles-wrapper)",
+  $scope: "main",
+  $content: ".is-root-container"
+  );
+
+@use "mixins" as *;
+
+@use "theme" as *;
+
+@use "typography" as *;
+@use "modules" as *;
+
+// @use "grid/bootstrap-grid" as *;
+@use "elements" as *;
+@use "layout" as *;
+
+@use "../../editor/scss/blocks" as *;
+@use "../../editor/scss/components" as *;

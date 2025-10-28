@@ -1,0 +1,21 @@
+@use '../mixins/' as *;
+
+.xd-post-cards {
+  .row {
+    row-gap: 10px;
+
+    @include mq(m) {
+      row-gap: 20px;
+    }
+  }
+
+  &--posts {
+    .xd-post-card {
+      @include mq(m, xl) {
+        &:nth-child(odd):last-child {
+          display: none;
+        }
+      }
+    }
+  }
+}

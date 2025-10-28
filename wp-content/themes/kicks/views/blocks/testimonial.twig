@@ -1,0 +1,9 @@
+{% embed 'includes/block.twig' %}
+  {% block innerBlocksContent %}
+    <h4>{{ attributes.content }}</h4>
+    <h6>{{ attributes.name }}</h6>
+    <p class="title">
+      <strong>{{ attributes.location }}</strong>
+    </p>
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,22 @@
+{% embed 'components/thumbnail-card.twig' %}
+	{% block cardSubTitleContent %}
+		{{ post.teamMemberPosition }}
+	{% endblock %}
+{% endembed %}
+
+{% embed 'components/post-flyout.twig' %}
+	{% block buttonsContent %}
+		{% if post.teamMemberEmailAddress %}
+			<a href="#" data-mailto="{{ post.teamMemberEmailAddress|obfuscate_email }}" class="xd-button">Email</a>
+		{% endif %}
+		{% if post.teamMemberPhoneNumber %}
+			<a href="tel:{{ post.teamMemberPhoneNumber }}" class="xd-button xd-button--alternate">Phone</a>
+		{% endif %}
+	{% endblock %}
+	{% block titleContent %}
+		{{ post.title }}
+	{% endblock %}
+	{% block subtitleContent %}
+		{{ post.teamMemberPosition }}
+	{% endblock %}
+{% endembed %}

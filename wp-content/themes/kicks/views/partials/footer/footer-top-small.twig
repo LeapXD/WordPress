@@ -1,0 +1,24 @@
+<div class="xd-footer--top xd-footer__top--small xd-py--sm">
+	<div class="container">
+		<div class="row">
+			<div class="xd-footer__column col-10 col-lg-12 offset-1 offset-lg-0">
+				{% if templateProps.footer.footerLogo %}
+					<a href="{{ templateProps.footer.footerLogo.url }}" 
+					class="xd-footer__logo"
+					aria-label="{{ site.name }} Home Page"
+					{{ templateProps.footer.footerLogo.rel }}
+					{{ templateProps.footer.footerLogo.target }}
+					>
+						{{ templateProps.footer.footerLogo.image }}
+					</a>
+				{% endif %}
+				{% if templateProps.footer.content %}
+					<div class="xd-footer__disclaimer">
+						{{ templateProps.footer.content }}
+					</div>
+				{% endif %}
+			</div>
+
+		</div>
+	</div>
+</div>

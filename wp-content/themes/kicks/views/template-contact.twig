@@ -1,0 +1,63 @@
+{% extends 'base.twig' %}
+
+{% block hero %}
+	{% include 'partials/hero/hero-small.twig' %}
+{% endblock %}
+
+{% block content %}
+	<article id="post-{{ post.id }}" class="{{ post.class }}">
+		<div class="entry-content">
+			{{ post.content }}
+		</div>
+	</article>
+	<div {{ templateProps.contact.id }} class="container contact-form xd-py--lg">
+		<div class="contact-form__wrapper row">
+			<div class="col-10 col-xl-2 offset-1 offset-xl-2 contact-form__contact-details">
+				<div class="contact-form__contact-column">
+					<p>
+						<strong>Address</strong>
+					</p>
+					<p>{{ templateProps.companyDetails.address|nl2br }}</p>
+					<p>
+						<a class="xd-button xd-button--text" href="{{ templateProps.companyDetails.directions.url }}" target="_blank" rel="noopener noreferrer">{{ templateProps.companyDetails.directions.title }}</a>
+					</p>
+				</div>
+				<div class="contact-form__contact-column">
+					<p>
+						<strong>Call Us</strong>
+					</p>
+					{% if templateProps.companyDetails.phone1.phone1Number %}
+						<p>
+							{% if templateProps.companyDetails.phone1.phone1Label %}
+								<span class="body-3">{{ templateProps.companyDetails.phone1.phone1Label }}</span><br/>
+							{% endif %}
+							<a class="xd-phone-number xd-button xd-button--text" href="tel:{{ templateProps.companyDetails.phone1.phone1Number }}">{{ templateProps.companyDetails.phone1.phone1DisplayNumber ? templateProps.companyDetails.phone1.phone1DisplayNumber : templateProps.companyDetails.phone1.phone1Number }}</a>
+
+							{% if templateProps.companyDetails.phone2.phone2Number %}
+								<br/>
+								{% if templateProps.companyDetails.phone2.phone2Label %}
+									<span class="body-3">{{ templateProps.companyDetails.phone2.phone2Label }}</span><br/>
+								{% endif %}
+								<a class="xd-phone-number xd-button xd-button--text" href="tel:{{ templateProps.companyDetails.phone2.phone2Number }}">{{ templateProps.companyDetails.phone2.phone2DisplayNumber ? templateProps.companyDetails.phone2.phone2DisplayNumber : templateProps.companyDetails.phone2.phone2Number }}</a>
+							{% endif %}
+						</p>
+					{% endif %}
+				</div>
+				<div class="contact-form__contact-column">
+					{% if templateProps.companyDetails.hours %}
+						<p>
+							<strong>Hours</strong>
+						</p>
+						<p>{{ templateProps.companyDetails.hours|nl2br }}</p>
+					{% endif %}
+					<div class="xd-social-links">
+						{{ templateProps.socialLinks.content }}
+					</div>
+				</div>
+			</div>
+			<div class="col-10 offset-1 col-xl-5 contact-form__form">
+				{{ templateProps.contactForm }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

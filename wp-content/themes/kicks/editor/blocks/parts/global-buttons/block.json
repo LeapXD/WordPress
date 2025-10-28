@@ -1,0 +1,134 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "apiVersion": 2,
+  "icon": "gm/domain",
+  "name": "xd/global-buttons",
+  "title": "Global Buttons",
+  "keywords": ["Menu", "Links"],
+  "attributes": {
+    "flyoutButton": {
+      "type": "object",
+      "default": {
+        "url": "/contact/",
+        "title": "Contact Us"
+      }
+    },
+    "navButtons": {
+      "type": "object",
+      "default": {
+        "navButton1": {
+          "url": "/contact/",
+          "title": "Contact Us"
+        }
+      }
+    },
+    "sideStickyButton": {
+      "type": "object",
+      "default": {}
+    },
+    "stickyButtons": {
+      "type": "object",
+      "default": {}
+    },
+    "footerButtons": {
+      "type": "object",
+      "default": {
+        "contactLink": {
+          "url": "/contact/",
+          "title": "Contact Us"
+        },
+        "newsletterTag": "Keep up to date by subscribing to our newsletter.",
+        "newsletterLink": {
+          "url": "/newsletter/",
+          "title": "Subscribe"
+        }
+      }
+    }
+  },
+  "supports": {
+    "custom": {
+      "multiple": false,
+      "register": true,
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "label": "Menu Flyout Button",
+              "type": "XDLinkControl",
+              "attribute": "flyoutButton"
+            },
+            {
+              "label": "Navigation Bar Buttons",
+              "type": "XDFieldGroup",
+              "attribute": "navButtons",
+              "fields": [
+                {
+                  "label": "Navbar Button 1",
+                  "type": "XDLinkControl",
+                  "attribute": "navButton1",
+                  "schema": {
+                    "type": "object"
+                  }
+                },
+                {
+                  "label": "Navbar Button 2",
+                  "type": "XDLinkControl",
+                  "attribute": "navButton2",
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Side Sticky Button",
+              "type": "XDLinkControl",
+              "attribute": "sideStickyButton",
+              "schema": {
+                "type": "object"
+              }
+            },
+            {
+              "label": "Mobile Sticky Buttons",
+              "type": "XDFieldGroup",
+              "attribute": "stickyButtons",
+              "fields": [
+                {
+                  "type": "ToggleControl",
+                  "label": "Display Sticky Buttons",
+                  "attribute": "displayStickyButtons",
+                  "schema": {
+                    "type": "boolean"
+                  },
+                  "activeState": "checked",
+                  "default": false
+                },
+                {
+                  "label": "Sticky Button 1",
+                  "type": "XDLinkControl",
+                  "attribute": "sticky1",
+                  "schema": {
+                    "type": "object"
+                  }
+                },
+                {
+                  "label": "Sticky Button 2",
+                  "type": "XDLinkControl",
+                  "attribute": "sticky2",
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "innerBlocks": [
+        {
+          "allowedBlocks": []
+        }
+      ]
+    }
+  }
+}

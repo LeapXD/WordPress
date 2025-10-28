@@ -1,0 +1,51 @@
+{% block accordion %}
+  <ul
+    class="uk-accordion {{ accordion.className ?? blockProps.className ?? className }}"
+    {{ accordion.id }}
+    {{ accordion.dataset }}
+    {{ accordion.aria }}
+    {{ accordion.role }}
+  >
+    {{ block('accordionElements') }}
+  </ul>
+{% endblock %}
+
+{% block accordionElements %}
+  {% for accordionElement in accordion.elements %}
+    {{ block('accordionElement') }}
+  {% endfor %}
+{% endblock %}
+
+{% block accordionElement %}
+  <li class="{{ accordionElement.className }}">{{ block('accordionElementContent') }}</li>
+{% endblock %}
+
+{% block accordionElementContent %}
+  {{ block('accordionElementHeading') }}
+  {{ block('accordionElementBody') }}
+{% endblock %}
+
+{% block accordionElementHeading %}
+  <a class="uk-accordion-title" href="#">
+    <span class="xd-accordionelement__title">{{ block('accordionElementHeadingContent') }}</span>
+    {{ get_icon('chevron-down') }}
+  </a>
+{% endblock %}
+
+{% block accordionElementHeadingContent %}
+  {{ accordionElement.title }}
+{% endblock %}
+
+{% block accordionElementBody %}
+  <div class="uk-accordion-content" hidden>
+    {{ block('accordionElementBodyContent') }}
+  </div>
+{% endblock %}
+
+{% block accordionElementBodyContent %}
+  {% if accordionElement.content %}
+    {{ accordionElement.content }}
+  {% else %}
+    {{ accordionElement }}
+  {% endif %}
+{% endblock %}

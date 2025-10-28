@@ -1,0 +1,5 @@
+{
+  "name": "core/embed",
+  "viewStyle": ["block-styles/embed"],
+  "editorStyle": ["block-styles/embed"]
+}

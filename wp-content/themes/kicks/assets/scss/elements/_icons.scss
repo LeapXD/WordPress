@@ -1,0 +1,53 @@
+.xd-icon {
+  pointer-events: none;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--icon-color);
+
+  a & {
+    color: var(--icon-link-color);
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:hover &,
+  a:focus &,
+  a:active & {
+    color: var(--icon-link-hover-color);
+  }
+}
+
+.xd-svg {
+  &--slider-arrow {
+    circle,
+    path {
+      transition: all 0.3s ease-in-out;
+      transition-property: fill, stroke;
+
+      &:where(:not([fill="none"])) {
+        fill: var(--slider-arrow-background-color);
+      }
+
+      &:where(:not([stroke="none"])) {
+        stroke: var(--slider-arrow-color);
+      }
+    }
+  }
+
+  &--card-button {
+    circle,
+    path {
+      transition: all 0.3s ease-in-out;
+      transition-property: fill, stroke;
+
+      &:where(:not([fill="none"])) {
+        fill: var(--card-button-background-color);
+      }
+
+      &:where(:not([stroke="none"])) {
+        stroke: var(--card-button-color);
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{% embed 'includes/card.twig' %}
+  {% block card %}
+    {# {{ post|debug }} #}
+    {{ block('header') }}
+    {{ block('body') }}
+  {% endblock %}
+  {% block footerContent %}
+    {# intentionally empty #}
+  {% endblock %}
+{% endembed %}

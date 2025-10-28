@@ -1,0 +1,61 @@
+@use "../mixins" as *;
+
+.contact-form {
+  &__contact-details {
+    margin-bottom: 2rem;
+
+    @include mq(xl) {
+      margin-bottom: 0;
+    }
+
+    @include mq(m) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    @include mq(xl) {
+      display: block;
+    }
+  }
+
+  &__contact-column {
+    margin-bottom: 2rem;
+
+    @include mq(m) {
+      flex: 0 0 50%;
+
+      &:first-child {
+        margin-bottom: 0;
+      }
+    }
+
+    @include mq(xl) {
+      width: 100%;
+    }
+
+    @include mq(xl) {
+      &:first-child {
+        margin-bottom: 2rem;
+      }
+    }
+
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 1rem;
+    }
+
+    .xd-button {
+      margin-top: 0;
+    }
+
+    .xd-social-links {
+      display: flex;
+
+      a {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

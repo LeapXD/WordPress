@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "attributes": {
+    "text": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "name": "xd/button",
+  "parent": ["xd/buttons"],
+  "title": "Button",
+  "category": "standard",
+  "description": "Prompt visitors to take action with a button-style link.",
+  "keywords": ["link"],
+  "icon": "wp/button",
+  "supports": {
+    "xd/link": true,
+    "xd/post-link": true,
+    "xd/button-style": true,
+    "xd/button-style-controls": true,
+    "xd/button-style-controls-v2": true,
+    "splitting": true,
+    "custom": {
+      "modules": [
+        {
+          "context": {
+            "themeVersion": {
+              "compare": ">=",
+              "version": "1.0.05"
+            }
+          },
+          "allowedModules": [
+            "xd/link",
+            "xd/post-link",
+            "xd/button-style",
+            "xd/button-style-controls-v2",
+            "xd/button-style-invert"
+          ]
+        },
+        {
+          "context": {
+            "themeVersion": {
+              "compare": "<",
+              "version": "1.0.05"
+            }
+          },
+          "allowedModules": ["xd/link", "xd/post-link", "xd/button-style", "xd/button-style-controls"]
+        }
+      ]
+    }
+  }
+}

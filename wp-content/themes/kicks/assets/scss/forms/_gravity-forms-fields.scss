@@ -1,0 +1,251 @@
+.gfield {
+  flex: 0 0 100%;
+
+  &--width-half {
+    @media (min-width: 450px) {
+      flex: 0 0 calc(50% - (var(--spacing-xs) / 2));
+    }
+  }
+
+  &--width-third {
+    @media (min-width: 450px) {
+      flex: 0 0 calc(33.3333% - (var(--spacing-xs) / 3 * 2));
+    }
+  }
+
+  &--width-quarter {
+    @media (min-width: 450px) {
+      flex: 0 0 calc(50% - (var(--spacing-xs) / 2));
+    }
+
+    @media (min-width: 580px) {
+      flex: 0 0 calc(25% - (var(--spacing-xs) / 4 * 3));
+    }
+  }
+
+  &--input-type-hidden,
+  &--type-hidden {
+    flex: none;
+
+    + .gfield:where(:not(.gfield--input-type-hidden,.gfield--type-hidden)) {
+      // remove the row gap between the hidden field and the next field
+      margin-top: -1.5rem;
+    }
+  }
+
+  &--type-honeypot {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+  }
+
+  @media (min-width: 580px) {
+    &--width-full {
+      &.gfield--type-multi_choice,
+      &.gfield--type-radio,
+      &.gfield--type-checkbox {
+        .gfield_checkbox,
+        .gfield_radio {
+          column-count: 3;
+        }
+      }
+    }
+  }
+}
+
+.gform-grid-col,
+.field--width-half {
+  @media screen and (max-width: 580px) {
+    grid-column: span 2;
+  }
+}
+
+.gfield_visibility_hidden {
+  display: none;
+}
+
+.gform_fields {
+  .select-container,
+  fieldset,
+  input:where(:not([type="checkbox"], [type="radio"], [type="submit"])),
+  select,
+  textarea {
+    margin-bottom: 0;
+  }
+
+  .gfield--type-multi_choice,
+  .gfield--type-radio,
+  .gfield--type-checkbox {
+    margin-bottom: -1rem;
+  }
+
+  .ginput_address_country,
+  .gfield_time_ampm,
+  .ginput_container_select {
+    @extend .select-container;
+  }
+}
+
+.gfield--type-time .gform-grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @media (min-width: 450px) {
+    flex-wrap: nowrap;
+  }
+
+  .hour_minute_colon {
+    display: none;
+
+    @media (min-width: 450px) {
+      display: block;
+    }
+  }
+
+  :where(& > *:not(.hour_minute_colon)) {
+    flex: 100%;
+
+    @media (min-width: 450px) {
+      flex: 1;
+    }
+  }
+}
+
+.gfield--input-type-html {
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ginput_container_image_choice {
+  .gfield_radio {
+    display: grid;
+    row-gap: var(--spacing-xs);
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--spacing-xs);
+
+    @media (min-width: 450px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .gchoice {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--input-border);
+
+    &:has(input:focus-visible) {
+      outline: 2px dotted var(--input-focus);
+      outline-offset: 2px;
+    }
+
+    &:has(input:checked) {
+      border: 2px solid var(--primary);
+    }
+  }
+
+  .gfield-choice-image-wrapper {
+    flex: 1;
+    display: flex;
+  }
+
+  .gfield-image-choice-wrapper-outer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+  }
+
+  input {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  label {
+    font-weight: 400;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.gfield--type-consent {
+  .gfield_description {
+    font-size: 14px;
+    line-height: 1.2em;
+    margin-bottom: 0;
+  }
+}
+
+.gfield--type-list {
+  .gform-grid-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .gfield_list_cell {
+    flex: 1 1 calc(100% - 80px);
+  }
+
+  button {
+    background-color: transparent;
+    width: auto;
+    border: none;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+
+    --btn-background-hover-color: none;
+    --btn-background-color: none;
+
+    &:focus,
+    &:hover {
+      box-shadow: none;
+    }
+
+    .list-button {
+      display: block;
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--input-border);
+      border-radius: 50%;
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 1px;
+        background-color: var(--input-border);
+        transform: translate(-50%, -50%);
+      }
+
+      &::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+    }
+
+    .remove {
+      &::after {
+        content: initial;
+      }
+    }
+  }
+}

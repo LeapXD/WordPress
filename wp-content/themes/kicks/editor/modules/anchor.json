@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "ID",
+  "name": "anchor",
+  "supports": [
+    {
+      "//": "Overrides the core anchor attribute. Removes the source and selector properties, forcing the id to save to the block attributes",
+      "name": "anchor",
+      "attributes": {
+        "anchor": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  ]
+}

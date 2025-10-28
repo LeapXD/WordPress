@@ -1,0 +1,8 @@
+{% extends 'blocks/post-cards.twig' %}
+{% block postInnerBlocks %}
+  {% if attributes.readMore %}
+    <div class="xd-post-cards__button">
+      <a class="xd-button" href="{{attributes.readMore.url}}">{{attributes.readMore.title}}</a>
+    </div>
+  {% endif %}
+{% endblock %}

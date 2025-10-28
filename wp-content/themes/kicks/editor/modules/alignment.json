@@ -1,0 +1,62 @@
+{
+  "$schema": "../schema/module-schema-v2.json",
+  "version": 2,
+  "name": "alignment",
+  "supports": [
+    {
+      "name": "xd/horizontal-align",
+      "attributes": {
+        "horizontalAlignment": {
+          "type": "string",
+          "default": "alignleft",
+          "className": true
+        }
+      },
+      "blockControls": [
+        {
+          "label": "Alignment",
+          "attribute": "horizontalAlignment",
+          "type": "XDToolbarDropdownMenu",
+          "group": "horizontal-align",
+          "options": [
+            {
+              "if": "left",
+              "iconPosition": "left",
+              "icon": "wp/positionLeft",
+              "label": "Left",
+              "value": "alignleft"
+            },
+            {
+              "if": "center",
+              "iconPosition": "left",
+              "icon": "wp/positionCenter",
+              "label": "Center",
+              "value": "aligncenter"
+            },
+            {
+              "if": "right",
+              "iconPosition": "left",
+              "icon": "wp/positionRight",
+              "label": "Right",
+              "value": "alignright"
+            },
+            {
+              "if": "full",
+              "iconPosition": "left",
+              "icon": "wp/stretchFullWidth",
+              "label": "Full",
+              "value": "alignfull"
+            },
+            {
+              "if": "wide",
+              "iconPosition": "left",
+              "icon": "wp/stretchWide",
+              "label": "Wide",
+              "value": "alignwide"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

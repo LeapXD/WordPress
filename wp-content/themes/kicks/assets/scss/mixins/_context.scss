@@ -1,0 +1,69 @@
+@use '../variables' as *;
+
+
+/**
+ * Transform .my-class { ... } into .editor-styles-wrapper .my-class { ... }
+ * when $scope is 'editor', otherwise leave it as .my-class { ... }
+ * @include wrap-editor() {
+ *   // styles here
+ * }
+ */
+@mixin wrap-editor() {
+	@if $scope == 'editor' {
+		#{$root} {
+				@content;
+		}
+	} @else {
+			@content;
+	}
+}
+
+/**
+ * Transform #{$root} { ... } into :root { ... } when $scope is 'main'
+ * or .editor-styles-wrapper { ... } when $scope is 'editor'
+ * @include root() {
+ *   // styles here
+ * }
+ */
+@mixin root() {	
+	#{$root} {
+			@content;
+	}
+}
+
+/**
+ * Include styles only when $scope is 'editor'
+ * @include editor() {
+ *   // styles here
+ * }
+ */
+@mixin editor() {
+	@if $scope == 'editor' {
+		@content;
+	}
+}
+
+/**
+ * Include styles only when $scope is 'main'
+ * @include main() {
+ *   // styles here
+ * }
+ */
+@mixin main() {
+	@if $scope == 'main' {
+		@content;
+	}
+}
+
+/**
+ * Transform #{$content} { ... } into .entry-content { ... } when $scope is 'main'
+ * or .is-root-container { ... } when $scope is 'editor'
+ * @include content() {
+ *   // styles here
+ * }
+ */
+@mixin content() {
+	#{$content} {
+		@content;
+	}
+}

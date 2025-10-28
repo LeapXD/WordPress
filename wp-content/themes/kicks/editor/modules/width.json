@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/module-schema.json",
+  "title": "Width",
+  "name": "width",
+  "supports": [
+    {
+      "name": "xd/container-width",
+      "attributes": {
+        "width": {
+          "type": "string",
+          "default": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3",
+          "innerBlocksClassName": true
+        }
+      },
+      "inspectorControls": [
+        {
+          "type": "XDButtonGroup",
+          "gridColumns": 8,
+          "attribute": "width",
+          "options": [
+            {
+              "icon": "gm/width-normal",
+              "label": "Inline",
+              "value": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3"
+            },
+            {
+              "icon": "gm/width-wide",
+              "label": "Wide",
+              "value": "xd-container-wide col-10 offset-1"
+            },
+            {
+              "icon": "gm/width-full",
+              "label": "Full",
+              "value": "xd-container-full col-12"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

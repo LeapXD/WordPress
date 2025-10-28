@@ -1,0 +1,59 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "name": "xd/image",
+  "apiVersion": 2,
+  "title": "Image",
+  "category": "standard",
+  "description": "Insert an image to make a visual statement.",
+  "keywords": ["image", "picture"],
+  "icon": "gm/image",
+  "supports": {
+    "xd/id": true,
+    "xd/link": true,
+    "xd/image-mobile": true,
+    "xd/image-desktop": true,
+    "xd/video": true,
+    "xd/video-modal": true,
+    "xd/image-align": true,
+    "xd/image-width": true,
+    "custom": {
+      "innerBlocks": [
+        {
+          "context": {
+            "parent": ["xd/image-gallery", "xd/image-slider"]
+          },
+          "wrap": {
+            "block": "xd-image--cover"
+          }
+        },
+        {
+          "context": {}
+        }
+      ],
+      "modules": [
+        {
+          "context": {
+            "parent": ["xd/image-gallery", "xd/image-slider"]
+          },
+          "allowedModules": ["xd/video", "xd/video-modal"]
+        },
+        {
+          "context": {
+            "parent": ["xd/logo-grid"]
+          },
+          "allowedModules": ["xd/link", "xd/image-desktop"]
+        },
+        {
+          "context": {
+            "parent": ["xd/container", "xd/column", "xd/two-tile", "xd/card"]
+          },
+          "allowedModules": ["xd/link", "xd/image-mobile", "xd/image-desktop", "xd/image-align", "xd/image-width"]
+        },
+        {
+          "context": {},
+          "allowedModules": ["xd/link", "xd/video", "xd/image-mobile", "xd/image-desktop", "xd/image-align", "xd/image-width"]
+        }
+      ]
+    }
+  }
+}

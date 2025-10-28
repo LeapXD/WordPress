@@ -1,0 +1,49 @@
+{% extends 'includes/card.twig' %}
+
+  {% block labelContent %}
+    {% if post.cardLabel %}
+      {{ post.cardLabel }}
+    {% endif %}
+  {% endblock %}
+  
+  {% block headingContent %}
+    {{ post.homeType }}
+  {% endblock %}
+  
+  {% block title %}
+    <h4>
+      {{ block('titleContent') }}
+    </h4>
+  {% endblock %}
+  
+  {% block preview %}
+    <ul class="is-style-standard-list">
+      {% if post.completion %}
+        <li>
+          <span class="title-lg">
+            Completion:
+          </span>
+          <span class="body-2">
+            {{ post.completion }}
+          </span>
+        </li>
+      {% endif %}
+      {% if post.projectTypes %}
+        <li>
+          <span class="title-lg">
+            Type:
+          </span>
+          <span class="body-2">
+            {{ post.projectTypes }}
+          </span>
+        </li>
+      {% endif %}
+    </ul>
+  {% endblock %}  
+    
+  {% block footerContent %}
+      <div class="xd-post-card__icon">
+        {{ get_icon('link-arrow') }}
+      </div>
+  {% endblock %}
+  

@@ -1,0 +1,73 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/column",
+  "title": "Column",
+  "description": "Single column of content",
+  "category": "standard",
+  "icon": "wp/column",
+  "parent": ["xd/columns"],
+  "keywords": ["card", "content", "column"],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "isDefault": true,
+          "context": { "parent": ["xd/columns"], "parentVariation": ["xd/columns"] },
+          "wrap": { "innerBlocks": "xd-column__inner" },
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "core/list",
+            "core/quote",
+            "core/cover",
+            "xd/buttons",
+            "core/separator",
+            "xd/image",
+            "xd/image-icon",
+            "xd/video",
+            "xd/accordion",
+            "xd/form"
+          ],
+          "template": [["core/heading"], ["core/paragraph"]],
+          "templateLock": false
+        },
+        {
+          "context": { "parent": ["xd/columns"], "parentVariation": ["xd/three-column", "xd/four-column"] },
+          "template": [["core/heading", { "level": 4 }], ["core/paragraph"]]
+        },
+        {
+          "context": { "parent": ["xd/columns"], "parentVariation": ["xd/quick-facts"] },
+          "wrap": { "innerBlocks": "xd-column__inner xd-quick-facts__inner" },
+          "allowedBlocks": ["core/heading", "core/paragraph"],
+          "template": [["core/heading"], ["core/paragraph", { "className": "is-style-body-1" }]]
+        },
+        {
+          "context": { "parent": ["xd/cta"] },
+          "wrap": {
+            "block": "col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-1",
+            "innerBlocks": "xd-cta__inner"
+          },
+          "allowedBlocks": ["core/paragraph", "core/heading", "xd/buttons", "core/separator"],
+          "template": [
+            ["core/heading", { "textAlign": "center" }],
+            ["xd/buttons", { "layout": { "type": "flex", "justifyContent": "center" } }]
+          ]
+        },
+        {
+          "context": { "parent": ["xd/cta"], "parentVariation": ["xd/cta-two-col"] },
+          "wrap": {
+            "block": "col-10 col-md-8 col-xl-4 offset-1 offset-md-2 offset-xl-1",
+            "innerBlocks": "xd-cta__inner"
+          },
+          "allowedBlocks": ["core/paragraph", "core/heading", "xd/buttons", "core/separator"],
+          "template": [
+            ["core/heading", { "textAlign": "center" }],
+            ["xd/buttons", { "layout": { "type": "flex", "justifyContent": "center" } }]
+          ]
+        }
+      ]
+    }
+  }
+}

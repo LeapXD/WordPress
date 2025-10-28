@@ -1,0 +1,285 @@
+/**
+* FONTS
+*
+* All font defintions.
+*/
+@use "../variables" as *;
+@use "../mixins" as *;
+
+@include main {
+  html {
+    font-size: $basefont-size;
+    font-family: var(--body-font-family);
+    line-height: var(--body-line-height);
+    font-display: swap;
+    color: var(--body-font-color);
+  }
+  
+  body {
+    font-size: var(--body-font-size);
+  }
+}
+
+@include wrap-editor {
+  
+  /**
+  * HEADINGS
+  *
+  * All heading classes.
+  */
+  .xd-font__display-1,
+  .d1 {
+    font-family: var(--d1-font-family);
+    font-size: var(--d1-font-size);
+    font-weight: var(--d1-font-weight);
+    line-height: var(--d1-line-height);
+    text-transform: var(--d1-text-transform);
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--d1-color);
+
+    @include mq(m) {
+      margin-top: 1rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  .xd-font__display-2,
+  .d2 {
+    font-family: var(--d2-font-family);
+    font-size: var(--d2-font-size);
+    font-weight: var(--d2-font-weight);
+    line-height: var(--d2-line-height);
+    text-transform: var(--d2-text-transform);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--d2-color);
+
+    @include mq(m) {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  h1,
+  .h1,
+  h2,
+  .h2 {
+    font-family: var(--h2-font-family);
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+    line-height: var(--h2-line-height);
+    text-transform: var(--h2-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(16);
+    color: var(--h2-color);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(21);
+    }
+  }
+
+  h3,
+  .h3 {
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+    line-height: var(--h3-line-height);
+    text-transform: var(--h3-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(16);
+    color: var(--h3-color);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(21);
+    }
+  }
+
+  h4,
+  .h4 {
+    font-family: var(--h4-font-family);
+    font-size: var(--h4-font-size);
+    font-weight: var(--h4-font-weight);
+    line-height: var(--h4-line-height);
+    text-transform: var(--h4-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(8);
+    color: var(--h4-color);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(12);
+    }
+  }
+
+  h5,
+  .h5 {
+    font-family: var(--h5-font-family);
+    font-size: var(--h5-font-size);
+    font-weight: var(--h5-font-weight);
+    line-height: var(--h5-line-height);
+    text-transform: var(--h5-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(8);
+    color: var(--h5-color);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(12);
+    }
+  }
+
+  h6,
+  .h6 {
+    font-family: var(--h6-font-family);
+    font-size: var(--h6-font-size);
+    font-weight: var(--h6-font-weight);
+    line-height: var(--h6-line-height);
+    text-transform: var(--h6-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(8);
+    color: var(--h6-color);
+
+    @include mq(m) {
+      margin-bottom: pixeltorem(12);
+    }
+  }
+
+  /**
+  * Paragraphs
+  *
+  * All body classes.
+  */
+
+  .xd-font__body-1,
+  .has-medium-font-size,
+  .body-1,
+  .is-style-body-1,
+  p.intro {
+    font-family: var(--p1-font-family);
+    font-size: var(--p1-font-size);
+    font-weight: var(--p1-font-weight);
+    line-height: var(--p1-line-height);
+    margin-top: 0;
+    margin-bottom: pixeltorem(15);
+    color: var(--p-color);
+  }
+
+  .xd-font__body-2,
+  .body-2,
+  .is-style-body-2,
+  p,
+  ul {
+    font-family: var(--p2-font-family);
+    font-size: var(--p2-font-size);
+    font-weight: var(--p2-font-weight);
+    line-height: var(--p2-line-height);
+    margin-top: 0;
+    margin-bottom: pixeltorem(15);
+    color: var(--p-color);
+  }
+
+  .xd-font__body-3,
+  .has-small-font-size,
+  .body-3,
+  .is-style-body-3 {
+    font-family: var(--p3-font-family);
+    font-size: var(--p3-font-size);
+    font-weight: var(--p3-font-weight);
+    line-height: var(--p3-line-height);
+    margin-top: 0;
+    margin-bottom: pixeltorem(15);
+    color: var(--p-color);
+  }
+
+  .xd-font__body-4,
+  .body-4 {
+    font-family: var(--p4-font-family);
+    font-size: var(--p4-font-size);
+    font-weight: var(--p4-font-weight);
+    line-height: var(--p4-line-height);
+    margin-top: 0;
+    margin-bottom: pixeltorem(15);
+    color: var(--p-color);
+  }
+
+  em {
+    color: inherit !important;
+  }
+
+  /**
+  * Titles
+  *
+  * All title classes.
+  */
+
+  .title,
+  .title-lg,
+  .xd-font__title-lg,
+  .is-style-title-lg {
+    font-family: var(--title-font-family);
+    font-size: var(--title-font-size);
+    font-weight: var(--title-font-weight);
+    line-height: var(--title-line-height);
+    letter-spacing: var(--title-letter-spacing);
+    text-transform: var(--title-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(21);
+
+    &:where(:not(:first-child)) {
+      margin-top: 2.3rem;
+    }
+
+    &:has(+p) {
+      margin-bottom: 0.8rem;
+    }
+
+    h2 + &,
+    h3 + &,
+    h4 + &,
+    h5 + &,
+    h6 + & {
+      margin-top: 0;
+    }
+  }
+
+  .title-sm,
+  .xd-font__title-sm,
+  .is-style-title-sm {
+    font-family: var(--title-sm-font-family);
+    font-size: var(--title-sm-font-size);
+    font-weight: var(--title-sm-font-weight);
+    line-height: var(--title-sm-line-height);
+    letter-spacing: var(--title-sm-letter-spacing);
+    text-transform: var(--title-sm-text-transform);
+    margin-top: 0;
+    margin-bottom: pixeltorem(21);
+
+    &:where(:not(:first-child)) {
+      margin-top: 2.3rem;
+    }
+
+    &:has(+p) {
+      margin-bottom: 0.8rem;
+    }
+
+    h2 + &,
+    h3 + &,
+    h4 + &,
+    h5 + &,
+    h6 + & {
+      margin-top: 0;
+    }
+  }
+
+  // Don't add margin top when heading follows semantic parent
+  p:not(.is-style-title-lg, .is-style-title-sm),
+  ul,
+  ol {
+    +h1,
+    +h2,
+    +h3,
+    +h4,
+    +h5 {
+      margin-top: 2rem;
+    }
+}
+}

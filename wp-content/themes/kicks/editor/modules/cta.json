@@ -1,0 +1,69 @@
+{
+  "title": "Align Content",
+  "name": "cta-alignment",
+  "supports": [
+    {
+      "name": "xd/cta-alignment",
+      "attributes": {
+        "align": {
+          "type": "string",
+          "default": "center",
+          "innerBlocksClassName": {
+            "left": "offset-xl-1",
+            "center": "offset-xl-3",
+            "right": "offset-xl-5"
+          }
+        }
+      },
+      "inspectorControls": [
+        {
+          "attribute": "align",
+          "type": "XDButtonGroup",
+          "gridColumns": 8,
+          "options": [
+            {
+              "icon": "wp/align-left",
+              "label": "Align Left",
+              "value": "left"
+            },
+            {
+              "icon": "wp/align-center",
+              "label": "Align Center",
+              "value": "center"
+            },
+            {
+              "icon": "wp/align-right",
+              "label": "Align Right",
+              "value": "right"
+            }
+          ]
+        }
+      ],
+      "blockControls": [
+        {
+          "label": "Align",
+          "attribute": "align",
+          "type": "XDToolbarDropdownMenu",
+          "group": "align",
+          "options": [
+            {
+              "icon": "wp/align-left",
+              "label": "Align Left",
+              "value": "left"
+            },
+            {
+              "icon": "wp/align-center",
+              "label": "Align Center",
+              "value": "center"
+            },
+            {
+              "icon": "wp/align-right",
+              "label": "Align Right",
+              "value": "right"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

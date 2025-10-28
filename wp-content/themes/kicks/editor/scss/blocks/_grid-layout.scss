@@ -1,0 +1,52 @@
+.xd-grid-cell {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1rem 0 1.5rem;
+
+  .wp-block {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .xd-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    min-width: 130px;
+    padding: 0;
+  }
+
+  // .alignfull {
+  //   width: 100%;
+  //   margin-left: 0;
+  //   margin-right: 0;
+  // }
+
+  // .aligncenter {
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+
+  // .alignright {
+  //   margin-left: auto;
+  // }
+}
+
+.grid-cell-resizable {
+  outline: 1px dashed rgba(0, 0, 0, 0.25);
+  position: relative;
+  min-height: 20px;
+  box-sizing: border-box;
+}
+
+.xd-content {
+  padding: 0;
+}
+
+.is-resizing {
+  opacity: 0.7;
+}
+// .is-resizing .xd-content{
+//   background-blend-mode: multiply;
+//   filter: opacity(0.5);
+//   // background-blend-mode: multiply;
+// }

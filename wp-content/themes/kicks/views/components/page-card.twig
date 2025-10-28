@@ -1,0 +1,27 @@
+{% extends 'includes/card.twig' %}
+
+{% block cardContent %}
+  <div class="xd-has-background-image xd-has-background-image--overlay">
+    {{ parent('cardContent') }}
+  </div>
+{% endblock %}
+
+{% block header %}
+  {{ block('headerContent') }}
+{% endblock %}
+
+{% block heading %}
+  <h3>{{ post.title }}</h3>
+{% endblock %}
+
+{% block preview null %}
+{% block title null %}
+
+{% block footerContent %}
+  <div class="xd-card__footer-left">
+    {{ parent('footerContent') }}
+  </div>
+  <div class="xd-card__footer-right">
+    {{ get_icon('card-button') }}
+  </div>
+{% endblock %}

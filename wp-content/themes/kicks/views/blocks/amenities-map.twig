@@ -1,0 +1,43 @@
+<section class="xd-amenities-map {{ props.marginTop }} {{ props.marginBottom }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-10 offset-1">
+        {% if fields.heading %}
+          <div class="xd-amenities-map__title">
+            <h4>{{ fields.heading }}</h4>
+          </div>
+        {% endif %}
+
+        <dl class="xd-amenities-map__legend">
+          <div class="select-container xd-amenities-map__legend-dropdown">
+            <select data-select="true" data-mapid="{{ props.id }}" class="h6">
+              <option value="-1">Filter Categories</option>
+              <option value="">Show All</option>
+              {% for category in categories %}
+                <option value="{{ category.term_id }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+            {{ get_icon('chevron-down') }}
+          </div>
+
+          <dd><a
+            href="#"
+            data-mapid="{{ props.id }}"
+            data-term="{{ category.term_id }}"
+          ><span class="circle circle-open"></span>
+          <span>Show All</span></a></dd>
+
+          {% for category in categories %}
+            <dd><a
+              href="#"
+              data-term="{{ category.term_id }}"
+              data-mapid="{{ props.id }}"
+            ><span class="circle" style="background-color: {{ category.colour }};"></span>
+            <span>{{ category.name }}</span></a></dd>
+          {% endfor %}
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="xd-amenities-map__map map_canvas" data-map="{{ props.id }}" data-options="{{ map_data|json }}"></div>
+</section>

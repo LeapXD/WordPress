@@ -1,0 +1,188 @@
+/* ----- BREAKPOINTS ---------------------------------------- */
+@use "sass:map";
+@use "../variables" as *;
+
+@function bp($breakpoint) {
+  @return map.get($breakpoints, $breakpoint);
+}
+
+@mixin mq($breakpoint, $breakpointLimit: "") {
+  @if $breakpoint == 'xs' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (max-width: #{map.get($breakpoints, 'bp-s')}px) {
+        @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 's' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-s')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-s')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'm' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-m')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-m')}px) {
+        @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'l' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-l')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-l')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'xl' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-xl')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-xl')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'xxl' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-xxl')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-xxl')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'xxxl' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-xxxl')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-xxxl')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'hd' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-hd')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-hd')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'retina' {
+    @if $breakpointLimit != "" {
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-retina')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-retina')}px) {
+          @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == '4k' {
+    @media all and (min-width: map.get($breakpoints, 'bp-4k')) {
+      @content;
+    }
+  }
+
+
+  // UI KIT specific breakpoints
+
+  @else if $breakpoint == 'ui-s' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-ui-s')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-ui-s')}px) {
+        @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'ui-m' {
+    @if $breakpointLimit != "" {
+      $max_bp: map.get($breakpoints, 'bp-#{$breakpointLimit}');
+      $max: #{$max_bp - 1};
+      @media all and (min-width: #{map.get($breakpoints, 'bp-ui-m')}px) and (max-width: #{$max}px) {
+        @content;
+      }
+    }
+    @else {
+      @media all and (min-width: #{map.get($breakpoints, 'bp-ui-m')}px) {
+        @content;
+      }
+    }
+  }
+
+  @else if $breakpoint == 'ui-l' {
+    @media all and (min-width: #{map.get($breakpoints, 'bp-ui-l')}px) {
+      @content;
+    }
+  }
+}

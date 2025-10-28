@@ -1,0 +1,27 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "xd/timeline",
+  "title": "Timeline",
+  "description": "Timeline",
+  "viewStyle": ["block-styles/timeline"],
+  "editorStyle": ["block-styles/timeline"],
+  "category": "standard",
+  "icon": "gm/view-timeline",
+  "keywords": ["timeline"],
+  "supports": {
+    "anchor": true,
+    "xd/id": true,
+    "xd/title": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "wrap": { "innerBlocks": "xd-timeline__items" },
+          "allowedBlocks": ["xd/timeline-item"],
+          "template": [["xd/timeline-item"], ["xd/timeline-item"], ["xd/timeline-item"]]
+        }
+      ]
+    }
+  }
+}

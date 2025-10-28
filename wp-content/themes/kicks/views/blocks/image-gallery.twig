@@ -1,0 +1,7 @@
+{% extends 'includes/block.twig' %}
+
+{% block innerBlocksContent %}
+  {{ content }}
+  {# embed the modal inside the inner blocks so that it doesn't break css sibling selectors #}
+  {% include 'components/modal-slider.twig' %}
+{% endblock %}

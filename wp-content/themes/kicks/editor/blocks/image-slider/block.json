@@ -1,0 +1,56 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "title": "Image Slider",
+  "name": "xd/image-slider",
+  "icon": "gm/filter",
+  "viewStyle": ["block-styles/image-slider"],
+  "editorStyle": ["block-styles/image-slider"],
+  "category": "standard",
+  "description": "Image Slider",
+  "keywords": ["Image Slider"],
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": ["xd/image"],
+          "template": [],
+          "orientation": "horizontal",
+          "templateLock": false,
+          "renderAppender": false,
+          "isDefault": true,
+          "wrap": {
+            "editorPostInnerBlocks": "xd-image-slider__inserter"
+          }
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "initialOpen": true,
+              "title": "Slider",
+              "controls": [
+                {
+                  "type": "XDGalleryControl",
+                  "id": "gallery-control"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "postInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "type": "XDGallery",
+              "id": "gallery"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

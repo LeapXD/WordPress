@@ -1,0 +1,118 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "attributes": {
+    "postType": { "type": "string", "default": "post" },
+    "slider": { "type": "boolean", "default": false },
+    "postCard": { "type": "integer", "default": 0 },
+    "paddingTop": {
+      "type": "string",
+      "default": "xd-pt--xs",
+      "className": true
+    },
+    "paddingBottom": {
+      "type": "string",
+      "default": "xd-pb--xs",
+      "className": true
+    }
+  },
+  "name": "xd/post-cards",
+  "title": "Post Cards",
+  "icon": "admin-post",
+  "viewStyle": ["block-styles/post-cards"],
+  "editorStyle": ["block-styles/post-cards"],
+  "description": "Insert a collection of cards linking to your blog posts",
+  "category": "standard",
+  "keywords": ["card", "cards"],
+  "variations": [
+    {
+      "name": "xd/post-cards",
+      "title": "Post Cards",
+      "icon": "admin-post",
+      "description": "Insert a collection of cards linking to your posts",
+      "isActive": ["postType"],
+      "attributes": { "postType": "post" },
+      "isDefault": true
+    },
+    {
+      "name": "xd/page-cards",
+      "title": "Page Cards",
+      "icon": "gm/collections-bookmark",
+      "description": "Insert a collection of cards linking to your pages",
+      "isActive": ["postType"],
+      "attributes": { "postType": "page" }
+    }
+  ],
+  "supports": {
+    "xd/title": true,
+    "xd/padding-controls-all": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "attributes": { "postType": "post" } },
+          "wrap": {
+            "block": "container xd-post-cards--posts",
+            "innerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        },
+        {
+          "context": { "attributes": { "postType": "page" } },
+          "wrap": {
+            "block": "container xd-post-cards--pages",
+            "innerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        },
+        {
+          "context": { "attributes": { "slider": true } },
+          "wrap": {
+            "block": "container xd-post-cards--slider",
+            "editorInnerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "context": { "variation": ["xd/post-cards", "xd/page-cards"] },
+          "panels": [
+            {
+              "title": "Display",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "attribute": "slider",
+                  "type": "XDRadioButtonGroup",
+                  "label": "Display mode",
+                  "options": [
+                    { "label": "Grid", "value": false },
+                    { "label": "Slider", "value": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Card Selection",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDPostSelectControl",
+                  "blockType": "xd/post-card"
+                }
+              ]
+            }
+          ]
+        },
+        { "context": {} }
+      ]
+    }
+  }
+}

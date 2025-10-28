@@ -1,0 +1,36 @@
+{
+  "apiVersion": 2,
+  "name": "xd/floorplan-accordion-element",
+  "title": "Floorplan",
+  "icon": "gm/photo-album",
+  "description": "Floorplan",
+  "category": "standard",
+  "keywords": ["floorplan", "accordion"],
+  "parent": ["xd/floorplan-accordion"],
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "floorplan"
+    },
+    "postId": {
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "supports": {
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "serverSideRender": true,
+          "allowedBlocks": []
+        }
+      ],
+      "blockControls": [
+        {
+          "controls": [{ "id": "remove-button", "type": "XDPostCardControls" }]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.xd-newsletter {
+  .gform_wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]) {
+    font-size: inherit;
+    font-family: inherit;
+    padding: 5px 4px;
+    letter-spacing: normal;
+  }
+
+  .gform_wrapper.gform_wrapper input[type="text"] {
+    //max-width: 220px;
+    margin: auto;
+    display: block;
+    padding: .6rem 1rem !important;
+
+    @media(min-width: 641px) {
+      max-width: 220px;
+      margin-left: 0;
+    }
+
+
+  }
+}

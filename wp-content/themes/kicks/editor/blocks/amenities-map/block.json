@@ -1,0 +1,9 @@
+{
+  "$schema": "../../schema/block-schema.json",
+  "apiVersion": 2,
+  "name": "acf/amenities-map",
+  "supports": {
+    "xd/margin": true,
+    "xd/margin-controls": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "apiVersion": 2,
+  "attributes": {
+    "postType": { "type": "string", "default": "accommodation" },
+    "slider": { "type": "boolean", "default": false },
+    "postCard": { "type": "integer", "default": 0 },
+    "paddingTop": {
+      "type": "string",
+      "default": "xd-pt--xs",
+      "className": true
+    },
+    "paddingBottom": {
+      "type": "string",
+      "default": "xd-pb--xs",
+      "className": true
+    }
+  },
+  "name": "xd/accommodation-cards",
+  "title": "Accommodation Cards",
+  "icon": "admin-post",
+  "viewStyle": ["block-styles/post-cards"],
+  "editorStyle": ["block-styles/post-cards"],
+  "description": "Insert a collection of cards linking to your accommodations",
+  "category": "standard",
+  "keywords": ["card", "cards"],
+  "supports": {
+    "xd/title": true,
+    "xd/padding-controls-all": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "attributes": { "postType": "accommodation" } },
+          "wrap": {
+            "block": "container xd-post-cards xd-post-cards--accommodations",
+            "innerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Card Selection",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDPostSelectControl",
+                  "blockType": "xd/accommodation-card"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

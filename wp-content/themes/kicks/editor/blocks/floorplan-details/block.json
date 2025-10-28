@@ -1,0 +1,93 @@
+{
+  "apiVersion": 2,
+  "name": "xd/floorplan-details",
+  "title": "Floorplan Details",
+  "icon": "gm/photo-album",
+  "description": "Floorplan Details",
+  "category": "standard",
+  "attributes": {
+    "floorPlate": {
+      "//": "deprecated attribute, use floorPlates instead",
+      "type": "object",
+      "default": {}
+    },
+    "floorPlates": {
+      "type": "array",
+      "default": []
+    },
+    "units": {
+      "type": "array",
+      "default": [{ "sold": false }]
+    },
+    "floorPlans": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "multiple": false,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "allowedBlocks": []
+        }
+      ],
+      "preInnerBlocksControls": [
+        {
+          "controls": [
+            {
+              "attribute": "units",
+              "type": "XDRepeaterField",
+              "addButtonLabel": "Add unit",
+              "label": "Units",
+              "fields": [
+                {
+                  "attribute": "unit",
+                  "label": "Unit",
+                  "type": "TextControl",
+                  "schema": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "attribute": "sold",
+                  "type": "ToggleControl",
+                  "label": "Sold",
+                  "default": false,
+                  "activeState": "checked",
+                  "schema": {
+                    "type": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "attribute": "floorPlates",
+              "type": "XDGalleryPreview",
+              "label": "Floor plates preview"
+            },
+            {
+              "attribute": "floorPlates",
+              "type": "XDImageControl",
+              "label": "Floor plates",
+              "gallery": true
+            },
+            {
+              "attribute": "floorPlans",
+              "type": "XDGalleryPreview",
+              "label": "Floor plans preview"
+            },
+            {
+              "attribute": "floorPlans",
+              "type": "XDImageControl",
+              "label": "Floor plans",
+              "gallery": true,
+              "className": "floorplans"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

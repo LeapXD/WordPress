@@ -1,0 +1,104 @@
+{
+  "$schema": "../schema/module-schema-v2.json",
+  "version": 2,
+  "name": "height",
+  "supports": [
+    {
+      "name": "xd/height",
+      "attributes": {
+        "height": {
+          "if": ["height", "auto", "stretch", "custom"],
+          "default": "auto",
+          "type": "string",
+          "className": {
+            "auto": "xd-height-auto",
+            "stretch": "xd-height-stretch",
+            "custom": "xd-height-custom"
+          }
+        },
+        "heightCustom": {
+          "if": ["height-custom", "px", "vh", "%", "vw", "rem", "em"],
+          "type": "string",
+          "default": "",
+          "cssVariable": true
+        }
+      },
+      "panels": [
+        {
+          "title": "Height",
+          "name": "height",
+          "initialOpen": true
+        }
+      ],
+      "inspectorControls": [
+        {
+          "if": "height",
+          "panel": "height",
+          "type": "XDRadioButtonGroup",
+          "label": "Height",
+          "attribute": "height",
+          "options": [
+            {
+              "if": ["height", "auto"],
+              "value": "auto",
+              "label": "Auto"
+            },
+            {
+              "if": ["height", "stretch"],
+              "value": "stretch",
+              "label": "Stretch"
+            },
+            {
+              "if": ["height", "custom"],
+              "value": "custom",
+              "label": "Custom"
+            }
+          ]
+        },
+        {
+          "panel": "height",
+          "if": ["height-custom"],
+          "label": "Custom Height",
+          "attribute": "heightCustom",
+          "type": "XDSizeControl",
+          "units": {
+            "px": {
+              "if": ["height-custom", "px"],
+              "min": 0
+            },
+            "%": {
+              "if": ["height-custom", "%"],
+              "min": 0
+            },
+            "vh": {
+              "if": ["height-custom", "vh"],
+              "min": 0
+            },
+            "vw": {
+              "if": ["height-custom", "vw"],
+              "min": 0
+            },
+            "rem": {
+              "if": ["height-custom", "rem"],
+              "min": 0
+            },
+            "em": {
+              "if": ["height-custom", "em"],
+              "min": 0
+            }
+          },
+          "when": [
+            [
+              {
+                "if": ["height", "custom", "auto", "stretch"],
+                "attribute": "height",
+                "operator": "==",
+                "value": "custom"
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

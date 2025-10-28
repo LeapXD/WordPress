@@ -1,0 +1,59 @@
+@use '../mixins/' as *;
+
+.xd-columns {
+  &__columns {
+    display: grid;
+    word-wrap: break-word;
+    grid-row-gap: var(--spacing-sm);
+    grid-template-columns: repeat(auto-fit, 100%);
+
+    @include mq(l) {
+      grid-template-columns: repeat(auto-fit, 46.25%);
+      grid-column-gap: 7.5%;
+    }
+
+    @include mq(xl) {
+      grid-template-columns: repeat(auto-fit, 44.75%);
+      grid-column-gap: 10.5%;
+    }
+  }
+
+  &--three &__columns {
+    grid-row-gap: pixeltorem(40);
+
+    @include mq(l) {
+      grid-row-gap: pixeltorem(56);
+      grid-template-columns: repeat(auto-fit, 30.86%);
+      grid-column-gap: 3.7%;
+    }
+  }
+
+  &--four &__columns {
+    grid-row-gap: pixeltorem(40);
+
+    @include mq(m) {
+      grid-row-gap: pixeltorem(56);
+      grid-template-columns: repeat(auto-fit, 44.75%);
+      grid-column-gap: 10.5%;
+    }
+
+    @include mq(xl) {
+      grid-template-columns: repeat(4, 22.375%);
+      grid-column-gap: 3.5%;
+    }
+  }
+
+  .xd-column {
+    &__heading {
+      @include mq(xs,l) {
+        margin-bottom: calc(0px - var(--spacing-sm));
+      }
+
+      @include mq(l) {
+        *:only-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

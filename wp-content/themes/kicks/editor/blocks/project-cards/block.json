@@ -1,0 +1,77 @@
+{
+  "apiVersion": 2,
+  "attributes": {
+    "postType": { "type": "string", "default": "project" },
+    "slider": { "type": "boolean", "default": false },
+    "postCard": { "type": "integer", "default": 0 }
+  },
+  "name": "xd/project-cards",
+  "title": "Project Cards",
+  "icon": "portfolio",
+  "viewStyle": ["block-styles/post-cards"],
+  "editorStyle": ["block-styles/post-cards"],
+  "description": "Insert a collection of cards linking to your projects",
+  "category": "standard",
+  "keywords": ["card", "cards"],
+  "supports": {
+    "xd/title": true,
+    "xd/margin": true,
+    "xd/margin-controls": true,
+    "custom": {
+      "register": true,
+      "innerBlocks": [
+        {
+          "context": { "attributes": { "postType": "project" } },
+          "wrap": {
+            "block": "container xd-project-cards xd-post-cards xd-post-cards--posts xd-post-cards--projects",
+            "innerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        },
+        {
+          "context": { "attributes": { "slider": true } },
+          "wrap": {
+            "block": "container xd-project-cards xd-post-cards--slider",
+            "editorInnerBlocks": "row"
+          },
+          "allowedBlocks": [],
+          "orientation": "horizontal",
+          "renderAppender": false
+        }
+      ],
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "title": "Display",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "attribute": "slider",
+                  "type": "XDRadioButtonGroup",
+                  "label": "Display mode",
+                  "options": [
+                    { "label": "Grid", "value": false },
+                    { "label": "Slider", "value": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Project Selection",
+              "initialOpen": true,
+              "controls": [
+                {
+                  "type": "XDPostSelectControl",
+                  "blockType": "xd/project-card"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

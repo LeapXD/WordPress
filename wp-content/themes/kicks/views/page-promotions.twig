@@ -1,0 +1,35 @@
+{% extends 'archive.twig' %}
+
+{% block hero %}
+	{% include 'partials/hero/hero-full.twig' %}
+{% endblock %}
+
+{% block content %}
+	{% block page_content %}
+		{{ post.content }}
+	{% endblock %}
+
+  <div class="archive__posts xd-post-cards">
+    <div class="container">
+      <div class="row">
+        {% if posts is not empty %}
+          {% for card in posts %}
+            {{ card }}
+          {% endfor %}
+        {% else %}
+          {# todo no results markup #}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% block pagination %}
+    {% if pagination %}
+      <nav class="navigation posts-navigation pagination" aria-label="navigation">
+        <h2 class="screen-reader-text">Navigation</h2>
+        <div class="nav-links">{{ pagination }}</div>
+      </nav>
+    {% endif %}
+  {% endblock %}
+
+{% endblock %}

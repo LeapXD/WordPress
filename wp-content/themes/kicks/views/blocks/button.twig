@@ -1,0 +1,16 @@
+<a
+  class="{{ blockProps.className }}"
+  href="{{ button.link.url }}"
+  {{ button.style }}
+  {{ button.link.target }}
+  {{ button.link.rel }}
+  {{ button.dataset }}
+>
+  {% if button.iconPosition is empty or button.iconPosition == 'before' %}
+    {{ button.icon }}
+  {% endif %}
+  {{ button.text }}
+  {% if button.iconPosition == 'after' %}
+    {{ button.icon }}
+  {% endif %}
+</a>

@@ -1,0 +1,91 @@
+@use "sass:map";
+@use "sass:math";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: map.get($xd-gutter, "mobile");
+  padding-right: map.get($xd-gutter, "mobile");
+
+  @include mq(m) {
+    padding-left: map.get($xd-gutter, "desktop");
+    padding-right: map.get($xd-gutter, "desktop");
+  }
+}
+
+.container-fluid,
+.container {
+  position: relative;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -(map.get($xd-gutter, "mobile") *0.5);
+    margin-right: -(map.get($xd-gutter, "mobile") *0.5);
+
+    @include mq(m) {
+      margin-left: -(map.get($xd-gutter, "desktop") *0.5);
+      margin-right: -(map.get($xd-gutter, "desktop") *0.5);
+    }
+  }
+
+  :where([class*="col-"]) {
+    width: 100%;
+    flex: 0 0 100%;
+    padding-left: map.get($xd-gutter, "mobile") *0.5;
+    padding-right: map.get($xd-gutter, "mobile") *0.5;
+
+    @include mq(m) {
+      padding-left: map.get($xd-gutter, "desktop") *0.5;
+      padding-right: map.get($xd-gutter, "desktop") *0.5;
+    }
+  }
+}
+
+.row.no-gutters {
+  margin-left: 0;
+  margin-right: 0;
+
+  >[class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+  overflow: hidden;
+}
+
+@each $bp, $val in $grid-breakpoints {
+  @if $bp == 'xs' {
+    @for $n from 1 through 12 {
+      .col-#{$n} {
+        max-width: math.div(math.round(math.div(100 * $n, 12)*1000) , 1000) + #{'%'}; 
+      }
+      @if $n <= 11 {
+        .offset-#{$n} {
+          margin-left: math.div(math.round(math.div(100 * $n, 12)*1000) , 1000) + #{'%'}; 
+        }
+      }
+    }
+  } 
+  @else {
+    @media (min-width: #{$val}) {
+      @for $n from 1 through 12 {
+        .col-#{$bp}-#{$n} {
+          max-width: math.div(math.round(math.div(100 * $n, 12)*1000) , 1000) + #{'%'};  
+        }
+        @if $n <= 11 {
+          .offset-#{$bp}-#{$n} {
+            margin-left: math.div(math.round(math.div(100 * $n, 12)*1000) , 1000) + #{'%'};
+          }
+        }
+      }
+    }
+  }
+}

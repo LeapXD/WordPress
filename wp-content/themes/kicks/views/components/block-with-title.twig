@@ -1,0 +1,17 @@
+{% extends 'includes/block.twig' %}
+
+{% block preInnerBlocks %}
+  {% if attributes.title %}
+    {{ parent() }}
+  {% endif %}
+{% endblock %}
+
+{% block preInnerBlocksContent %}
+  {% if attributes.title %}
+    {{ block('blockTitle') }}
+  {% endif %}
+{% endblock %}
+
+{% block blockTitle %}
+  <h3 class="xd-title">{{ attributes.title }}</h3>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% block flyout %}
+  <div
+    {{ flyout.id }}
+    class="uk-offcanvas xd-flyout {{ flyout.className ?? className }} {{ flyout.hasNavbarSpacing ? 'xd-flyout--has-navbar-spacing' : '' }}"
+    {{ flyout.dataset }}
+    {{ flyout.aria }}
+    {{ flyout.role }}
+  >
+    <div class="xd-flyout__wrapper">
+      <div class="uk-offcanvas-bar xd-flyout__bar {{ flyout.innerClassName }}">
+        <a
+          href="#"
+          class="accessible-close-button screen-reader-text"
+          title="Close Sidebar"
+          data-ui-toggle="xd-flyout-main-menu"
+        >
+          Close Sidebar
+        </a>
+        {{ block('flyoutContent') }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block flyoutContent %}
+  {{ block('header') }}
+  {{ block('flyoutBody') }}
+{% endblock %}
+
+{% block header %}
+  {% if block('headerContent') is defined %}
+    <div class="xd-flyout__header">
+      {{ block('headerContent') }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block flyoutBody %}
+  <div class="xd-flyout__body">
+    {{ block('buttons') }}
+    {{ block('flyoutBodyContent') }}
+  </div>
+{% endblock %}
+
+{% block buttons %}
+  {% if block('buttonsContent') is defined %}
+    <div class="xd-flyout__buttons">
+      {{ block('buttonsContent') }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block flyoutBodyContent %}
+  <div class="xd-flyout__inner">
+    {{ block('title') }}
+    {{ block('subtitle') }}
+    {{ block('body') }}
+  </div>
+{% endblock %}
+
+{% block title %}
+  {% if block('titleContent') is defined %}
+    <h4>
+      {{ block('titleContent') }}
+    </h4>
+  {% endif %}
+{% endblock %}
+
+{% block subtitle %}
+  {% if block('subtitleContent') is defined %}
+    <p class="title">
+      {{ block('subtitleContent') }}
+    </p>
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  {{ post.content }}
+{% endblock %}

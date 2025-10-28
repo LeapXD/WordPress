@@ -1,0 +1,23 @@
+
+{% extends 'includes/accordion.twig' %}
+
+{% block accordionElementHeading %}
+	<a class="uk-accordion-title" href="#">
+		<div class="xd-floorplan__heading-item">
+			<h4>{{ accordionElement.title }}</h4>
+		</div>
+		{% for item in accordionElement.summary %}
+			<div class="xd-floorplan__heading-item xd-floorplan__heading-item--detail">
+				<h4>{{ item }}</h4>
+			</div>
+		{% endfor %}
+		<div class="xd-floorplan__heading-item">
+			{{ get_icon('chevron-down') }}
+		</div>
+		<div class="xd-floorplan__summary">
+			<p class="body-1">
+				{{ accordionElement.summary | join(', ') }}
+			</p>
+		</div>
+	</a>
+{% endblock %}

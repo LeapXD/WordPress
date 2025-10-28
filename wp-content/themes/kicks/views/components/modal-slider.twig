@@ -1,0 +1,12 @@
+{% embed 'includes/modal.twig' %}
+  {% block modalBodyContent %}
+    {% embed 'includes/slider.twig' %}
+      {% block slideContent %}
+        {{ parent('slideContent') }}
+        {% if slide.caption %}
+          <span class="caption">{{ slide.caption }}</span>
+        {% endif %}
+      {% endblock %}
+    {% endembed %}
+  {% endblock %}
+{% endembed %}

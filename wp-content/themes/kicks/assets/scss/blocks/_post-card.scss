@@ -1,0 +1,140 @@
+@use '../mixins/' as *;
+
+.xd-post-card {
+  width: 100%;
+  display: flex;
+  max-height: 100%;
+  flex-direction: column;
+
+  &__header {
+    position: relative;
+    background-color: var(--card-background-color);
+
+    .xd-image {
+      height: 73vw;
+
+      @include mq(m) {
+        height: 36vw;
+      }
+
+      @include mq(l) {
+        height: 24.4vw;
+      }
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 1.5rem;
+    padding: 0.5rem 2rem;
+    z-index: 1;
+    background-color: var(--card-label-background-color);
+    color: var(--card-label-color);
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--card-border-color, var(--stroke));
+    color: var(--body);
+    border-top: none;
+    background-color: var(--card-background-color);
+  }
+
+  h4,
+  h5 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+
+    &.title {
+      margin-bottom: 0;
+    }
+
+    &.title-sm {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .xd-button--text {
+    margin-top: 2rem;
+    margin-bottom: 0;
+
+    &::after {
+      border-color: transparent;
+    }
+  }
+
+  // Show the hover state when the card is hovered,
+  // but not when the card contains a link that is not hovered itself.
+  // This allows the card to either contain a link or be clickable itself.
+  &:hover:where(:not(:has(a:not(:hover)))) {
+    .xd-button--text {
+      color: var(--text-btn-hover-color, var(--body-link-hover-color));
+
+      &::after {
+        border-color: var(--text-btn-hover-color, var(--body-link-hover-color));
+      }
+    }
+  }
+
+  &--page {
+    display: grid;
+    height: 142vw;
+
+    @include mq(m) {
+      height: 110vw;
+    }
+
+    @include mq(l) {
+      height: 48.5vw;
+    }
+
+    .xd-button--text {
+      margin-top: 0;
+    }
+
+    &:hover {
+      .xd-icon {
+        transform: translateX(0.5rem);
+      }
+
+      .xd-button--text {
+        &::after {
+          border-color: transparent;
+        }
+      }
+    }
+  }
+
+  &--page &__body {
+    border: none;
+  }
+
+  &--page &__content {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &--page &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .xd-icon {
+      transition: transform 0.3s ease-in-out;
+      width: 52px;
+      height: 52px;
+    }
+  }
+}

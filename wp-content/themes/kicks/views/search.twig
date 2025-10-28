@@ -1,0 +1,77 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+  <div class="search-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3">
+          <header class="page-header">
+            <h1 class="page-title screen-reader-text">
+              Search
+            </h1>
+            <form
+              role="search"
+              method="get"
+              class="search-form"
+              action="/"
+            >
+              <div class="search-form">
+                <label>
+                  <span class="screen-reader-text">Search for:</span>
+                  <input
+                    id="search_modal_search_field"
+                    type="search"
+                    class="search-field xd-search__input"
+                    placeholder="Search …"
+                    value="{{ templateProps.searchQuery|escape }}"
+                    name="s"
+                  />
+                </label>
+                <label for="search-submit" class="xd-search__submit">
+                  <span class="screen-reader-text">search</span>
+                  <button
+                    name="search-submit"
+                    type="submit"
+                    class="search-submit"
+                    value="Search"
+                    tabindex="0"
+                  >
+                    {{ get_icon('search') }}
+                  </button>
+                </label>
+              </div>
+            </form>
+          </header>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="search-page__results col-10 col-md-8 col-xl-6 offset-1 offset-md-2 offset-xl-3 xd-pt--sm xd-pb--lg">
+          {% if (posts|length) > 0 %}
+            {% for post in posts %}
+              <a href="{{ post.link }}" class="search-page__result">
+                <h4>{{ post.title }}</h4>
+                {{ post.excerpt({ read_more: '' }) }}
+              </a>
+            {% endfor %}
+            {{ fn('the_posts_navigation') }}
+          {% else %}
+            <section class="no-results not-found">
+              <header class="page-header">
+                <h1 class="page-title xd-heading-h4">
+                  {{ __('Nothing Found', 'xd') }}
+                </h1>
+              </header>
+
+              <div class="page-content uk-height-medium">
+                <p>
+                  {{ __('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'xd') }}
+                </p>
+              </div>
+            </section>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

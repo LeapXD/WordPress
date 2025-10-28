@@ -1,0 +1,32 @@
+{% extends 'includes/card.twig' %}
+
+{% block header %}
+  <div class="xd-thumbnail-card__header">
+    {{ block('headerContent') }}
+  </div>
+{% endblock %}
+
+{% block body %}
+  <div class="xd-thumbnail-card__body">
+    {{ block('cardTitle') }}
+    {{ block('cardSubTitle') }}
+  </div>
+{% endblock %}
+
+{% block cardTitle %}
+  <h6>{{ block('cardTitleContent') }}</h6>
+{% endblock %}
+
+{% block cardTitleContent %}
+  {{ post.title }}
+{% endblock %}
+
+{% block cardSubTitle %}
+  <p class="body-3">
+    {{ block('cardSubTitleContent') }}
+  </p>
+{% endblock %}
+
+{% block cardSubTitleContent %}
+  {{ post.subTitle }}
+{% endblock %}

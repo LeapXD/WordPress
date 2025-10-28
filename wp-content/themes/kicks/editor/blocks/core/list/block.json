@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../schema/block-schema.json",
+  "name": "core/list",
+  "title": "List",
+  "description": "Create a bulleted, numbered, or stylized list.",
+  "viewStyle": ["block-styles/lists"],
+  "editorStyle": ["block-styles/lists"],
+  "supports": {
+    "custom": {
+      "inspectorControls": [
+        {
+          "panels": [
+            {
+              "initialOpen": true,
+              "title": "List Style",
+              "controls": [
+                {
+                  "attribute": "className",
+                  "type": "XDButtonGroup",
+                  "gridColumns": 8,
+                  "options": [
+                    {
+                      "value": "",
+                      "label": "Default",
+                      "icon": "gm/format-list-bulleted"
+                    },
+                    {
+                      "value": "is-style-standard-list",
+                      "label": "Standard List",
+                      "icon": "gm/reorder"
+                    },
+                    {
+                      "value": "is-style-standard-list-with-checkmarks",
+                      "label": "Standard List With Checkmarks",
+                      "icon": "gm/checklist"
+                    },
+                    {
+                      "value": "is-style-standard-list-with-links",
+                      "label": "Link List With Arrows",
+                      "icon": "gm/link"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
