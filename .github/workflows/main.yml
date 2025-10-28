@@ -10,9 +10,9 @@ on:
         required: false
         default: "LeapXD/kicks"
       ref:
-        description: "Branch or tag in source (e.g., master)"
+        description: "Branch/tag to pull. Use 'auto' to use each repo's default branch."
         required: true
-        default: "master"
+        default: "auto"
       sync_all:
         description: "Sync all four repos (kick-start, kicks, kicks-editor, kicks-plugins)"
         type: boolean
@@ -27,23 +27,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # === Manual "sync all" fan-out button ===
   fanout:
-    # Robust coercion: boolean inputs sometimes arrive as strings; normalize with fromJSON
     if: ${{ github.event_name == 'workflow_dispatch' && fromJSON(inputs.sync_all) == true }}
     runs-on: ubuntu-latest
-    env:
-      DEST_BRANCH: main
     strategy:
       fail-fast: false
       matrix:
         repo: [ "LeapXD/kick-start", "LeapXD/kicks", "LeapXD/kicks-editor", "LeapXD/kicks-plugins" ]
+    env:
+      DEST_BRANCH: main
     steps:
-      - name: ✅ Kickoff (sync_all)
-        run: |
-          echo "Running SYNC ALL on branch: $DEST_BRANCH"
-          echo "Matrix includes: ${{ join(matrix.repo, ', ') }}"
-
       - name: Checkout destination
         uses: actions/checkout@v4
         with:
@@ -62,15 +55,32 @@ jobs:
             LeapXD/kicks-plugins)DEST_PATH="wp-content/plugins";             DELETE_MODE="" ;;
             *) echo "Unknown repo: $REPO"; exit 64 ;;
           esac
-          echo "repo=$REPO"             >> "$GITHUB_OUTPUT"
-          echo "dest_path=${DEST_PATH}" >> "$GITHUB_OUTPUT"
-          echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
+          echo "repo=$REPO"                  >> "$GITHUB_OUTPUT"
+          echo "dest_path=${DEST_PATH}"      >> "$GITHUB_OUTPUT"
+          echo "delete_mode=${DELETE_MODE}"  >> "$GITHUB_OUTPUT"
+
+      - name: Resolve source ref (auto → default branch)
+        id: ref
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.MIRROR_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          REQ="${{ inputs.ref }}"
+          if [ "$REQ" = "auto" ] || [ -z "$REQ" ]; then
+            DEF=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+                          -H "Accept: application/vnd.github+json" \
+                          "https://api.github.com/repos/${{ steps.map.outputs.repo }}" | jq -r .default_branch)
+            echo "resolved=$DEF" >> "$GITHUB_OUTPUT"
+          else
+            echo "resolved=$REQ" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Checkout source at ref
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.map.outputs.repo }}
-          ref: ${{ inputs.ref }}  # defaults to master
+          ref: ${{ steps.ref.outputs.resolved }}
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
@@ -81,7 +91,6 @@ jobs:
           set -euo pipefail
           if [ -f .gitmodules ]; then
             git config -f .gitmodules --get-regexp path | awk '{print $2}' | while read -r p; do
-              echo "Removing submodule dir: $p"
               rm -rf -- "$p"
             done
             rm -f .gitmodules
@@ -115,24 +124,19 @@ jobs:
           fi
           git add -A
           SRC="${{ steps.map.outputs.repo }}"
-          REF="${{ inputs.ref }}"
+          REF="${{ steps.ref.outputs.resolved }}"
           DEST_PATH="${{ steps.map.outputs.dest_path }}"
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
           git push origin "$DEST_BRANCH"
 
-  # === Single-repo path (manual OR repository_dispatch) ===
   pull-and-commit:
     if: ${{ !(github.event_name == 'workflow_dispatch' && fromJSON(inputs.sync_all) == true) }}
     runs-on: ubuntu-latest
     env:
       DEST_BRANCH: main
     steps:
-      - name: ✅ Kickoff (single)
-        run: |
-          echo "Running SINGLE path on branch: $DEST_BRANCH (event=${{ github.event_name }})"
-
       - name: Checkout destination
         uses: actions/checkout@v4
         with:
@@ -149,8 +153,7 @@ jobs:
             SRC_REF="${{ inputs.ref }}"
           else
             SRC_REPO="${{ github.event.client_payload.repo }}"
-            # Force master for repository_dispatch events
-            SRC_REF="master"
+            SRC_REF="master"   # force master for repo_dispatch
           fi
           echo "repo=${SRC_REPO}" >> "$GITHUB_OUTPUT"
           echo "ref=${SRC_REF}"   >> "$GITHUB_OUTPUT"
@@ -167,14 +170,31 @@ jobs:
             LeapXD/kicks-plugins)DEST_PATH="wp-content/plugins";             DELETE_MODE="" ;;
             *) echo "Unknown repo: $REPO"; exit 64 ;;
           esac
-          echo "dest_path=${DEST_PATH}"       >> "$GITHUB_OUTPUT"
-          echo "delete_mode=${DELETE_MODE}"   >> "$GITHUB_OUTPUT"
+          echo "dest_path=${DEST_PATH}"     >> "$GITHUB_OUTPUT"
+          echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve source ref (auto → default branch)
+        id: ref
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.MIRROR_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          REQ="${{ steps.payload.outputs.ref }}"
+          if [ "$REQ" = "auto" ] || [ -z "$REQ" ]; then
+            DEF=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
+                          -H "Accept: application/vnd.github+json" \
+                          "https://api.github.com/repos/${{ steps.payload.outputs.repo }}" | jq -r .default_branch)
+            echo "resolved=$DEF" >> "$GITHUB_OUTPUT"
+          else
+            echo "resolved=$REQ" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Checkout source at ref
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.payload.outputs.repo }}
-          ref: ${{ steps.payload.outputs.ref }}  # 'master' for repo_dispatch; input for manual
+          ref: ${{ steps.ref.outputs.resolved }}
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
@@ -185,10 +205,9 @@ jobs:
           set -euo pipefail
           if [ -f .gitmodules ]; then
             git config -f .gitmodules --get-regexp path | awk '{print $2}' | while read -r p; do
-            echo "Removing submodule dir: $p"
-            rm -rf -- "$p"
-          done
-          rm -f .gitmodules
+              rm -rf -- "$p"
+            done
+            rm -f .gitmodules
           fi
 
       - name: Prepare export tree
@@ -219,7 +238,7 @@ jobs:
           fi
           git add -A
           SRC="${{ steps.payload.outputs.repo }}"
-          REF="${{ steps.payload.outputs.ref }}"
+          REF="${{ steps.ref.outputs.resolved }}"
           DEST_PATH="${{ steps.map.outputs.dest_path }}"
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
