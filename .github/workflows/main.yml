@@ -9,10 +9,6 @@ on:
         description: "Source repo (ignored if sync_all is true)"
         required: false
         default: "LeapXD/kicks"
-      ref:
-        description: "Branch/tag to pull. Use 'auto' to use each repo's default branch."
-        required: true
-        default: "auto"
       sync_all:
         description: "Sync all four repos (kick-start, kicks, kicks-editor, kicks-plugins)"
         type: boolean
@@ -26,7 +22,14 @@ concurrency:
   group: aggregate-mirror
   cancel-in-progress: false
 
+env:
+  # Always push the destination repo to 'default'
+  DEST_BRANCH: default
+  # Always fetch 'master' from sources
+  SRC_REF: master
+
 jobs:
+  # === Manual "sync all" fan-out ===
   fanout:
     if: ${{ github.event_name == 'workflow_dispatch' && fromJSON(inputs.sync_all) == true }}
     runs-on: ubuntu-latest
@@ -34,10 +37,8 @@ jobs:
       fail-fast: false
       matrix:
         repo: [ "LeapXD/kick-start", "LeapXD/kicks", "LeapXD/kicks-editor", "LeapXD/kicks-plugins" ]
-    env:
-      DEST_BRANCH: main
     steps:
-      - name: Checkout destination
+      - name: Checkout destination repo@default
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -59,28 +60,11 @@ jobs:
           echo "dest_path=${DEST_PATH}"      >> "$GITHUB_OUTPUT"
           echo "delete_mode=${DELETE_MODE}"  >> "$GITHUB_OUTPUT"
 
-      - name: Resolve source ref (auto → default branch)
-        id: ref
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.MIRROR_READ_TOKEN }}
-        run: |
-          set -euo pipefail
-          REQ="${{ inputs.ref }}"
-          if [ "$REQ" = "auto" ] || [ -z "$REQ" ]; then
-            DEF=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
-                          -H "Accept: application/vnd.github+json" \
-                          "https://api.github.com/repos/${{ steps.map.outputs.repo }}" | jq -r .default_branch)
-            echo "resolved=$DEF" >> "$GITHUB_OUTPUT"
-          else
-            echo "resolved=$REQ" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Checkout source at ref
+      - name: Checkout source repo@master
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.map.outputs.repo }}
-          ref: ${{ steps.ref.outputs.resolved }}
+          ref: ${{ env.SRC_REF }}   # always master
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
@@ -124,39 +108,36 @@ jobs:
           fi
           git add -A
           SRC="${{ steps.map.outputs.repo }}"
-          REF="${{ steps.ref.outputs.resolved }}"
+          REF="${{ env.SRC_REF }}"
           DEST_PATH="${{ steps.map.outputs.dest_path }}"
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
           git push origin "$DEST_BRANCH"
 
+  # === Single-repo path (manual or repository_dispatch) ===
   pull-and-commit:
     if: ${{ !(github.event_name == 'workflow_dispatch' && fromJSON(inputs.sync_all) == true) }}
     runs-on: ubuntu-latest
-    env:
-      DEST_BRANCH: main
     steps:
-      - name: Checkout destination
+      - name: Checkout destination repo@default
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ env.DEST_BRANCH }}
 
-      - name: Select payload
+      - name: Select payload (force master)
         id: payload
         shell: bash
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             SRC_REPO="${{ inputs.repo }}"
-            SRC_REF="${{ inputs.ref }}"
           else
             SRC_REPO="${{ github.event.client_payload.repo }}"
-            SRC_REF="master"   # force master for repo_dispatch
           fi
           echo "repo=${SRC_REPO}" >> "$GITHUB_OUTPUT"
-          echo "ref=${SRC_REF}"   >> "$GITHUB_OUTPUT"
+          echo "ref=${SRC_REF}"   >> "$GITHUB_OUTPUT"   # always master via env
 
       - name: Map repo → destination path
         id: map
@@ -173,28 +154,11 @@ jobs:
           echo "dest_path=${DEST_PATH}"     >> "$GITHUB_OUTPUT"
           echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
 
-      - name: Resolve source ref (auto → default branch)
-        id: ref
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.MIRROR_READ_TOKEN }}
-        run: |
-          set -euo pipefail
-          REQ="${{ steps.payload.outputs.ref }}"
-          if [ "$REQ" = "auto" ] || [ -z "$REQ" ]; then
-            DEF=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" \
-                          -H "Accept: application/vnd.github+json" \
-                          "https://api.github.com/repos/${{ steps.payload.outputs.repo }}" | jq -r .default_branch)
-            echo "resolved=$DEF" >> "$GITHUB_OUTPUT"
-          else
-            echo "resolved=$REQ" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Checkout source at ref
+      - name: Checkout source repo@master
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.payload.outputs.repo }}
-          ref: ${{ steps.ref.outputs.resolved }}
+          ref: ${{ steps.payload.outputs.ref }}   # 'master' from above
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
@@ -238,7 +202,7 @@ jobs:
           fi
           git add -A
           SRC="${{ steps.payload.outputs.repo }}"
-          REF="${{ steps.ref.outputs.resolved }}"
+          REF="${{ steps.payload.outputs.ref }}"
           DEST_PATH="${{ steps.map.outputs.dest_path }}"
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
