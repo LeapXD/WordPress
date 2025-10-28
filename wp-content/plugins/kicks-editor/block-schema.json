@@ -1,0 +1,268 @@
+{
+  "title": "JSON schema for XD blocks",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "allOf": [{
+          "$ref": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+          "additionalProperties": true,
+          "required": ["name"]
+        }, {
+          "type": "object",
+          "properties": {
+            "supports": {
+              "allOf": [{
+                  "type": "object",
+                  "properties": {
+                    "xd/background-image": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/id": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/link": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/margin": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/margin-controls": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/padding": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/padding-controls": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/title": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/width": {
+                      "type": "boolean",
+                      "enum": [true]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "xd/width-controls": {
+                      "type": "array",
+                      "items": [{
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "width": {
+                            "type": "string"
+                          }
+                        }
+                      }]
+                    }
+                  }
+                }
+              ]
+            },
+            "custom": {
+              "type": "object",
+              "properties": {
+                "register": {
+                  "type": "boolean",
+                  "enum": [true]
+                },
+                "styles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "type": "object",
+                        "properties": {
+                          "all": {
+                            "type": "boolean",
+                            "enum": [true]
+                          },
+                          "postType": {
+                            "oneOf": [{
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          },
+                          "parent": {
+                            "oneOf": [{
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "allowedStyles": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "default": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "innerBlocks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "context": {
+                        "type": "object",
+                        "properties": {
+                          "all": {
+                            "type": "boolean",
+                            "enum": [true]
+                          },
+                          "postType": {
+                            "oneOf": [{
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          },
+                          "parent": {
+                            "oneOf": [{
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "allowedBlocks": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "template": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": [{
+                              "type": "string"
+                            },
+                            {
+                              "type": "object"
+                            }
+                          ]
+                        }
+                      },
+                      "templateLock": {
+                        "oneOf": [{
+                            "type": "boolean",
+                            "enum": [false]
+                          },
+                          {
+                            "type": "string",
+                            "enum": [
+                              "all", "insert"
+                            ]
+                          }
+                        ]
+                      },
+                      "orientation": {
+                        "type": "string",
+                        "enum": ["horizontal", "vertical"]
+                      },
+                      "wrap": {
+                        "type": "boolean",
+                        "enum": [true]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }]
+      }
+    }
+  }
+}

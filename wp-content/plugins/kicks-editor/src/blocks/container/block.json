@@ -1,0 +1,29 @@
+{
+	"apiVersion": 2,
+	"name": "xd/container",
+	"title": "Container",
+	"description": "Container",
+	"category": "standard",
+	"keywords": ["container", "layout"],
+	"supports": {
+		"custom": {
+			"innerBlocks": [
+				{
+					"allowedBlocks": [
+						"core/paragraph",
+						"core/heading",
+						"core/list",
+						"core/quote",
+						"core/cover",
+						"xd/button",
+						"core/separator",
+						"xd/image",
+						"xd/accordion",
+						"gravityforms/form"
+					],
+					"template": [["core/paragraph"]]
+				}
+			]
+		}
+	}
+}

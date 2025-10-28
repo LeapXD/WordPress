@@ -1,0 +1,37 @@
+{
+  "apiVersion": 2,
+  "name": "xd/four-column",
+  "title": "Four Column",
+  "description": "Four Column",
+  "category": "standard",
+  "keywords": [
+    "four",
+    "column"
+  ],
+  "supports": {
+    "custom": {
+      "innerBlocks": [
+        {
+          "orientation": "horizontal",
+          "allowedBlocks": [
+            "xd/card"
+          ],
+          "template": [
+            [
+              "xd/card"
+            ],
+            [
+              "xd/card"
+            ],
+            [
+              "xd/card"
+            ],
+            [
+              "xd/card"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

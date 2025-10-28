@@ -1,0 +1,60 @@
+@import "../../scss/mixins/breakponts";
+[data-type="xd\/cta"]:not(.xd-cta) {
+
+  .row {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .col-12 {
+      width: 100%;
+    }
+
+    .col-md-10 {
+      @include mq(m) {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .col-lg-8 {
+      @include mq(xxl) {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .wp-block-xd-cta {
+    color: black;
+
+    &.is-style-dark {
+      background: #333;
+      color: white;
+    }
+  }
+
+  .has-background-image {
+    .wp-block-xd-cta {
+      position: relative;
+      z-index: 3;
+
+      &::after {
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  text-align: center;
+
+}

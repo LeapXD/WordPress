@@ -1,0 +1,42 @@
+{
+  "apiVersion": 2,
+  "name": "xd/two-tile-inner",
+  "title": "Two Tile Content",
+  "description": "Two tile content",
+  "category": "standard",
+  "keywords": [
+    "two",
+    "tile",
+    "contents"
+  ],
+  "supports": {
+    "custom": {
+      "innerBlocks": [
+        {
+          "orientation": "horizontal",
+          "allowedBlocks": [
+            "xd/image",
+            "core/heading",
+            "core/paragraph",
+            "xd/button"
+          ],
+          "template": [
+            [
+              "core/heading",
+              {
+                "level": 3
+              }
+            ],
+            [
+              "core/paragraph"
+            ],
+            [
+              "xd/button"
+            ]
+          ],
+          "templateLock": false
+        }
+      ]
+    }
+  }
+}

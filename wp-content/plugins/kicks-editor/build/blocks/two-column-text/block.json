@@ -1,0 +1,32 @@
+{
+  "apiVersion": 2,
+  "name": "xd/two-column-text",
+  "title": "Two Column Text",
+  "description": "Two columns of editable content",
+  "category": "standard",
+  "keywords": [
+    "two",
+    "column"
+  ],
+  "supports": {
+    "custom": {
+      "innerBlocks": [
+        {
+          "orientation": "horizontal",
+          "allowedBlocks": [
+            "xd/two-tile-inner"
+          ],
+          "template": [
+            [
+              "xd/two-tile-inner"
+            ],
+            [
+              "xd/two-tile-inner"
+            ]
+          ],
+          "templateLock": true
+        }
+      ]
+    }
+  }
+}

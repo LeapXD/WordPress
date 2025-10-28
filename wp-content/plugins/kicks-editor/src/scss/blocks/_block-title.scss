@@ -1,0 +1,64 @@
+.wp-block {
+  position: relative;
+  &:where([style*="--xd-block-title"]:not(.has-block-overlay))::before,
+  &-title{
+    content: var(--xd-block-title) !important;
+    z-index: 1;
+    display: block !important;
+    position: absolute;
+    top: -1px !important;
+    right: -1px !important;
+    left: auto !important;
+    bottom: auto !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 3px 7px;
+    background: #ddd;
+    appearance: none;
+    border: none;
+
+    text-decoration: none !important;
+  
+  }
+
+  &.wp-block-paragraph,
+  &.wp-block-list,
+  &.wp-block-list-item,
+  &.wp-block-heading,
+  &.wp-block-image,
+  &.xd-image:not(.xd-video),
+  &.xd-button,
+  &.wp-block-missing,
+  &.xd-richtext,
+  &.block-list-appender,
+  .block-editor-inserter__preview-container &,
+  .block-editor-block-styles__item-preview &,
+  .block-editor-block-switcher__preview & {
+    &::before{
+      content: initial !important;
+    }
+  }
+  
+  :not(.has-block-overlay):hover{
+    &::before{
+      background: #ccc !important;
+      color: #000 !important;
+    }
+  }
+
+  .block-editor-block-list__block:not(.has-block-overlay).is-selected>&,
+  &:not(.has-block-overlay).is-selected {
+    &::before,
+    &-title{
+      color: white !important;
+      background: black !important;
+      font-weight: bold;
+    }
+    .block-editor-block-list__block:not(.has-block-overlay)::before{
+      background: #ddd !important;
+      color: #333 !important;
+    }
+  }
+  
+}

@@ -1,0 +1,30 @@
+{
+	"apiVersion": 2,
+	"name": "xd/richtext",
+	"title": "Richtext",
+	"description": "Richtext field",
+	"category": "text",
+	"keywords": ["richtext"],
+	"attributes": {
+		"content": {
+			"type": "string",
+			"default": ""
+		},
+		"disableLineBreaks": {
+			"type": "boolean",
+			"default": true
+		},
+		"placeholder": {
+			"type": "string",
+			"default": ""
+		},
+		"disableFormats": {
+			"type": "boolean",
+			"default": true
+		},
+		"tagName": {
+			"type": "string",
+			"default": "p"
+		}
+	}
+}

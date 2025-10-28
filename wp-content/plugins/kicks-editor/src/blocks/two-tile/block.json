@@ -1,0 +1,20 @@
+{
+	"apiVersion": 2,
+	"name": "xd/two-tile",
+	"title": "Two Tile",
+	"description": "An image with content",
+	"category": "standard",
+	"keywords": ["two", "tile"],
+	"supports": {
+		"custom": {
+			"innerBlocks": [
+				{
+					"orientation": "horizontal",
+					"allowedBlocks": ["xd/image", "xd/two-two-tile-inner"],
+					"template": [["xd/image"], ["xd/two-tile-inner"]],
+					"templateLock": "insert"
+				}
+			]
+		}
+	}
+}

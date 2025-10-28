@@ -1,0 +1,51 @@
+{
+  "apiVersion": 2,
+  "name": "xd/buttons",
+  "title": "Buttons",
+  "category": "standard",
+  "description": "Prompt visitors to take action with a group of button-style links.",
+  "keywords": [
+    "link"
+  ],
+  "textdomain": "default",
+  "supports": {
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "custom": {
+      "innerBlocks": [
+        {
+          "allowedBlocks": [
+            "xd/button"
+          ]
+        }
+      ]
+    }
+  },
+  "editorStyle": "wp-block-buttons-editor",
+  "style": "wp-block-buttons",
+  "example": {
+    "innerBlocks": [
+      {
+        "name": "xd/button",
+        "attributes": {
+          "text": "Find out more"
+        }
+      },
+      {
+        "name": "xd/button",
+        "attributes": {
+          "text": "Contact us"
+        }
+      }
+    ]
+  },
+  "attributes": {
+    "contentJustification": {
+      "type": "string",
+      "default": "left"
+    }
+  }
+}

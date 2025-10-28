@@ -1,0 +1,57 @@
+@import "../../scss/mixins/breakponts";
+
+.XD-four-column__content {
+
+	.row {
+		position: relative;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+
+		.col-sm-12 {
+			width: 100%;
+		}
+
+		.col-md-10 {
+			@include mq(m) {
+				max-width: 85%;
+				flex-basis: 85%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+
+		.col-lg-8 {
+			@include mq(xxl) {
+				max-width: 85%;
+				flex-basis: 85%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+
+	@include mq(m) {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+
+	&>div {
+		@include mq(s) {
+			width: 50%;
+		}
+		@include mq(s) {
+			width: 33.33%;
+		}
+
+
+		@include mq(l) {
+			width: 25%;
+		}
+	}
+}

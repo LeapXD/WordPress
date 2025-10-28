@@ -1,0 +1,13 @@
+.editor-block-list__layout {
+  padding-right: 0;
+}
+
+.wp-block {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+html :where(.wp-block .wp-block:not([class*="col-"])) {
+  max-width: 100%;
+}
+

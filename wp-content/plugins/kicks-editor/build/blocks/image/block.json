@@ -1,0 +1,19 @@
+{
+  "apiVersion": 2,
+  "name": "xd/image",
+  "title": "Image",
+  "description": "Image",
+  "category": "standard",
+  "keywords": [
+    "image",
+    "media"
+  ],
+  "attributes": {
+    "imageMobile": {
+      "type": "number"
+    },
+    "imageDesktop": {
+      "type": "number"
+    }
+  }
+}

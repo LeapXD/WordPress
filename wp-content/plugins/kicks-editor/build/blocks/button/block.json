@@ -1,0 +1,32 @@
+{
+  "apiVersion": 2,
+  "name": "xd/button",
+  "title": "Button",
+  "category": "standard",
+  "description": "Prompt visitors to take action with a button-style link.",
+  "keywords": [
+    "link"
+  ],
+  "textdomain": "default",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": ""
+    },
+    "url": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "linkTarget": {
+      "type": "string"
+    },
+    "rel": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    }
+  }
+}

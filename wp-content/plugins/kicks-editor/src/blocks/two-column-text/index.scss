@@ -1,0 +1,15 @@
+@import "../../scss/mixins/breakponts";
+
+.XD-two-column-text {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding-top: 2rem;
+
+ .XD-two-tile__inner {
+		@include mq(s) {
+			flex: 0 0 50%;
+		}
+	}
+}

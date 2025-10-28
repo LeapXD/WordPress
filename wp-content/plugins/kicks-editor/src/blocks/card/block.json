@@ -1,0 +1,31 @@
+{
+	"apiVersion": 2,
+	"name": "xd/card",
+	"title": "Card",
+	"description": "Card",
+	"category": "standard",
+	"keywords": ["card", "column"],
+	"supports": {
+		"custom": {
+			"merge": true,
+			"innerBlocks": [
+				{
+					"allowedBlocks": [
+						"core/paragraph",
+						"core/heading",
+						"core/list",
+						"core/quote",
+						"core/cover",
+						"xd/button",
+						"core/separator",
+						"xd/image",
+						"xd/accordion",
+						"gravityforms/form"
+					],
+					"template": [["xd/image"], ["core/heading"], ["core/paragraph"]],
+    			"templateLock": false
+				}
+			]
+		}
+	}
+}

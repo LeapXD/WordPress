@@ -1,0 +1,21 @@
+{
+	"apiVersion": 2,
+	"name": "xd/accordion",
+	"title": "Accordion",
+	"icon": "gm/expand-more",
+	"description": "Accordion",
+	"category": "standard",
+	"keywords": [
+		"accordion", "collapse", "list"
+	],
+	"attributes": {
+		"accordionNoCollapse": {
+			"type": "boolean",
+			"default": false
+		},
+		"accordionMultipleOpen": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

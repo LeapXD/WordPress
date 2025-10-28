@@ -1,0 +1,15 @@
+@import "mixins/breakponts";
+@import "components/_components";
+@import "layout/layout";
+@import "blocks/_blocks";
+@import "typography/fonts";
+
+
+.block-editor-block-styles__item-preview,
+.block-editor-block-switcher__preview {
+	[class*=col-] {
+		max-width: none;
+		flex: 0 0 100%;
+		margin: 0;
+	}
+}

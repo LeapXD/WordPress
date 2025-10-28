@@ -1,0 +1,44 @@
+{
+  "apiVersion": 2,
+  "name": "xd/accordionelement",
+  "title": "Accordion Element",
+  "icon": "gm/expand-less",
+  "description": "Accordion Element",
+  "category": "standard",
+  "parent": [
+    "xd/accordion"
+  ],
+  "keywords": [
+    "accordion",
+    "list item",
+    "collapse"
+  ],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "",
+      "source": "html",
+      "selector": ".accordion-element__title"
+    }
+  },
+  "supports": {
+    "custom": {
+      "innerBlocks": [
+        {
+          "allowedBlocks": [
+            "core/paragraph",
+            "core/heading",
+            "core/list",
+            "xd/button",
+            "core/separator"
+          ],
+          "template": [
+            [
+              "core/paragraph"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

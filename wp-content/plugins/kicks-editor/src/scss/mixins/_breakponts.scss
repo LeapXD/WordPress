@@ -1,0 +1,30 @@
+/* ----- BREAKPOINTS ---------------------------------------- */
+
+
+@mixin mq($breakpoint) {
+	@if $breakpoint=='s' {
+		@media all and (min-width: 640px) {
+			@content;
+		}
+	}
+	@if $breakpoint=='m' {
+		@media all and (min-width: 768px) {
+			@content;
+		}
+	}
+	@if $breakpoint=='l' {
+		@media all and (min-width: 960px) {
+			@content;
+		}
+	}
+	@if $breakpoint=='xl' {
+		@media all and (min-width: 1200px) {
+			@content;
+		}
+	}
+	@if $breakpoint=='xxl' {
+		@media all and (min-width: 1200px) {
+			@content;
+		}
+	}
+}

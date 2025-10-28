@@ -1,0 +1,29 @@
+.block-editor-block-styles__item-preview,
+.block-editor-block-switcher__preview {
+	.block-editor-block-list__block {
+		padding: 0 !important;
+
+		.wp-block-xd-button__link {
+			display: table !important;
+			margin: auto !important;
+			padding: 1.75rem 2rem;
+			font-size: 2rem;
+		}
+	}
+}
+
+.wp-block-xd-button {
+	margin-left: 0;
+	margin-right: auto;
+
+	[data-align] & {
+		margin-left: auto;
+	}
+
+	&.is-style-ghost-inverse {
+		.wp-block-xd-button__link {
+			border-color: #e5e5e5 !important;
+			color: #e5e5e5 !important;
+		}
+	}
+}

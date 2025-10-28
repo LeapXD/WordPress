@@ -1,0 +1,39 @@
+{
+  "apiVersion": 2,
+  "name": "xd/cta",
+  "title": "CTA",
+  "description": "Call to Action",
+  "category": "standard",
+  "keywords": [
+    "container",
+    "layout",
+    "CTA"
+  ],
+  "supports": {
+    "custom": {
+      "innerBlocks": [
+        {
+          "allowedBlocks": [
+            "core/heading",
+            "core/paragraph",
+            "xd/button"
+          ],
+          "template": [
+            [
+              "core/heading"
+            ],
+            [
+              "core/paragraph"
+            ],
+            [
+              "xd/button",
+              {
+                "align": "center"
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

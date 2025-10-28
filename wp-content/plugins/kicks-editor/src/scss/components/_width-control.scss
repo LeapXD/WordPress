@@ -1,0 +1,13 @@
+.xd-width-control{
+	&__fields {
+		display: flex;
+	}
+	
+	.components-base-control{
+		margin: 0 !important;
+		.components-text-control__input,
+		.components-toggle-group-control{
+			height: 2.3rem !important;
+		}
+	}
+}
