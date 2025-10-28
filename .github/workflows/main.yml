@@ -11,11 +11,6 @@ on:
       ref:
         description: "Branch or SHA (e.g., main)"
         required: true
-      force_full_sync:
-        description: "If true, ignore cache and re-copy everything"
-        type: boolean
-        required: false
-        default: false
 
 permissions:
   contents: write
@@ -28,13 +23,13 @@ jobs:
   pull-and-commit:
     runs-on: ubuntu-latest
     env:
-      # Adjust if you want a staging branch in your fork instead of main
-      DEST_BRANCH: main
+      DEST_BRANCH: default
     steps:
       - name: Checkout destination
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ env.DEST_BRANCH }}
 
       - name: Select payload
         id: payload
@@ -69,9 +64,8 @@ jobs:
               DELETE_MODE="--delete"
               ;;
             LeapXD/kicks-plugins)
-              # This repo merges into the shared plugins dir; do NOT delete other plugins.
               DEST_PATH="wp-content/plugins"
-              DELETE_MODE=""   # no --delete (prevents nuking other plugins)
+              DELETE_MODE=""   # don't delete other plugins in plugins/
               ;;
             *)
               echo "Unknown repo: $REPO"
@@ -88,7 +82,6 @@ jobs:
           ref: ${{ steps.payload.outputs.ref }}
           path: source
           submodules: false
-          # Token must have contents:read on the LeapXD repos
           token: ${{ secrets.MIRROR_READ_TOKEN }}
 
       - name: Strip submodules (if present)
@@ -123,7 +116,6 @@ jobs:
           set -euo pipefail
           DEST="${{ steps.map.outputs.dest_path }}"
           mkdir -p "$DEST"
-          # For kicks-plugins we intentionally do NOT --delete (to avoid wiping other plugins)
           rsync -a ${{ steps.map.outputs.delete_mode }} /tmp/export/ "$DEST/"
 
       - name: Commit & push if changed
