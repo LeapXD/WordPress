@@ -29,15 +29,21 @@ concurrency:
 jobs:
   # === Manual "sync all" fan-out button ===
   fanout:
-    if: github.event_name == 'workflow_dispatch' && inputs.sync_all == true
+    # Robust coercion: boolean inputs sometimes arrive as strings; normalize with fromJSON
+    if: ${{ github.event_name == 'workflow_dispatch' && fromJSON(inputs.sync_all) == true }}
     runs-on: ubuntu-latest
+    env:
+      DEST_BRANCH: main
     strategy:
       fail-fast: false
       matrix:
         repo: [ "LeapXD/kick-start", "LeapXD/kicks", "LeapXD/kicks-editor", "LeapXD/kicks-plugins" ]
-    env:
-      DEST_BRANCH: main
     steps:
+      - name: ✅ Kickoff (sync_all)
+        run: |
+          echo "Running SYNC ALL on branch: $DEST_BRANCH"
+          echo "Matrix includes: ${{ join(matrix.repo, ', ') }}"
+
       - name: Checkout destination
         uses: actions/checkout@v4
         with:
@@ -50,28 +56,13 @@ jobs:
           set -euo pipefail
           REPO="${{ matrix.repo }}"
           case "$REPO" in
-            LeapXD/kick-start)
-              DEST_PATH="wp-content/themes/kick-start"
-              DELETE_MODE="--delete"
-              ;;
-            LeapXD/kicks)
-              DEST_PATH="wp-content/themes/kicks"
-              DELETE_MODE="--delete"
-              ;;
-            LeapXD/kicks-editor)
-              DEST_PATH="wp-content/plugins/kicks-editor"
-              DELETE_MODE="--delete"
-              ;;
-            LeapXD/kicks-plugins)
-              DEST_PATH="wp-content/plugins"
-              DELETE_MODE=""   # don't delete other plugins in plugins/
-              ;;
-            *)
-              echo "Unknown repo: $REPO"
-              exit 64
-              ;;
+            LeapXD/kick-start)   DEST_PATH="wp-content/themes/kick-start";   DELETE_MODE="--delete" ;;
+            LeapXD/kicks)        DEST_PATH="wp-content/themes/kicks";        DELETE_MODE="--delete" ;;
+            LeapXD/kicks-editor) DEST_PATH="wp-content/plugins/kicks-editor";DELETE_MODE="--delete" ;;
+            LeapXD/kicks-plugins)DEST_PATH="wp-content/plugins";             DELETE_MODE="" ;;
+            *) echo "Unknown repo: $REPO"; exit 64 ;;
           esac
-          echo "repo=$REPO" >> "$GITHUB_OUTPUT"
+          echo "repo=$REPO"             >> "$GITHUB_OUTPUT"
           echo "dest_path=${DEST_PATH}" >> "$GITHUB_OUTPUT"
           echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
 
@@ -131,20 +122,24 @@ jobs:
               commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
           git push origin "$DEST_BRANCH"
 
-  # === Single-repo path (manual or repository_dispatch) ===
+  # === Single-repo path (manual OR repository_dispatch) ===
   pull-and-commit:
-    if: !(github.event_name == 'workflow_dispatch' && inputs.sync_all == true)
+    if: ${{ !(github.event_name == 'workflow_dispatch' && fromJSON(inputs.sync_all) == true) }}
     runs-on: ubuntu-latest
     env:
       DEST_BRANCH: main
     steps:
+      - name: ✅ Kickoff (single)
+        run: |
+          echo "Running SINGLE path on branch: $DEST_BRANCH (event=${{ github.event_name }})"
+
       - name: Checkout destination
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ env.DEST_BRANCH }}
 
-      - name: Select payload & resolve ref
+      - name: Select payload
         id: payload
         shell: bash
         run: |
@@ -166,35 +161,20 @@ jobs:
           set -euo pipefail
           REPO="${{ steps.payload.outputs.repo }}"
           case "$REPO" in
-            LeapXD/kick-start)
-              DEST_PATH="wp-content/themes/kick-start"
-              DELETE_MODE="--delete"
-              ;;
-            LeapXD/kicks)
-              DEST_PATH="wp-content/themes/kicks"
-              DELETE_MODE="--delete"
-              ;;
-            LeapXD/kicks-editor)
-              DEST_PATH="wp-content/plugins/kicks-editor"
-              DELETE_MODE="--delete"
-              ;;
-            LeapXD/kicks-plugins)
-              DEST_PATH="wp-content/plugins"
-              DELETE_MODE=""   # don't delete other plugins in plugins/
-              ;;
-            *)
-              echo "Unknown repo: $REPO"
-              exit 64
-              ;;
+            LeapXD/kick-start)   DEST_PATH="wp-content/themes/kick-start";   DELETE_MODE="--delete" ;;
+            LeapXD/kicks)        DEST_PATH="wp-content/themes/kicks";        DELETE_MODE="--delete" ;;
+            LeapXD/kicks-editor) DEST_PATH="wp-content/plugins/kicks-editor";DELETE_MODE="--delete" ;;
+            LeapXD/kicks-plugins)DEST_PATH="wp-content/plugins";             DELETE_MODE="" ;;
+            *) echo "Unknown repo: $REPO"; exit 64 ;;
           esac
-          echo "dest_path=${DEST_PATH}" >> "$GITHUB_OUTPUT"
-          echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
+          echo "dest_path=${DEST_PATH}"       >> "$GITHUB_OUTPUT"
+          echo "delete_mode=${DELETE_MODE}"   >> "$GITHUB_OUTPUT"
 
       - name: Checkout source at ref
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.payload.outputs.repo }}
-          ref: ${{ steps.payload.outputs.ref }}  # forced master if repo_dispatch
+          ref: ${{ steps.payload.outputs.ref }}  # 'master' for repo_dispatch; input for manual
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
@@ -205,10 +185,10 @@ jobs:
           set -euo pipefail
           if [ -f .gitmodules ]; then
             git config -f .gitmodules --get-regexp path | awk '{print $2}' | while read -r p; do
-              echo "Removing submodule dir: $p"
-              rm -rf -- "$p"
-            done
-            rm -f .gitmodules
+            echo "Removing submodule dir: $p"
+            rm -rf -- "$p"
+          done
+          rm -f .gitmodules
           fi
 
       - name: Prepare export tree
