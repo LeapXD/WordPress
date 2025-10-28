@@ -1,0 +1,144 @@
+name: Aggregator mirror
+
+on:
+  repository_dispatch:
+    types: [mirror_push]
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: "Source repo (e.g., LeapXD/kicks)"
+        required: true
+      ref:
+        description: "Branch or SHA (e.g., main)"
+        required: true
+      force_full_sync:
+        description: "If true, ignore cache and re-copy everything"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggregate-mirror
+  cancel-in-progress: false
+
+jobs:
+  pull-and-commit:
+    runs-on: ubuntu-latest
+    env:
+      # Adjust if you want a staging branch in your fork instead of main
+      DEST_BRANCH: main
+    steps:
+      - name: Checkout destination
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select payload
+        id: payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "repo=${{ inputs.repo }}" >> "$GITHUB_OUTPUT"
+            echo "ref=${{ inputs.ref }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "repo=${{ github.event.client_payload.repo }}" >> "$GITHUB_OUTPUT"
+            echo "ref=${{ github.event.client_payload.ref }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Map repo → destination path
+        id: map
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPO="${{ steps.payload.outputs.repo }}"
+          case "$REPO" in
+            LeapXD/kick-start)
+              DEST_PATH="wp-content/themes/kick-start"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks)
+              DEST_PATH="wp-content/themes/kicks"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks-editor)
+              DEST_PATH="wp-content/plugins/kicks-editor"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks-plugins)
+              # This repo merges into the shared plugins dir; do NOT delete other plugins.
+              DEST_PATH="wp-content/plugins"
+              DELETE_MODE=""   # no --delete (prevents nuking other plugins)
+              ;;
+            *)
+              echo "Unknown repo: $REPO"
+              exit 64
+              ;;
+          esac
+          echo "dest_path=${DEST_PATH}" >> "$GITHUB_OUTPUT"
+          echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout source at ref
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.payload.outputs.repo }}
+          ref: ${{ steps.payload.outputs.ref }}
+          path: source
+          submodules: false
+          # Token must have contents:read on the LeapXD repos
+          token: ${{ secrets.MIRROR_READ_TOKEN }}
+
+      - name: Strip submodules (if present)
+        working-directory: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f .gitmodules ]; then
+            git config -f .gitmodules --get-regexp path | awk '{print $2}' | while read -r p; do
+              echo "Removing submodule dir: $p"
+              rm -rf -- "$p"
+            done
+            rm -f .gitmodules
+          fi
+
+      - name: Prepare export tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/export
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.gitmodules' \
+            --exclude='.github' \
+            --exclude='.gitattributes' \
+            --exclude='.gitignore' \
+            source/ /tmp/export/
+
+      - name: Copy into destination path
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEST="${{ steps.map.outputs.dest_path }}"
+          mkdir -p "$DEST"
+          # For kicks-plugins we intentionally do NOT --delete (to avoid wiping other plugins)
+          rsync -a ${{ steps.map.outputs.delete_mode }} /tmp/export/ "$DEST/"
+
+      - name: Commit & push if changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git add -A
+          SRC="${{ steps.payload.outputs.repo }}"
+          REF="${{ steps.payload.outputs.ref }}"
+          DEST_PATH="${{ steps.map.outputs.dest_path }}"
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
+          git push origin "$DEST_BRANCH"
