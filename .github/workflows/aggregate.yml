@@ -1,0 +1,243 @@
+name: Aggregator mirror
+
+on:
+  repository_dispatch:
+    types: [mirror_push]
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: "Source repo (e.g., LeapXD/kicks). Ignored if sync_all is true."
+        required: false
+        default: "LeapXD/kicks"
+      ref:
+        description: "Branch or tag in source (e.g., main)"
+        required: true
+        default: "main"
+      sync_all:
+        description: "Sync all four repos (kick-start, kicks, kicks-editor, kicks-plugins)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggregate-mirror
+  cancel-in-progress: false
+
+jobs:
+  # === Manual "sync all" fan-out button ===
+  fanout:
+    if: github.event_name == 'workflow_dispatch' && inputs.sync_all == true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [ "LeapXD/kick-start", "LeapXD/kicks", "LeapXD/kicks-editor", "LeapXD/kicks-plugins" ]
+    env:
+      DEST_BRANCH: main
+    steps:
+      - name: Checkout destination
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ env.DEST_BRANCH }}
+
+      - name: Map repo → destination path
+        id: map
+        run: |
+          set -euo pipefail
+          REPO="${{ matrix.repo }}"
+          case "$REPO" in
+            LeapXD/kick-start)
+              DEST_PATH="wp-content/themes/kick-start"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks)
+              DEST_PATH="wp-content/themes/kicks"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks-editor)
+              DEST_PATH="wp-content/plugins/kicks-editor"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks-plugins)
+              DEST_PATH="wp-content/plugins"
+              DELETE_MODE=""   # don't delete other plugins in plugins/
+              ;;
+            *)
+              echo "Unknown repo: $REPO"
+              exit 64
+              ;;
+          esac
+          echo "repo=$REPO" >> "$GITHUB_OUTPUT"
+          echo "dest_path=${DEST_PATH}" >> "$GITHUB_OUTPUT"
+          echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout source at ref
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.map.outputs.repo }}
+          ref: ${{ inputs.ref }}
+          path: source
+          submodules: false
+          token: ${{ secrets.MIRROR_READ_TOKEN }}
+
+      - name: Strip submodules (if present)
+        working-directory: source
+        run: |
+          set -euo pipefail
+          if [ -f .gitmodules ]; then
+            git config -f .gitmodules --get-regexp path | awk '{print $2}' | while read -r p; do
+              echo "Removing submodule dir: $p"
+              rm -rf -- "$p"
+            done
+            rm -f .gitmodules
+          fi
+
+      - name: Prepare export tree
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/export
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.gitmodules' \
+            --exclude='.github' \
+            --exclude='.gitattributes' \
+            --exclude='.gitignore' \
+            source/ /tmp/export/
+
+      - name: Copy into destination path
+        run: |
+          set -euo pipefail
+          DEST="${{ steps.map.outputs.dest_path }}"
+          mkdir -p "$DEST"
+          rsync -a ${{ steps.map.outputs.delete_mode }} /tmp/export/ "$DEST/"
+
+      - name: Commit & push if changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git add -A
+          SRC="${{ steps.map.outputs.repo }}"
+          REF="${{ inputs.ref }}"
+          DEST_PATH="${{ steps.map.outputs.dest_path }}"
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
+          git push origin "$DEST_BRANCH"
+
+  # === Single-repo path (manual or repository_dispatch) ===
+  pull-and-commit:
+    if: !(github.event_name == 'workflow_dispatch' && inputs.sync_all == true)
+    runs-on: ubuntu-latest
+    env:
+      DEST_BRANCH: main
+    steps:
+      - name: Checkout destination
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ env.DEST_BRANCH }}
+
+      - name: Select payload
+        id: payload
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "repo=${{ inputs.repo }}" >> "$GITHUB_OUTPUT"
+            echo "ref=${{ inputs.ref }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "repo=${{ github.event.client_payload.repo }}" >> "$GITHUB_OUTPUT"
+            echo "ref=${{ github.event.client_payload.ref }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Map repo → destination path
+        id: map
+        run: |
+          set -euo pipefail
+          REPO="${{ steps.payload.outputs.repo }}"
+          case "$REPO" in
+            LeapXD/kick-start)
+              DEST_PATH="wp-content/themes/kick-start"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks)
+              DEST_PATH="wp-content/themes/kicks"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks-editor)
+              DEST_PATH="wp-content/plugins/kicks-editor"
+              DELETE_MODE="--delete"
+              ;;
+            LeapXD/kicks-plugins)
+              DEST_PATH="wp-content/plugins"
+              DELETE_MODE=""   # don't delete other plugins in plugins/
+              ;;
+            *)
+              echo "Unknown repo: $REPO"
+              exit 64
+              ;;
+          esac
+          echo "dest_path=${DEST_PATH}" >> "$GITHUB_OUTPUT"
+          echo "delete_mode=${DELETE_MODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout source at ref
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.payload.outputs.repo }}
+          ref: ${{ steps.payload.outputs.ref }}
+          path: source
+          submodules: false
+          token: ${{ secrets.MIRROR_READ_TOKEN }}
+
+      - name: Strip submodules (if present)
+        working-directory: source
+        run: |
+          set -euo pipefail
+          if [ -f .gitmodules ]; then
+            git config -f .gitmodules --get-regexp path | awk '{print $2}' | while read -r p; do
+              echo "Removing submodule dir: $p"
+              rm -rf -- "$p"
+            done
+            rm -f .gitmodules
+          fi
+
+      - name: Prepare export tree
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/export
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.gitmodules' \
+            --exclude='.github' \
+            --exclude='.gitattributes' \
+            --exclude='.gitignore' \
+            source/ /tmp/export/
+
+      - name: Copy into destination path
+        run: |
+          set -euo pipefail
+          DEST="${{ steps.map.outputs.dest_path }}"
+          mkdir -p "$DEST"
+          rsync -a ${{ steps.map.outputs.delete_mode }} /tmp/export/ "$DEST/"
+
+      - name: Commit & push if changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git add -A
+          SRC="${{ steps.payload.outputs.repo }}"
+          REF="${{ steps.payload.outputs.ref }}"
+          DEST_PATH="${{ steps.map.outputs.dest_path }}"
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Mirror ${SRC}@${REF} → ${DEST_PATH}"
+          git push origin "$DEST_BRANCH"
