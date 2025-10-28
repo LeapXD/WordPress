@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       repo:
-        description: "Source repo (e.g., LeapXD/kicks). Ignored if sync_all is true."
+        description: "Source repo (ignored if sync_all is true)"
         required: false
         default: "LeapXD/kicks"
       ref:
-        description: "Branch or tag in source (e.g., main)"
+        description: "Branch or tag in source (e.g., master)"
         required: true
-        default: "main"
+        default: "master"
       sync_all:
         description: "Sync all four repos (kick-start, kicks, kicks-editor, kicks-plugins)"
         type: boolean
@@ -79,7 +79,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.map.outputs.repo }}
-          ref: ${{ inputs.ref }}
+          ref: ${{ inputs.ref }}  # defaults to master
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
@@ -144,17 +144,21 @@ jobs:
           fetch-depth: 0
           ref: ${{ env.DEST_BRANCH }}
 
-      - name: Select payload
+      - name: Select payload & resolve ref
         id: payload
+        shell: bash
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "repo=${{ inputs.repo }}" >> "$GITHUB_OUTPUT"
-            echo "ref=${{ inputs.ref }}" >> "$GITHUB_OUTPUT"
+            SRC_REPO="${{ inputs.repo }}"
+            SRC_REF="${{ inputs.ref }}"
           else
-            echo "repo=${{ github.event.client_payload.repo }}" >> "$GITHUB_OUTPUT"
-            echo "ref=${{ github.event.client_payload.ref }}" >> "$GITHUB_OUTPUT"
+            SRC_REPO="${{ github.event.client_payload.repo }}"
+            # Force master for repository_dispatch events
+            SRC_REF="master"
           fi
+          echo "repo=${SRC_REPO}" >> "$GITHUB_OUTPUT"
+          echo "ref=${SRC_REF}"   >> "$GITHUB_OUTPUT"
 
       - name: Map repo → destination path
         id: map
@@ -190,7 +194,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.payload.outputs.repo }}
-          ref: ${{ steps.payload.outputs.ref }}
+          ref: ${{ steps.payload.outputs.ref }}  # forced master if repo_dispatch
           path: source
           submodules: false
           token: ${{ secrets.MIRROR_READ_TOKEN }}
